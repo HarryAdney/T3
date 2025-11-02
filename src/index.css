@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans text-stone-900 bg-parchment-50;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl font-semibold leading-snug;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl font-medium leading-snug;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-sage-600 text-white rounded-xl font-medium transition-all hover:bg-sage-700 hover:shadow-soft active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-parchment-200 text-stone-800 rounded-xl font-medium transition-all hover:bg-parchment-300 hover:shadow-soft active:scale-95;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-soft p-6 transition-all hover:shadow-soft-lg;
+  }
+
+  .sepia-overlay {
+    @apply relative overflow-hidden;
+  }
+
+  .sepia-overlay::after {
+    content: '';
+    @apply absolute inset-0 bg-parchment-900 opacity-10 pointer-events-none mix-blend-multiply;
+  }
+}
