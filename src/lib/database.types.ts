@@ -333,6 +333,32 @@ export interface Database {
           updated_at?: string
         }
       }
+      user_profiles: {
+        Row: {
+          id: string
+          email: string
+          full_name: string | null
+          role: 'viewer' | 'editor' | 'admin'
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id: string
+          email: string
+          full_name?: string | null
+          role?: 'viewer' | 'editor' | 'admin'
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          email?: string
+          full_name?: string | null
+          role?: 'viewer' | 'editor' | 'admin'
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
     Views: {}
     Functions: {}
