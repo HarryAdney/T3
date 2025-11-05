@@ -92,7 +92,7 @@ export function Timeline() {
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-sage-200" />
 
             <div className="space-y-8">
-              {filteredEvents.map((event, index) => (
+              {filteredEvents.map((event) => (
                 <div key={event.id} className="relative pl-20">
                   <div className="absolute left-0 w-16 h-16 bg-sage-600 rounded-full flex items-center justify-center text-white font-serif font-semibold shadow-soft">
                     {event.decade}s

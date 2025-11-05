@@ -22,9 +22,15 @@ export function Contribute() {
     setError(null);
 
     try {
-      const { error: submitError } = await supabase
+      const { error: submitError } = await (supabase as any)
         .from('contributions')
-        .insert([formData]);
+        .insert([{
+          contributor_name: formData.contributor_name,
+          contributor_email: formData.contributor_email,
+          contribution_type: formData.contribution_type,
+          title: formData.title,
+          content: formData.content,
+        }]);
 
       if (submitError) throw submitError;
 
