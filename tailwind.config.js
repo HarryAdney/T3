@@ -42,8 +42,8 @@ export default {
         },
       },
       fontFamily: {
-        serif: ['Lora', 'Georgia', 'serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['Georgia', 'serif'],
+        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
       },
       boxShadow: {
         'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 2px 6px -2px rgba(0, 0, 0, 0.05)',
@@ -61,13 +61,13 @@ export default {
           css: {
             lineHeight: '1.7',
             h1: {
-              fontFamily: 'Lora, Georgia, serif',
+              fontFamily: 'Georgia, serif',
             },
             h2: {
-              fontFamily: 'Lora, Georgia, serif',
+              fontFamily: 'Georgia, serif',
             },
             h3: {
-              fontFamily: 'Lora, Georgia, serif',
+              fontFamily: 'Georgia, serif',
             },
           },
         },
