@@ -60,13 +60,6 @@ export function Header() {
               <Search className="w-5 h-5" />
             </button>
 
-            <Link
-              to="/contribute"
-              className="hidden sm:inline-flex btn-primary text-sm"
-            >
-              Contribute
-            </Link>
-
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden p-2 rounded-lg text-stone-700 hover:bg-parchment-100 transition-colors"
@@ -104,13 +97,6 @@ export function Header() {
                 {item.name}
               </Link>
             ))}
-            <Link
-              to="/contribute"
-              onClick={() => setIsMenuOpen(false)}
-              className="block px-4 py-3 bg-sage-600 text-white text-center rounded-xl font-medium hover:bg-sage-700 transition-colors"
-            >
-              Contribute Your Story
-            </Link>
           </nav>
         )}
       </div>
