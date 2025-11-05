@@ -9,6 +9,8 @@ import { Photos } from './pages/Photos';
 import { Maps } from './pages/Maps';
 import { About } from './pages/About';
 import { Contribute } from './pages/Contribute';
+import { Editor } from './pages/Editor';
+import { PuckPage } from './pages/PuckPage';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/maps" element={<Maps />} />
           <Route path="/about" element={<About />} />
           <Route path="/contribute" element={<Contribute />} />
+          <Route path="/editor" element={<Editor />} />
+          <Route path="/page/:slug" element={<PuckPage />} />
         </Routes>
         <Footer />
       </div>

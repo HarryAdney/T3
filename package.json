@@ -11,6 +11,8 @@
     "typecheck": "tsc --noEmit -p tsconfig.app.json"
   },
   "dependencies": {
+    "@measured/puck": "^0.20.2",
+    "@measured/puck-plugin-heading-analyzer": "^0.20.2",
     "@supabase/supabase-js": "^2.57.4",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.23.24",

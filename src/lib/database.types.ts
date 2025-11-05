@@ -304,6 +304,35 @@ export interface Database {
           photograph_id?: string
         }
       }
+      puck_pages: {
+        Row: {
+          id: string
+          slug: string
+          title: string
+          content: Json
+          published: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          slug: string
+          title: string
+          content?: Json
+          published?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          slug?: string
+          title?: string
+          content?: Json
+          published?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
     Views: {}
     Functions: {}
