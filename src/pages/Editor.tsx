@@ -37,9 +37,25 @@ export function Editor() {
 
       if (pageData && !error) {
         setData(JSON.parse(pageData.content));
+      } else {
+        // Fallback to localStorage
+        const localData = localStorage.getItem('puck_page_home');
+        if (localData) {
+          setData(JSON.parse(localData));
+        }
       }
     } catch (err) {
       console.error('Error loading page:', err);
+
+      // Fallback to localStorage
+      try {
+        const localData = localStorage.getItem('puck_page_home');
+        if (localData) {
+          setData(JSON.parse(localData));
+        }
+      } catch (localErr) {
+        console.error('Error loading from localStorage:', localErr);
+      }
     }
   };
 
@@ -47,6 +63,7 @@ export function Editor() {
     setSaveMessage('');
 
     try {
+      // Try database save first
       const { error } = await (supabase as any)
         .from('puck_pages')
         .upsert({
@@ -56,20 +73,34 @@ export function Editor() {
           updated_at: new Date().toISOString(),
         });
 
-      if (error) throw error;
+      if (error) {
+        // If database save fails due to RLS, fallback to localStorage
+        console.warn('Database save failed, using localStorage fallback:', error);
+        localStorage.setItem('puck_page_home', JSON.stringify(newData));
+        setSaveMessage('Page saved locally! (Database permissions need to be updated)');
+      } else {
+        setSaveMessage('Page saved successfully!');
+      }
 
-      setSaveMessage('Page saved successfully!');
       setTimeout(() => setSaveMessage(''), 3000);
     } catch (err: any) {
       console.error('Error saving page:', err);
-      setSaveMessage(`Error: ${err.message}`);
+
+      // Fallback to localStorage
+      try {
+        localStorage.setItem('puck_page_home', JSON.stringify(newData));
+        setSaveMessage('Page saved locally! (Database connection failed)');
+        setTimeout(() => setSaveMessage(''), 3000);
+      } catch (localErr) {
+        setSaveMessage(`Error: ${err.message}`);
+      }
     }
   };
 
   return (
     <div className="h-screen">
       {saveMessage && (
-        <div className="fixed top-4 right-4 z-50 bg-sage-600 text-white px-6 py-3 rounded-lg shadow-lg">
+        <div className="fixed z-50 px-6 py-3 text-white rounded-lg shadow-lg top-4 right-4 bg-sage-600">
           {saveMessage}
         </div>
       )}

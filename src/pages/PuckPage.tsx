@@ -24,9 +24,25 @@ export function PuckPage() {
 
       if (pageData && !error) {
         setData(JSON.parse(pageData.content));
+      } else {
+        // Fallback to localStorage if database query fails
+        const localData = localStorage.getItem('puck_page_home');
+        if (localData) {
+          setData(JSON.parse(localData));
+        }
       }
     } catch (err) {
       console.error('Error loading page:', err);
+
+      // Fallback to localStorage on any error
+      try {
+        const localData = localStorage.getItem('puck_page_home');
+        if (localData) {
+          setData(JSON.parse(localData));
+        }
+      } catch (localErr) {
+        console.error('Error loading from localStorage:', localErr);
+      }
     } finally {
       setLoading(false);
     }
@@ -36,7 +52,7 @@ export function PuckPage() {
     return (
       <PageWrapper>
         <div className="flex items-center justify-center min-h-screen">
-          <div className="inline-block w-8 h-8 border-4 border-sage-600 border-t-transparent rounded-full animate-spin" />
+          <div className="inline-block w-8 h-8 border-4 rounded-full border-sage-600 border-t-transparent animate-spin" />
         </div>
       </PageWrapper>
     );
@@ -45,9 +61,9 @@ export function PuckPage() {
   if (!data) {
     return (
       <PageWrapper>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-3xl font-serif font-semibold text-stone-900 mb-4">
+            <h1 className="mb-4 font-serif text-3xl font-semibold text-stone-900">
               Page Not Found
             </h1>
             <p className="text-stone-600">
@@ -61,7 +77,7 @@ export function PuckPage() {
 
   return (
     <PageWrapper>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <Render config={config} data={data} />
       </div>
     </PageWrapper>
