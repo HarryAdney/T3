@@ -5,8 +5,13 @@ import { config } from '../puck.config';
 import { supabase } from '../lib/supabase';
 import { PageWrapper } from '../components/PageWrapper';
 
-export function PuckPage() {
-  const { slug } = useParams<{ slug: string }>();
+interface PuckPageProps {
+  slug?: string;
+}
+
+export function PuckPage({ slug: slugProp }: PuckPageProps = {}) {
+  const { slug: slugParam } = useParams<{ slug: string }>();
+  const slug = slugProp || slugParam;
   const [data, setData] = useState<Data | null>(null);
   const [loading, setLoading] = useState(true);
 
