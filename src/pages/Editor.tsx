@@ -5,7 +5,7 @@ import { config } from '../puck.config';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { Login } from '../components/Login';
-import { LogOut, User, Shield, ArrowLeft } from 'lucide-react';
+import { LogOut, User, Shield, ArrowLeft, Save } from 'lucide-react';
 import '@measured/puck/puck.css';
 
 const initialData: Data = {
@@ -158,6 +158,13 @@ export function Editor() {
           Back to Pages
         </button>
         <div className="flex-1" />
+        <button
+          onClick={() => handleSave(data)}
+          className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white transition-colors rounded-lg bg-sage-600 hover:bg-sage-700 focus:outline-none focus:ring-2 focus:ring-sage-500"
+        >
+          <Save className="w-4 h-4" />
+          Save
+        </button>
         <div className="flex items-center gap-2">
           <User className="w-4 h-4 text-stone-500" />
           <span className="text-sm font-medium text-stone-700">
