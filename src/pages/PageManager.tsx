@@ -190,21 +190,27 @@ export function PageManager() {
                 className="overflow-hidden transition-shadow bg-white border shadow-sm rounded-xl border-stone-200"
               >
                 <div className="p-6">
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="font-serif text-xl font-semibold text-stone-900">
-                      {page.title}
-                    </h3>
-                    <Lock className="w-4 h-4 text-stone-400" />
-                  </div>
+                  <h3 className="mb-2 font-serif text-xl font-semibold text-stone-900">
+                    {page.title}
+                  </h3>
                   <p className="mb-4 text-sm text-stone-600">
                     {page.path}
                   </p>
-                  <button
-                    onClick={() => navigate(page.path)}
-                    className="flex items-center justify-center w-full gap-2 px-4 py-2 text-sm font-medium transition-colors border rounded-lg text-stone-700 border-stone-300 bg-stone-50 hover:bg-stone-100"
-                  >
-                    View Page
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => navigate(`/editor/${page.slug}`)}
+                      className="flex items-center justify-center flex-1 gap-2 px-4 py-2 text-sm font-medium transition-colors border rounded-lg text-sage-700 border-sage-300 bg-sage-50 hover:bg-sage-100"
+                    >
+                      <Edit className="w-4 h-4" />
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => navigate(page.path)}
+                      className="flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium transition-colors border rounded-lg text-stone-700 border-stone-300 bg-stone-50 hover:bg-stone-100"
+                    >
+                      View
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
