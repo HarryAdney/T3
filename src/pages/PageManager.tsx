@@ -4,7 +4,7 @@ import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { Login } from '../components/Login';
 import { PageWrapper } from '../components/PageWrapper';
-import { Plus, Edit, Trash2, FileText, Shield } from 'lucide-react';
+import { Plus, Edit, Trash2, FileText, Shield, Lock } from 'lucide-react';
 
 interface Page {
   id: string;
@@ -12,6 +12,12 @@ interface Page {
   title: string;
   created_at: string;
   updated_at: string;
+}
+
+interface StaticPage {
+  slug: string;
+  title: string;
+  path: string;
 }
 
 export function PageManager() {
@@ -23,6 +29,16 @@ export function PageManager() {
   const [newPageTitle, setNewPageTitle] = useState('');
   const [newPageSlug, setNewPageSlug] = useState('');
   const [error, setError] = useState('');
+
+  const staticPages: StaticPage[] = [
+    { slug: 'home', title: 'Home', path: '/' },
+    { slug: 'bishopdale-valley', title: 'Bishopdale Valley', path: '/bishopdale-valley' },
+    { slug: 'four-townships', title: 'The Four Townships', path: '/four-townships' },
+    { slug: 'timeline', title: 'Timeline', path: '/timeline' },
+    { slug: 'maps', title: 'Maps', path: '/maps' },
+    { slug: 'gallery', title: 'Gallery', path: '/gallery' },
+    { slug: 'contact', title: 'Contact', path: '/contact' },
+  ];
 
   useEffect(() => {
     if (user && isEditor) {
@@ -163,11 +179,49 @@ export function PageManager() {
           </div>
         </div>
 
+        <div className="mb-8">
+          <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
+            Static Pages
+          </h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {staticPages.map((page) => (
+              <div
+                key={page.slug}
+                className="overflow-hidden transition-shadow bg-white border shadow-sm rounded-xl border-stone-200"
+              >
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-2">
+                    <h3 className="font-serif text-xl font-semibold text-stone-900">
+                      {page.title}
+                    </h3>
+                    <Lock className="w-4 h-4 text-stone-400" />
+                  </div>
+                  <p className="mb-4 text-sm text-stone-600">
+                    {page.path}
+                  </p>
+                  <button
+                    onClick={() => navigate(page.path)}
+                    className="flex items-center justify-center w-full gap-2 px-4 py-2 text-sm font-medium transition-colors border rounded-lg text-stone-700 border-stone-300 bg-stone-50 hover:bg-stone-100"
+                  >
+                    View Page
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <h2 className="font-serif text-2xl font-semibold text-stone-900">
+            Custom Pages
+          </h2>
+        </div>
+
         {pages.length === 0 ? (
           <div className="py-16 text-center bg-white border-2 border-dashed rounded-2xl border-stone-300">
             <FileText className="w-12 h-12 mx-auto mb-4 text-stone-400" />
             <h3 className="mb-2 font-serif text-xl font-semibold text-stone-900">
-              No pages yet
+              No custom pages yet
             </h3>
             <p className="mb-6 text-stone-600">
               Create your first custom page to get started
@@ -192,7 +246,7 @@ export function PageManager() {
                     {page.title}
                   </h3>
                   <p className="mb-4 text-sm text-stone-600">
-                    /{page.slug}
+                    /page/{page.slug}
                   </p>
                   <p className="mb-4 text-xs text-stone-500">
                     Updated {new Date(page.updated_at).toLocaleDateString()}
