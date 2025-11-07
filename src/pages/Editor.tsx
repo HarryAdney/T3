@@ -43,12 +43,26 @@ export function Editor() {
         .eq('slug', slug)
         .maybeSingle();
 
-      if (pageData && !error) {
-        setData(JSON.parse(pageData.content));
+      console.log('Loading page data for slug:', slug);
+      console.log('Page data:', pageData);
+      console.log('Error:', error);
+
+      if (error) {
+        console.error('Database error:', error);
+        setSaveMessage(`Error loading page: ${error.message}`);
+      } else if (pageData) {
+        console.log('Parsing content:', pageData.content);
+        const parsedData = JSON.parse(pageData.content);
+        console.log('Parsed data:', parsedData);
+        setData(parsedData);
         setPageTitle(pageData.title);
+      } else {
+        console.log('No page data found for slug:', slug);
+        setSaveMessage('Page not found in database');
       }
     } catch (err) {
       console.error('Error loading page:', err);
+      setSaveMessage(`Error: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {
       setLoading(false);
     }
