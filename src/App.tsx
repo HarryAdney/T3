@@ -22,7 +22,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/bishopdale-valley" element={<BishopdaleValley />} />
+            <Route path="/bishopdale-valley" element={<PuckPage slug="bishopdale-valley" />} />
             <Route path="/four-townships" element={<FourTownships />} />
             <Route path="/timeline" element={<Timeline />} />
             <Route path="/maps" element={<Maps />} />

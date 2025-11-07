@@ -4,6 +4,7 @@ import { Render, Data } from '@measured/puck';
 import { config } from '../puck.config';
 import { supabase } from '../lib/supabase';
 import { PageWrapper } from '../components/PageWrapper';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 
 interface PuckPageProps {
   slug?: string;
@@ -13,6 +14,7 @@ export function PuckPage({ slug: slugProp }: PuckPageProps = {}) {
   const { slug: slugParam } = useParams<{ slug: string }>();
   const slug = slugProp || slugParam;
   const [data, setData] = useState<Data | null>(null);
+  const [pageTitle, setPageTitle] = useState<string>('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,6 +33,7 @@ export function PuckPage({ slug: slugProp }: PuckPageProps = {}) {
 
         if (pageData && !error) {
           setData(JSON.parse(pageData.content));
+          setPageTitle(pageData.title || '');
         } else {
           console.error('Error loading page:', error);
         }
@@ -71,9 +74,17 @@ export function PuckPage({ slug: slugProp }: PuckPageProps = {}) {
     );
   }
 
+  const getBreadcrumbPath = () => {
+    if (slug === 'bishopdale-valley') return '/bishopdale-valley';
+    if (slug === 'four-townships') return '/four-townships';
+    if (slug === 'home') return '/';
+    return `/page/${slug}`;
+  };
+
   return (
     <PageWrapper>
-      <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div className="px-4 py-12 mx-auto max-w-4xl sm:px-6 lg:px-8">
+        {pageTitle && <Breadcrumbs items={[{ label: pageTitle, path: getBreadcrumbPath() }]} />}
         <Render config={config} data={data} />
       </div>
     </PageWrapper>
