@@ -13,6 +13,7 @@ import { Contribute } from './pages/Contribute';
 import { Editor } from './pages/Editor';
 import { Admin } from './pages/Admin';
 import { PuckPage } from './pages/PuckPage';
+import { PageManager } from './pages/PageManager';
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
             <Route path="/maps" element={<Maps />} />
             <Route path="/about" element={<About />} />
             <Route path="/contribute" element={<Contribute />} />
+            <Route path="/pages" element={<PageManager />} />
+            <Route path="/editor/:slug" element={<Editor />} />
             <Route path="/editor" element={<Editor />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/page/:slug" element={<PuckPage />} />

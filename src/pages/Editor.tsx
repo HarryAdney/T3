@@ -1,109 +1,88 @@
 import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Puck, Data } from '@measured/puck';
 import { config } from '../puck.config';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { Login } from '../components/Login';
-import { LogOut, User, Shield } from 'lucide-react';
+import { LogOut, User, Shield, ArrowLeft } from 'lucide-react';
 import '@measured/puck/puck.css';
 
 const initialData: Data = {
-  content: [
-    {
-      type: 'Hero',
-      props: {
-        id: 'hero-1',
-        title: 'Welcome to Thoralby Through Time',
-        description: 'Discover the rich heritage of Thoralby and Bishopdale through stories, photographs, and maps spanning centuries of Yorkshire Dales history.',
-        imageSrc: 'https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg',
-      },
-    },
-  ],
-  root: { props: { title: 'Custom Page' } },
+  content: [],
+  root: { props: { title: 'New Page' } },
 };
 
 export function Editor() {
+  const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const { user, profile, loading: authLoading, signOut, isEditor } = useAuth();
   const [data, setData] = useState<Data>(initialData);
+  const [pageTitle, setPageTitle] = useState('');
   const [saveMessage, setSaveMessage] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user && isEditor) {
+    if (user && isEditor && slug) {
       loadPageData();
+    } else if (user && isEditor && !slug) {
+      setLoading(false);
     }
-  }, [user, isEditor]);
+  }, [user, isEditor, slug]);
 
   const loadPageData = async () => {
+    if (!slug) {
+      setLoading(false);
+      return;
+    }
+
     try {
-      const { data: pageData, error } = await (supabase as any)
+      const { data: pageData, error } = await supabase
         .from('puck_pages')
         .select('*')
-        .eq('slug', 'home')
+        .eq('slug', slug)
         .maybeSingle();
 
       if (pageData && !error) {
         setData(JSON.parse(pageData.content));
-      } else {
-        // Fallback to localStorage
-        const localData = localStorage.getItem('puck_page_home');
-        if (localData) {
-          setData(JSON.parse(localData));
-        }
+        setPageTitle(pageData.title);
       }
     } catch (err) {
       console.error('Error loading page:', err);
-
-      // Fallback to localStorage
-      try {
-        const localData = localStorage.getItem('puck_page_home');
-        if (localData) {
-          setData(JSON.parse(localData));
-        }
-      } catch (localErr) {
-        console.error('Error loading from localStorage:', localErr);
-      }
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSave = async (newData: Data) => {
     setSaveMessage('');
 
+    if (!slug) {
+      setSaveMessage('Error: No page selected');
+      return;
+    }
+
     try {
-      // Try database save first
-      const { error } = await (supabase as any)
+      const { error } = await supabase
         .from('puck_pages')
         .upsert({
-          slug: 'home',
-          title: newData.root.props?.title || 'Custom Page',
+          slug,
+          title: newData.root.props?.title || pageTitle || 'Untitled Page',
           content: JSON.stringify(newData),
           updated_at: new Date().toISOString(),
         });
 
-      if (error) {
-        // If database save fails due to RLS, fallback to localStorage
-        console.warn('Database save failed, using localStorage fallback:', error);
-        localStorage.setItem('puck_page_home', JSON.stringify(newData));
-        setSaveMessage('Page saved locally! (Database permissions need to be updated)');
-      } else {
-        setSaveMessage('Page saved successfully!');
-      }
-
+      if (error) throw error;
+      setSaveMessage('Page saved successfully!');
       setTimeout(() => setSaveMessage(''), 3000);
     } catch (err: any) {
       console.error('Error saving page:', err);
-
-      // Fallback to localStorage
-      try {
-        localStorage.setItem('puck_page_home', JSON.stringify(newData));
-        setSaveMessage('Page saved locally! (Database connection failed)');
-        setTimeout(() => setSaveMessage(''), 3000);
-      } catch (localErr) {
-        setSaveMessage(`Error: ${err.message}`);
-      }
+      setSaveMessage(`Error: ${err.message}`);
+      setTimeout(() => setSaveMessage(''), 5000);
     }
   };
 
-  if (authLoading) {
+  if (authLoading || loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-stone-50">
         <div className="inline-block w-12 h-12 border-4 rounded-full border-sage-600 border-t-transparent animate-spin" />
@@ -147,9 +126,38 @@ export function Editor() {
     );
   }
 
+  if (!slug) {
+    return (
+      <div className="flex items-center justify-center min-h-screen px-4 bg-gradient-to-br from-stone-50 to-sage-50">
+        <div className="w-full max-w-md p-8 text-center bg-white shadow-lg rounded-2xl">
+          <h1 className="mb-3 font-serif text-2xl font-bold text-stone-900">
+            No Page Selected
+          </h1>
+          <p className="mb-6 text-stone-600">
+            Please select a page to edit from the page manager.
+          </p>
+          <button
+            onClick={() => navigate('/pages')}
+            className="w-full py-3 font-medium text-white transition-colors rounded-lg bg-sage-600 hover:bg-sage-700"
+          >
+            Go to Page Manager
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative h-screen">
-      <div className="absolute z-50 flex items-center gap-4 px-6 py-3 bg-white border-b shadow-sm top-0 right-0 border-stone-200">
+      <div className="absolute z-50 flex items-center gap-4 px-6 py-3 bg-white border-b shadow-sm top-0 left-0 right-0 border-stone-200">
+        <button
+          onClick={() => navigate('/pages')}
+          className="flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors rounded-lg text-stone-700 hover:bg-stone-100"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Pages
+        </button>
+        <div className="flex-1" />
         <div className="flex items-center gap-2">
           <User className="w-4 h-4 text-stone-500" />
           <span className="text-sm font-medium text-stone-700">

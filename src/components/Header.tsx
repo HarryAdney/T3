@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Search, MapPin } from 'lucide-react';
+import { Menu, X, Search, MapPin, FileEdit } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const location = useLocation();
+  const { isEditor } = useAuth();
 
   const navigation = [
     { name: 'Home', path: '/' },
@@ -52,6 +54,16 @@ export function Header() {
           </nav>
 
           <div className="flex items-center space-x-3">
+            {isEditor && (
+              <Link
+                to="/pages"
+                className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-sage-700 bg-sage-50 hover:bg-sage-100 transition-colors"
+              >
+                <FileEdit className="w-4 h-4" />
+                Manage Pages
+              </Link>
+            )}
+
             <button
               onClick={() => setIsSearchOpen(!isSearchOpen)}
               className="p-2 rounded-lg text-stone-700 hover:bg-parchment-100 transition-colors"
@@ -97,6 +109,16 @@ export function Header() {
                 {item.name}
               </Link>
             ))}
+            {isEditor && (
+              <Link
+                to="/pages"
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium text-sage-700 bg-sage-50 hover:bg-sage-100"
+              >
+                <FileEdit className="w-4 h-4" />
+                Manage Pages
+              </Link>
+            )}
           </nav>
         )}
       </div>
