@@ -54,16 +54,6 @@ export function Header() {
           </nav>
 
           <div className="flex items-center space-x-3">
-            {isEditor && (
-              <Link
-                to="/pages"
-                className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-sage-700 bg-sage-50 hover:bg-sage-100 transition-colors"
-              >
-                <FileEdit className="w-4 h-4" />
-                Manage Pages
-              </Link>
-            )}
-
             <button
               onClick={() => setIsSearchOpen(!isSearchOpen)}
               className="p-2 rounded-lg text-stone-700 hover:bg-parchment-100 transition-colors"
@@ -71,6 +61,16 @@ export function Header() {
             >
               <Search className="w-5 h-5" />
             </button>
+
+            {isEditor && (
+              <Link
+                to="/pages"
+                className="p-2 rounded-lg text-sage-700 hover:bg-sage-100 transition-colors"
+                aria-label="Manage Pages"
+              >
+                <FileEdit className="w-5 h-5" />
+              </Link>
+            )}
 
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
