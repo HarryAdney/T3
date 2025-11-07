@@ -4,7 +4,7 @@ import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { Login } from '../components/Login';
 import { PageWrapper } from '../components/PageWrapper';
-import { Plus, Edit, Trash2, FileText, Shield, Lock } from 'lucide-react';
+import { Plus, CreditCard as Edit, Trash2, FileText, Shield, Lock } from 'lucide-react';
 
 interface Page {
   id: string;
