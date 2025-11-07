@@ -2,11 +2,11 @@ import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { Heart, Users, Archive, Target } from 'lucide-react';
 
-export function About() {
+export function BishopdaleValley() {
   return (
     <PageWrapper>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Breadcrumbs items={[{ label: 'About', path: '/about' }]} />
+        <Breadcrumbs items={[{ label: 'Bishopdale Valley', path: '/bishopdale-valley' }]} />
 
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-serif font-semibold text-stone-900 mb-6">

@@ -4,7 +4,7 @@ import { Breadcrumbs } from '../components/Breadcrumbs';
 import { supabase } from '../lib/supabase';
 import { Image as ImageIcon, Search, X } from 'lucide-react';
 
-export function Photos() {
+export function Gallery() {
   const [photos, setPhotos] = useState<any[]>([]);
   const [filteredPhotos, setFilteredPhotos] = useState<any[]>([]);
   const [selectedPhoto, setSelectedPhoto] = useState<any | null>(null);
@@ -55,11 +55,11 @@ export function Photos() {
   return (
     <PageWrapper>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Breadcrumbs items={[{ label: 'Photo Archive', path: '/photos' }]} />
+        <Breadcrumbs items={[{ label: 'Gallery', path: '/gallery' }]} />
 
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-serif font-semibold text-stone-900 mb-4">
-            Photo Archive
+            Gallery
           </h1>
           <p className="text-lg text-stone-600 max-w-3xl">
             Browse our growing collection of historical photographs capturing life,

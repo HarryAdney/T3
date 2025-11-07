@@ -3,13 +3,11 @@ import { AuthProvider } from './contexts/AuthContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
-import { People } from './pages/People';
-import { Buildings } from './pages/Buildings';
+import { BishopdaleValley } from './pages/BishopdaleValley';
 import { Timeline } from './pages/Timeline';
-import { Photos } from './pages/Photos';
+import { Gallery } from './pages/Gallery';
 import { Maps } from './pages/Maps';
-import { About } from './pages/About';
-import { Contribute } from './pages/Contribute';
+import { Contact } from './pages/Contact';
 import { Editor } from './pages/Editor';
 import { Admin } from './pages/Admin';
 import { PuckPage } from './pages/PuckPage';
@@ -23,13 +21,11 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/people" element={<People />} />
-            <Route path="/buildings" element={<Buildings />} />
+            <Route path="/bishopdale-valley" element={<BishopdaleValley />} />
             <Route path="/timeline" element={<Timeline />} />
-            <Route path="/photos" element={<Photos />} />
             <Route path="/maps" element={<Maps />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contribute" element={<Contribute />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/pages" element={<PageManager />} />
             <Route path="/editor/:slug" element={<Editor />} />
             <Route path="/editor" element={<Editor />} />

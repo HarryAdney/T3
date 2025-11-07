@@ -11,12 +11,11 @@ export function Header() {
 
   const navigation = [
     { name: 'Home', path: '/' },
-    { name: 'People', path: '/people' },
-    { name: 'Buildings', path: '/buildings' },
+    { name: 'Bishopdale Valley', path: '/bishopdale-valley' },
     { name: 'Timeline', path: '/timeline' },
-    { name: 'Photo Archive', path: '/photos' },
     { name: 'Maps', path: '/maps' },
-    { name: 'About', path: '/about' },
+    { name: 'Gallery', path: '/gallery' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   const isActive = (path: string) => location.pathname === path;

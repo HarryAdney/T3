@@ -4,7 +4,7 @@ import { Breadcrumbs } from '../components/Breadcrumbs';
 import { supabase } from '../lib/supabase';
 import { Send, CheckCircle } from 'lucide-react';
 
-export function Contribute() {
+export function Contact() {
   const [formData, setFormData] = useState({
     contributor_name: '',
     contributor_email: '',
@@ -79,11 +79,11 @@ export function Contribute() {
   return (
     <PageWrapper>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Breadcrumbs items={[{ label: 'Contribute', path: '/contribute' }]} />
+        <Breadcrumbs items={[{ label: 'Contact', path: '/contact' }]} />
 
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-serif font-semibold text-stone-900 mb-4">
-            Contribute Your Story
+            Contact Us
           </h1>
           <p className="text-lg text-stone-600">
             Help us preserve Thoralby's history by sharing your memories, photographs,
