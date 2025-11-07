@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
 import { BishopdaleValley } from './pages/BishopdaleValley';
+import { FourTownships } from './pages/FourTownships';
 import { Timeline } from './pages/Timeline';
 import { Gallery } from './pages/Gallery';
 import { Maps } from './pages/Maps';
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/bishopdale-valley" element={<BishopdaleValley />} />
+            <Route path="/four-townships" element={<FourTownships />} />
             <Route path="/timeline" element={<Timeline />} />
             <Route path="/maps" element={<Maps />} />
             <Route path="/gallery" element={<Gallery />} />

@@ -12,6 +12,7 @@ export function Header() {
   const navigation = [
     { name: 'Home', path: '/' },
     { name: 'Bishopdale Valley', path: '/bishopdale-valley' },
+    { name: 'The Four Townships', path: '/four-townships' },
     { name: 'Timeline', path: '/timeline' },
     { name: 'Maps', path: '/maps' },
     { name: 'Gallery', path: '/gallery' },
