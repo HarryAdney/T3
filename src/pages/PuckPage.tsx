@@ -16,42 +16,33 @@ export function PuckPage({ slug: slugProp }: PuckPageProps = {}) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const loadPageData = async () => {
+      setLoading(true);
+      setData(null);
+
+      const pageSlug = slug || 'home';
+
+      try {
+        const { data: pageData, error } = await (supabase as any)
+          .from('puck_pages')
+          .select('*')
+          .eq('slug', pageSlug)
+          .maybeSingle();
+
+        if (pageData && !error) {
+          setData(JSON.parse(pageData.content));
+        } else {
+          console.error('Error loading page:', error);
+        }
+      } catch (err) {
+        console.error('Error loading page:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     loadPageData();
   }, [slug]);
-
-  const loadPageData = async () => {
-    try {
-      const { data: pageData, error } = await (supabase as any)
-        .from('puck_pages')
-        .select('*')
-        .eq('slug', slug || 'home')
-        .maybeSingle();
-
-      if (pageData && !error) {
-        setData(JSON.parse(pageData.content));
-      } else {
-        // Fallback to localStorage if database query fails
-        const localData = localStorage.getItem('puck_page_home');
-        if (localData) {
-          setData(JSON.parse(localData));
-        }
-      }
-    } catch (err) {
-      console.error('Error loading page:', err);
-
-      // Fallback to localStorage on any error
-      try {
-        const localData = localStorage.getItem('puck_page_home');
-        if (localData) {
-          setData(JSON.parse(localData));
-        }
-      } catch (localErr) {
-        console.error('Error loading from localStorage:', localErr);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (loading) {
     return (
