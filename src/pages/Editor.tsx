@@ -70,6 +70,8 @@ export function Editor() {
           title: newData.root.props?.title || pageTitle || 'Untitled Page',
           content: JSON.stringify(newData),
           updated_at: new Date().toISOString(),
+        }, {
+          onConflict: 'slug'
         });
 
       if (error) throw error;
