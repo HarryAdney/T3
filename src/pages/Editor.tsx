@@ -51,10 +51,16 @@ export function Editor() {
         console.error('Database error:', error);
         setSaveMessage(`Error loading page: ${error.message}`);
       } else if (pageData) {
-        console.log('Parsing content:', pageData.content);
-        const parsedData = JSON.parse(pageData.content);
+        console.log('Content type:', typeof pageData.content);
+        console.log('Content:', pageData.content);
+
+        // Supabase returns JSONB as objects, not strings
+        const parsedData = typeof pageData.content === 'string'
+          ? JSON.parse(pageData.content)
+          : pageData.content;
+
         console.log('Parsed data:', parsedData);
-        setData(parsedData);
+        setData(parsedData as Data);
         setPageTitle(pageData.title);
       } else {
         console.log('No page data found for slug:', slug);
@@ -82,7 +88,7 @@ export function Editor() {
         .upsert({
           slug,
           title: newData.root.props?.title || pageTitle || 'Untitled Page',
-          content: JSON.stringify(newData),
+          content: newData,
           updated_at: new Date().toISOString(),
         }, {
           onConflict: 'slug'

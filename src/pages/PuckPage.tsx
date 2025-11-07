@@ -32,7 +32,11 @@ export function PuckPage({ slug: slugProp }: PuckPageProps = {}) {
           .maybeSingle();
 
         if (pageData && !error) {
-          setData(JSON.parse(pageData.content));
+          // Supabase returns JSONB as objects, not strings
+          const parsedData = typeof pageData.content === 'string'
+            ? JSON.parse(pageData.content)
+            : pageData.content;
+          setData(parsedData);
           setPageTitle(pageData.title || '');
         } else {
           console.error('Error loading page:', error);
