@@ -81,6 +81,7 @@ export function PuckPage({ slug: slugProp }: PuckPageProps = {}) {
   const getBreadcrumbPath = () => {
     if (slug === 'bishopdale-valley') return '/bishopdale-valley';
     if (slug === 'four-townships') return '/four-townships';
+    if (slug === 'thoralby') return '/thoralby';
     if (slug === 'home') return '/';
     return `/page/${slug}`;
   };

@@ -24,6 +24,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/bishopdale-valley" element={<PuckPage slug="bishopdale-valley" />} />
             <Route path="/four-townships" element={<FourTownships />} />
+            <Route path="/thoralby" element={<PuckPage slug="thoralby" />} />
             <Route path="/timeline" element={<Timeline />} />
             <Route path="/maps" element={<Maps />} />
             <Route path="/gallery" element={<Gallery />} />
