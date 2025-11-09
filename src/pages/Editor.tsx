@@ -171,41 +171,8 @@ export function Editor() {
 
   return (
     <div className="relative h-screen">
-      <div className="absolute z-50 flex items-center gap-4 px-6 py-3 bg-white border-b shadow-sm top-0 left-0 right-0 border-stone-200">
-        <button
-          onClick={() => navigate('/pages')}
-          className="flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors rounded-lg text-stone-700 hover:bg-stone-100"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Pages
-        </button>
-        <div className="flex-1" />
-        <button
-          onClick={() => handleSave(data)}
-          className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white transition-colors rounded-lg bg-sage-600 hover:bg-sage-700 focus:outline-none focus:ring-2 focus:ring-sage-500"
-        >
-          <Save className="w-4 h-4" />
-          Save
-        </button>
-        <div className="flex items-center gap-2">
-          <User className="w-4 h-4 text-stone-500" />
-          <span className="text-sm font-medium text-stone-700">
-            {profile?.email}
-          </span>
-          <span className="px-2 py-1 text-xs font-medium rounded bg-sage-100 text-sage-700">
-            {profile?.role}
-          </span>
-        </div>
-        <button
-          onClick={signOut}
-          className="flex items-center gap-2 px-4 py-2 text-sm font-medium transition-colors rounded-lg text-stone-700 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-sage-500"
-        >
-          <LogOut className="w-4 h-4" />
-          Sign Out
-        </button>
-      </div>
       {saveMessage && (
-        <div className="fixed z-50 px-6 py-3 text-white rounded-lg shadow-lg top-20 right-4 bg-sage-600">
+        <div className="fixed z-50 px-6 py-3 text-white rounded-lg shadow-lg top-4 right-4 bg-sage-600">
           {saveMessage}
         </div>
       )}
@@ -214,6 +181,7 @@ export function Editor() {
         data={data}
         onPublish={handleSave}
         onChange={setData}
+        headerPath="/pages"
       />
     </div>
   );
