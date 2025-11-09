@@ -11,6 +11,13 @@ type Props = {
 };
 
 export const config: Config<Props> = {
+  root: {
+    render: ({ children }) => (
+      <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        {children}
+      </div>
+    ),
+  },
   components: {
     Hero: {
       fields: {

@@ -91,10 +91,12 @@ export function PuckPage({ slug: slugProp }: PuckPageProps = {}) {
 
   return (
     <PageWrapper>
-      <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        {pageTitle && <Breadcrumbs items={[{ label: pageTitle, path: getBreadcrumbPath() }]} />}
-        <Render config={config} data={data} />
-      </div>
+      {pageTitle && (
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 pt-12">
+          <Breadcrumbs items={[{ label: pageTitle, path: getBreadcrumbPath() }]} />
+        </div>
+      )}
+      <Render config={config} data={data} />
     </PageWrapper>
   );
 }
