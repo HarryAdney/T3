@@ -82,6 +82,9 @@ export function PuckPage({ slug: slugProp }: PuckPageProps = {}) {
     if (slug === 'bishopdale-valley') return '/bishopdale-valley';
     if (slug === 'four-townships') return '/four-townships';
     if (slug === 'thoralby') return '/thoralby';
+    if (slug === 'newbiggin') return '/newbiggin';
+    if (slug === 'street') return '/street';
+    if (slug === 'west-burton') return '/west-burton';
     if (slug === 'home') return '/';
     return `/page/${slug}`;
   };
