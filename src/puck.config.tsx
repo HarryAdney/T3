@@ -83,8 +83,8 @@ export const config: Config<Props> = {
         caption: { type: 'text', label: 'Caption (optional)' },
       },
       defaultProps: {
-        src: 'https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg',
-        alt: 'Placeholder image',
+        src: '',
+        alt: 'Add your image description here',
       },
       render: ({ src, alt, caption }) => (
         <div className="overflow-hidden sepia-overlay rounded-2xl">

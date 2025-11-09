@@ -4,17 +4,37 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Building2, Clock, Image, Map, ArrowRight, BookOpen } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { supabase } from '../lib/supabase';
+import { sampleImages } from '../config/sampleImages';
 
-const heroImages = [
-  'https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg',
-  'https://images.pexels.com/photos/208518/pexels-photo-208518.jpeg',
-  'https://images.pexels.com/photos/442583/pexels-photo-442583.jpeg',
-  'https://images.pexels.com/photos/1612351/pexels-photo-1612351.jpeg',
+interface Photograph {
+  id: string;
+  title: string;
+  description?: string;
+  image_url: string;
+  thumbnail_url?: string;
+  photo_date?: string;
+  photo_year?: number;
+  location?: string;
+  photographer?: string;
+  contributor?: string;
+  tags?: string[];
+  created_at: string;
+  updated_at: string;
+}
+
+const heroImages: string[] = [
+  // Using sample images for demonstration
+  ...sampleImages.hero,
+  // Replace with your own image URLs for production
+  // 'https://your-domain.com/images/hero1.jpg',
+  // 'https://your-domain.com/images/hero2.jpg',
+  // 'https://your-domain.com/images/hero3.jpg',
+  // 'https://your-domain.com/images/hero4.jpg',
 ];
 
 export function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [latestPhotos, setLatestPhotos] = useState<any[]>([]);
+  const [latestPhotos, setLatestPhotos] = useState<Photograph[]>([]);
   const [stats, setStats] = useState({ people: 0, buildings: 0, events: 0, photos: 0 });
 
   useEffect(() => {
@@ -115,32 +135,32 @@ export function Home() {
             <img
               src={heroImages[currentImageIndex]}
               alt="Thoralby landscape"
-              className="w-full h-full object-cover"
+              className="object-cover w-full h-full"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-stone-900/50 via-stone-900/30 to-parchment-50" />
           </motion.div>
         </AnimatePresence>
 
-        <div className="relative h-full flex items-center">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="relative flex items-center h-full">
+          <div className="w-full px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
               className="max-w-3xl"
             >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight">
+              <h1 className="mb-6 font-serif text-5xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
                 Thoralby Through Time
               </h1>
-              <p className="text-xl md:text-2xl text-parchment-100 mb-8 leading-relaxed">
+              <p className="mb-8 text-xl leading-relaxed md:text-2xl text-parchment-100">
                 Discover the rich heritage of Thoralby and Bishopdale through stories,
                 photographs, and maps spanning centuries of Yorkshire Dales history.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link to="/photos" className="btn-primary bg-white text-stone-900 hover:bg-parchment-100">
+                <Link to="/photos" className="bg-white btn-primary text-stone-900 hover:bg-parchment-100">
                   Explore the Archive
                 </Link>
-                <Link to="/contribute" className="btn-secondary bg-sage-600 text-white hover:bg-sage-700">
+                <Link to="/contribute" className="text-white btn-secondary bg-sage-600 hover:bg-sage-700">
                   Share Your Story
                 </Link>
               </div>
@@ -148,7 +168,7 @@ export function Home() {
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 flex justify-center space-x-2 pb-6">
+        <div className="absolute bottom-0 left-0 right-0 flex justify-center pb-6 space-x-2">
           {heroImages.map((_, index) => (
             <button
               key={index}
@@ -164,18 +184,18 @@ export function Home() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-serif font-semibold text-stone-900 mb-4">
+      <div className="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="mb-12 text-center">
+          <h2 className="mb-4 font-serif text-4xl font-semibold text-stone-900">
             Explore Our Collections
           </h2>
-          <p className="text-lg text-stone-600 max-w-2xl mx-auto">
+          <p className="max-w-2xl mx-auto text-lg text-stone-600">
             Dive into different aspects of Thoralby's history through our curated
             collections of people, places, events, and photographs.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 gap-6 mb-16 md:grid-cols-2 lg:grid-cols-3">
           {sections.map((section, index) => (
             <motion.div
               key={section.path}
@@ -183,22 +203,22 @@ export function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Link to={section.path} className="card group h-full flex flex-col">
+              <Link to={section.path} className="flex flex-col h-full card group">
                 <div className={`w-12 h-12 rounded-xl bg-${section.color}-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                   <section.icon className={`w-6 h-6 text-${section.color}-700`} />
                 </div>
-                <h3 className="text-xl font-serif font-semibold text-stone-900 mb-2">
+                <h3 className="mb-2 font-serif text-xl font-semibold text-stone-900">
                   {section.title}
                 </h3>
                 {section.stat > 0 && (
-                  <p className="text-sm text-stone-500 mb-3">
+                  <p className="mb-3 text-sm text-stone-500">
                     {section.stat} {section.stat === 1 ? 'item' : 'items'}
                   </p>
                 )}
-                <p className="text-stone-600 mb-4 flex-1">{section.description}</p>
-                <div className="flex items-center text-sage-700 font-medium group-hover:text-sage-800 transition-colors">
+                <p className="flex-1 mb-4 text-stone-600">{section.description}</p>
+                <div className="flex items-center font-medium transition-colors text-sage-700 group-hover:text-sage-800">
                   <span className="text-sm">Explore</span>
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                 </div>
               </Link>
             </motion.div>
@@ -209,7 +229,7 @@ export function Home() {
           <div className="mb-16">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <h2 className="text-3xl font-serif font-semibold text-stone-900 mb-2">
+                <h2 className="mb-2 font-serif text-3xl font-semibold text-stone-900">
                   Latest Additions
                 </h2>
                 <p className="text-stone-600">
@@ -218,28 +238,28 @@ export function Home() {
               </div>
               <Link
                 to="/photos"
-                className="text-sage-700 hover:text-sage-800 font-medium flex items-center transition-colors"
+                className="flex items-center font-medium transition-colors text-sage-700 hover:text-sage-800"
               >
                 View all
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
               {latestPhotos.map((photo) => (
                 <Link
                   key={photo.id}
                   to={`/photos/${photo.id}`}
-                  className="group block"
+                  className="block group"
                 >
                   <div className="aspect-[4/3] overflow-hidden rounded-2xl mb-4 sepia-overlay">
                     <img
                       src={photo.image_url}
                       alt={photo.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
-                  <h3 className="font-serif text-lg font-medium text-stone-900 mb-1 group-hover:text-sage-700 transition-colors">
+                  <h3 className="mb-1 font-serif text-lg font-medium transition-colors text-stone-900 group-hover:text-sage-700">
                     {photo.title}
                   </h3>
                   {photo.photo_year && (
@@ -251,17 +271,17 @@ export function Home() {
           </div>
         )}
 
-        <div className="bg-gradient-to-r from-sage-600 to-sage-700 rounded-2xl p-8 md:p-12 text-white text-center">
-          <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-4">
+        <div className="p-8 text-center text-white bg-gradient-to-r from-sage-600 to-sage-700 rounded-2xl md:p-12">
+          <h2 className="mb-4 font-serif text-3xl font-semibold md:text-4xl">
             Help Us Preserve Our Heritage
           </h2>
-          <p className="text-lg text-sage-100 mb-6 max-w-2xl mx-auto">
+          <p className="max-w-2xl mx-auto mb-6 text-lg text-sage-100">
             Do you have photographs, documents, or stories about Thoralby and Bishopdale?
             We'd love to hear from you and add your contributions to our archive.
           </p>
           <Link
             to="/contribute"
-            className="inline-flex items-center px-8 py-4 bg-white text-sage-700 rounded-xl font-semibold hover:bg-parchment-50 transition-colors"
+            className="inline-flex items-center px-8 py-4 font-semibold transition-colors bg-white text-sage-700 rounded-xl hover:bg-parchment-50"
           >
             Contribute Your Story
             <ArrowRight className="w-5 h-5 ml-2" />

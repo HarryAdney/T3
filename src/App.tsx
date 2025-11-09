@@ -16,9 +16,9 @@ import { Contact } from './pages/Contact';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter className="">
       <AuthProvider>
-        <div className="min-h-screen flex flex-col bg-texture">
+        <div className="flex flex-col min-h-screen bg-texture">
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
