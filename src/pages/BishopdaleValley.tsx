@@ -5,7 +5,7 @@ import { Heart, Users, Archive, Target } from 'lucide-react';
 export function BishopdaleValley() {
   return (
     <PageWrapper>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Breadcrumbs items={[{ label: 'Bishopdale Valley', path: '/bishopdale-valley' }]} />
 
         <div className="mb-12">
