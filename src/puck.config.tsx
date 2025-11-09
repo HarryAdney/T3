@@ -35,17 +35,17 @@ export const config: Config<Props> = {
             <img
               src={imageSrc}
               alt={title}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 object-cover w-full h-full"
             />
           )}
           <div className="absolute inset-0 bg-gradient-to-b from-stone-900/50 via-stone-900/30 to-parchment-50" />
-          <div className="relative h-full flex items-center">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="relative flex items-center h-full">
+            <div className="w-full px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
               <div className="max-w-3xl">
-                <h1 className="text-5xl md:text-6xl font-serif font-bold text-white mb-6 leading-tight">
+                <h1 className="mb-6 font-serif text-5xl font-bold leading-tight text-white md:text-6xl">
                   {title}
                 </h1>
-                <p className="text-xl md:text-2xl text-parchment-100 leading-relaxed">
+                <p className="text-xl leading-relaxed md:text-2xl text-parchment-100">
                   {description}
                 </p>
               </div>
@@ -72,7 +72,7 @@ export const config: Config<Props> = {
       },
       render: ({ content, align }) => (
         <div className={`prose prose-stone max-w-none text-${align || 'left'}`}>
-          <p className="text-stone-700 leading-relaxed">{content}</p>
+          <p className="leading-relaxed text-stone-700">{content}</p>
         </div>
       ),
     },
@@ -87,10 +87,10 @@ export const config: Config<Props> = {
         alt: 'Placeholder image',
       },
       render: ({ src, alt, caption }) => (
-        <div className="sepia-overlay rounded-2xl overflow-hidden">
+        <div className="overflow-hidden sepia-overlay rounded-2xl">
           <img src={src} alt={alt} className="w-full h-auto" />
           {caption && (
-            <p className="text-sm text-stone-600 mt-2 text-center italic">
+            <p className="mt-2 text-sm italic text-center text-stone-600">
               {caption}
             </p>
           )}
@@ -121,23 +121,23 @@ export const config: Config<Props> = {
       render: ({ title, cards }) => (
         <div>
           {title && (
-            <h2 className="text-3xl font-serif font-semibold text-stone-900 mb-8">
+            <h2 className="mb-8 font-serif text-3xl font-semibold text-stone-900">
               {title}
             </h2>
           )}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {cards?.map((card, idx) => (
               <div key={idx} className="card">
                 {card.image && (
-                  <div className="aspect-video overflow-hidden rounded-xl mb-4 sepia-overlay">
+                  <div className="mb-4 overflow-hidden aspect-video rounded-xl sepia-overlay">
                     <img
                       src={card.image}
                       alt={card.title}
-                      className="w-full h-full object-cover"
+                      className="object-cover w-full h-full"
                     />
                   </div>
                 )}
-                <h3 className="text-xl font-serif font-semibold text-stone-900 mb-2">
+                <h3 className="mb-2 font-serif text-xl font-semibold text-stone-900">
                   {card.title}
                 </h3>
                 <p className="text-stone-600">{card.description}</p>
@@ -158,8 +158,8 @@ export const config: Config<Props> = {
         author: 'Author Name',
       },
       render: ({ quote, author, role }) => (
-        <div className="bg-sage-50 rounded-2xl p-8 border-l-4 border-sage-600">
-          <blockquote className="text-xl font-serif text-stone-900 italic mb-4">
+        <div className="p-8 border-l-4 bg-sage-50 rounded-2xl border-sage-600">
+          <blockquote className="mb-4 font-serif text-xl italic text-stone-900">
             "{quote}"
           </blockquote>
           <div className="text-stone-700">
@@ -200,7 +200,7 @@ export const config: Config<Props> = {
         content: 'Feature description goes here...',
       },
       render: ({ icon, iconBg, title, content }) => {
-        const iconMap: Record<string, any> = {
+        const iconMap: Record<string, React.ReactElement> = {
           Target: (
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -240,16 +240,16 @@ export const config: Config<Props> = {
         };
 
         return (
-          <div className="card mb-8">
-            <div className="flex items-start space-x-4 mb-4">
+          <div className="mb-8 card">
+            <div className="flex items-start mb-4 space-x-4">
               <div className={`w-12 h-12 ${bgClasses[iconBg as keyof typeof bgClasses] || bgClasses.sage} rounded-xl flex items-center justify-center flex-shrink-0`}>
                 {iconMap[icon] || iconMap.Target}
               </div>
               <div className="flex-1">
-                <h2 className="text-2xl font-serif font-semibold text-stone-900 mb-2">
+                <h2 className="mb-2 font-serif text-2xl font-semibold text-stone-900">
                   {title}
                 </h2>
-                <div className="text-stone-700 leading-relaxed whitespace-pre-line">
+                <div className="leading-relaxed whitespace-pre-line text-stone-700">
                   {content}
                 </div>
               </div>
@@ -287,10 +287,10 @@ export const config: Config<Props> = {
 
         return (
           <div className={`${bgClasses[bgColor as keyof typeof bgClasses] || bgClasses.gradient} rounded-2xl p-8`}>
-            <h2 className="text-2xl font-serif font-semibold text-stone-900 mb-4">
+            <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
               {title}
             </h2>
-            <div className="text-stone-700 leading-relaxed whitespace-pre-line">
+            <div className="leading-relaxed whitespace-pre-line text-stone-700">
               {content}
             </div>
           </div>
