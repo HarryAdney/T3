@@ -5,6 +5,7 @@ This guide explains how to set up and use the new authentication system for the 
 ## Overview
 
 The site now has role-based access control with three user roles:
+
 - **Viewer**: Can only view published content (default for new users)
 - **Editor**: Can edit and publish content using the Puck editor
 - **Admin**: Full access including user management and all editor permissions
@@ -12,19 +13,23 @@ The site now has role-based access control with three user roles:
 ## Features Implemented
 
 ### 1. Database
+
 - `user_profiles` table stores user information and roles
 - Automatic profile creation when users sign up
 - Row Level Security (RLS) policies enforce role-based access
 
 ### 2. Authentication Methods
+
 - **Email/Password**: Traditional login with email and password
 - **Magic Link**: Passwordless login via email link
 
 ### 3. Protected Routes
+
 - `/editor` - Requires authentication + editor or admin role
 - `/admin` - Requires authentication + admin role
 
 ### 4. User Interface
+
 - Login screen with tabbed interface for password/magic link
 - Editor page shows user info and logout button
 - Admin panel for managing user roles
@@ -33,6 +38,7 @@ The site now has role-based access control with three user roles:
 ## Getting Started
 
 ### Step 1: Create Your First Admin User
+
 
 Since new users default to the "viewer" role, you'll need to create an admin user directly in the Supabase dashboard:
 
@@ -47,11 +53,13 @@ Since new users default to the "viewer" role, you'll need to create an admin use
 
 ### Step 2: Sign In
 
+
 1. Visit `/editor` or `/admin` on your site
 2. You'll be redirected to the login page
 3. Sign in with your admin credentials
 
 ### Step 3: Manage Users (Admin Only)
+
 
 Once signed in as an admin:
 
@@ -99,16 +107,19 @@ New users can be added in two ways:
 ## Troubleshooting
 
 ### "Access Denied" on Editor Page
+
 - Verify your user role in Supabase dashboard
 - Make sure it's set to "editor" or "admin"
 - Try signing out and back in
 
 ### Magic Link Not Working
+
 - Check your Supabase email settings
 - Verify the redirect URL is correct
 - Look for the email in spam folder
 
 ### Cannot Save Changes
+
 - Ensure you're signed in
 - Check that you have editor or admin role
 - Look for error messages in the browser console
@@ -124,6 +135,7 @@ New users can be added in two ways:
 ## Next Steps
 
 Consider:
+
 - Setting up custom email templates in Supabase
 - Adding password reset functionality
 - Implementing invitation system for new users
