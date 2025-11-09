@@ -62,34 +62,69 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+    let mounted = true;
+    let isInitialized = false;
 
-      if (session?.user) {
-        fetchUserProfile(session.user.id).then(setProfile);
-      }
+    const initAuth = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
 
-      setLoading(false);
-    });
+        if (!mounted) return;
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      (async () => {
         setSession(session);
         setUser(session?.user ?? null);
 
         if (session?.user) {
           const userProfile = await fetchUserProfile(session.user.id);
-          setProfile(userProfile);
-        } else {
-          setProfile(null);
+          if (mounted) {
+            setProfile(userProfile);
+          }
         }
 
-        setLoading(false);
-      })();
+        if (mounted) {
+          setLoading(false);
+          isInitialized = true;
+        }
+      } catch (error) {
+        console.error('Error initializing auth:', error);
+        if (mounted) {
+          setLoading(false);
+          isInitialized = true;
+        }
+      }
+    };
+
+    initAuth();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (!mounted || !isInitialized) return;
+
+      // Only update if the session actually changed
+      setSession((prevSession) => {
+        if (prevSession?.access_token === session?.access_token) {
+          return prevSession;
+        }
+        return session;
+      });
+
+      setUser(session?.user ?? null);
+
+      if (session?.user) {
+        const userProfile = await fetchUserProfile(session.user.id);
+        if (mounted) {
+          setProfile(userProfile);
+        }
+      } else {
+        if (mounted) {
+          setProfile(null);
+        }
+      }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   const signInWithPassword = async (email: string, password: string) => {
