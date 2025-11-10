@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Building2, Clock, Image, Map, ArrowRight, BookOpen } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { supabase } from '../lib/supabase';
-import { sampleImages } from '../config/sampleImages';
+// import { sampleImages } from '../config/sampleImages';
 
 interface Photograph {
   id: string;
@@ -24,12 +24,11 @@ interface Photograph {
 
 const heroImages: string[] = [
   // Using sample images for demonstration
-  ...sampleImages.hero,
-  // Replace with your own image URLs for production
-  // 'https://your-domain.com/images/hero1.jpg',
-  // 'https://your-domain.com/images/hero2.jpg',
-  // 'https://your-domain.com/images/hero3.jpg',
-  // 'https://your-domain.com/images/hero4.jpg',
+  // ...sampleImages.hero,
+    '/images/hero/home-page.webp',
+    '/images/hero/bishopdale-valley.webp',
+    '/images/hero/west-burton-village-green.webp',
+    '/images/hero/bishopdale-beck-1938.webp',
 ];
 
 export function Home() {
