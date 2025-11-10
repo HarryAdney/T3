@@ -4,15 +4,10 @@ import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { Login } from '../components/Login';
 import { PageWrapper } from '../components/PageWrapper';
-import { Plus, CreditCard as Edit, Trash2, FileText, Shield, Lock } from 'lucide-react';
+import { Plus, CreditCard as Edit, Trash2, FileText, Shield } from 'lucide-react';
+import { Database } from '../lib/database.types';
 
-interface Page {
-  id: string;
-  slug: string;
-  title: string;
-  created_at: string;
-  updated_at: string;
-}
+type PuckPage = Database['public']['Tables']['puck_pages']['Row'];
 
 interface StaticPage {
   slug: string;
@@ -21,9 +16,9 @@ interface StaticPage {
 }
 
 export function PageManager() {
-  const { user, profile, loading: authLoading, isEditor } = useAuth();
+  const { user, loading: authLoading, isEditor } = useAuth();
   const navigate = useNavigate();
-  const [pages, setPages] = useState<Page[]>([]);
+  const [pages, setPages] = useState<PuckPage[]>([]);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [newPageTitle, setNewPageTitle] = useState('');
@@ -48,8 +43,8 @@ export function PageManager() {
 
   const loadPages = async () => {
     try {
-      const { data, error } = await supabase
-        .from('puck_pages')
+      const { data, error } = await (supabase
+        .from('puck_pages') as ReturnType<typeof supabase.from>)
         .select('*')
         .order('updated_at', { ascending: false });
 
@@ -79,8 +74,8 @@ export function PageManager() {
         root: { props: { title: newPageTitle } },
       };
 
-      const { error } = await supabase
-        .from('puck_pages')
+      const { error } = await (supabase
+        .from('puck_pages') as ReturnType<typeof supabase.from>)
         .insert({
           slug,
           title: newPageTitle,
@@ -94,8 +89,9 @@ export function PageManager() {
       setNewPageSlug('');
       loadPages();
       navigate(`/editor/${slug}`);
-    } catch (err: any) {
-      setError(err.message || 'Failed to create page');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to create page';
+      setError(errorMessage);
     }
   };
 
@@ -141,7 +137,7 @@ export function PageManager() {
       <PageWrapper>
         <div className="flex items-center justify-center min-h-screen px-4">
           <div className="w-full max-w-md p-8 text-center bg-white shadow-lg rounded-2xl">
-            <div className="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-red-100">
+            <div className="inline-flex items-center justify-center w-16 h-16 mb-4 bg-red-100 rounded-full">
               <Shield className="w-8 h-8 text-red-600" />
             </div>
             <h1 className="mb-3 font-serif text-2xl font-bold text-stone-900">
@@ -267,7 +263,7 @@ export function PageManager() {
                     </button>
                     <button
                       onClick={() => handleDeletePage(page.id, page.slug)}
-                      className="flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-red-700 transition-colors bg-red-50 border border-red-300 rounded-lg hover:bg-red-100"
+                      className="flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-red-700 transition-colors border border-red-300 rounded-lg bg-red-50 hover:bg-red-100"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -281,7 +277,7 @@ export function PageManager() {
 
       {showCreateModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-          <div className="w-full max-w-md p-6 bg-white rounded-2xl shadow-xl">
+          <div className="w-full max-w-md p-6 bg-white shadow-xl rounded-2xl">
             <h2 className="mb-4 font-serif text-2xl font-bold text-stone-900">
               Create New Page
             </h2>
@@ -325,7 +321,7 @@ export function PageManager() {
                 </p>
               </div>
               {error && (
-                <div className="mb-4 p-3 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg">
+                <div className="p-3 mb-4 text-sm text-red-700 border border-red-200 rounded-lg bg-red-50">
                   {error}
                 </div>
               )}
