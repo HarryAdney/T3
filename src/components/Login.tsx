@@ -94,14 +94,14 @@ export function Login() {
           </div>
 
           {error && (
-            <div className="flex items-start gap-3 p-4 mb-6 border rounded-lg bg-red-50 border-red-200">
+            <div className="flex items-start gap-3 p-4 mb-6 border border-red-200 rounded-lg bg-red-50">
               <AlertCircle className="flex-shrink-0 w-5 h-5 text-red-600" />
               <p className="text-sm text-red-800">{error}</p>
             </div>
           )}
 
           {success && (
-            <div className="flex items-start gap-3 p-4 mb-6 border rounded-lg bg-green-50 border-green-200">
+            <div className="flex items-start gap-3 p-4 mb-6 border border-green-200 rounded-lg bg-green-50">
               <CheckCircle className="flex-shrink-0 w-5 h-5 text-green-600" />
               <p className="text-sm text-green-800">{success}</p>
             </div>

@@ -39,7 +39,6 @@ The site now has role-based access control with three user roles:
 
 ### Step 1: Create Your First Admin User
 
-
 Since new users default to the "viewer" role, you'll need to create an admin user directly in the Supabase dashboard:
 
 1. Go to your Supabase project dashboard
@@ -53,13 +52,11 @@ Since new users default to the "viewer" role, you'll need to create an admin use
 
 ### Step 2: Sign In
 
-
 1. Visit `/editor` or `/admin` on your site
 2. You'll be redirected to the login page
 3. Sign in with your admin credentials
 
 ### Step 3: Manage Users (Admin Only)
-
 
 Once signed in as an admin:
 

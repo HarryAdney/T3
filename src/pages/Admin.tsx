@@ -60,18 +60,23 @@ export function Admin() {
     try {
       setUpdating(userId);
 
-      // Type assertion to handle RLS type inference issues
-      const { error } = await (supabase
-        .from('user_profiles') as ReturnType<typeof supabase.from>)
-        .update({ role: newRole })
-        .eq('id', userId);
+      // Use the secure backend function to update user roles
+      const { data, error } = await (supabase
+        .rpc('update_user_role', {
+          target_user_id: userId,
+          new_role: newRole
+        }) as any);
 
       if (error) {
         throw error;
       }
 
-      showMessage('success', 'User role updated successfully');
-      await loadUsers();
+      if (data && data.success) {
+        showMessage('success', 'User role updated successfully');
+        await loadUsers();
+      } else {
+        throw new Error(data?.error || 'Failed to update user role');
+      }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to update user role';
       showMessage('error', errorMessage);
