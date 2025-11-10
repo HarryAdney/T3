@@ -22,8 +22,8 @@ export function Contact() {
     setError(null);
 
     try {
-      const { error: submitError } = await (supabase as any)
-        .from('contributions')
+      const { error: submitError } = await (supabase
+        .from('contributions') as ReturnType<typeof supabase.from>)
         .insert([{
           contributor_name: formData.contributor_name,
           contributor_email: formData.contributor_email,
@@ -42,8 +42,9 @@ export function Contact() {
         title: '',
         content: '',
       });
-    } catch (err: any) {
-      setError(err.message || 'Failed to submit contribution');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to submit contribution';
+      setError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -52,15 +53,15 @@ export function Contact() {
   if (isSubmitted) {
     return (
       <PageWrapper>
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-2xl px-4 py-12 mx-auto sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 bg-green-100 rounded-full">
               <CheckCircle className="w-8 h-8 text-green-600" />
             </div>
-            <h1 className="text-3xl font-serif font-semibold text-stone-900 mb-4">
+            <h1 className="mb-4 font-serif text-3xl font-semibold text-stone-900">
               Thank You!
             </h1>
-            <p className="text-lg text-stone-600 mb-8">
+            <p className="mb-8 text-lg text-stone-600">
               Your contribution has been received and will be reviewed by our team.
               We appreciate you helping us preserve Thoralby's history.
             </p>
@@ -78,11 +79,11 @@ export function Contact() {
 
   return (
     <PageWrapper>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <Breadcrumbs items={[{ label: 'Contact', path: '/contact' }]} />
 
         <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-serif font-semibold text-stone-900 mb-4">
+          <h1 className="mb-4 font-serif text-4xl font-semibold md:text-5xl text-stone-900">
             Contact Us
           </h1>
           <p className="text-lg text-stone-600">
@@ -91,34 +92,34 @@ export function Contact() {
           </p>
         </div>
 
-        <div className="card mb-8">
-          <h2 className="text-xl font-serif font-semibold text-stone-900 mb-4">
+        <div className="mb-8 card">
+          <h2 className="mb-4 font-serif text-xl font-semibold text-stone-900">
             What Can You Contribute?
           </h2>
           <ul className="space-y-3 text-stone-700">
             <li className="flex items-start">
-              <span className="w-2 h-2 bg-sage-600 rounded-full mt-2 mr-3 flex-shrink-0" />
+              <span className="flex-shrink-0 w-2 h-2 mt-2 mr-3 rounded-full bg-sage-600" />
               <span>
                 <strong>Personal Stories:</strong> Memories and anecdotes about life
                 in Thoralby and Bishopdale
               </span>
             </li>
             <li className="flex items-start">
-              <span className="w-2 h-2 bg-sage-600 rounded-full mt-2 mr-3 flex-shrink-0" />
+              <span className="flex-shrink-0 w-2 h-2 mt-2 mr-3 rounded-full bg-sage-600" />
               <span>
                 <strong>Photographs:</strong> Historical images of people, places,
                 and events
               </span>
             </li>
             <li className="flex items-start">
-              <span className="w-2 h-2 bg-sage-600 rounded-full mt-2 mr-3 flex-shrink-0" />
+              <span className="flex-shrink-0 w-2 h-2 mt-2 mr-3 rounded-full bg-sage-600" />
               <span>
                 <strong>Documents:</strong> Historical records, letters, or other
                 written materials
               </span>
             </li>
             <li className="flex items-start">
-              <span className="w-2 h-2 bg-sage-600 rounded-full mt-2 mr-3 flex-shrink-0" />
+              <span className="flex-shrink-0 w-2 h-2 mt-2 mr-3 rounded-full bg-sage-600" />
               <span>
                 <strong>Corrections:</strong> Updates or corrections to existing
                 information in our archive
@@ -129,11 +130,11 @@ export function Contact() {
 
         <form onSubmit={handleSubmit} className="card">
           <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div>
                 <label
                   htmlFor="contributor_name"
-                  className="block text-sm font-medium text-stone-700 mb-2"
+                  className="block mb-2 text-sm font-medium text-stone-700"
                 >
                   Your Name *
                 </label>
@@ -145,14 +146,14 @@ export function Contact() {
                   onChange={(e) =>
                     setFormData({ ...formData, contributor_name: e.target.value })
                   }
-                  className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border rounded-xl border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="contributor_email"
-                  className="block text-sm font-medium text-stone-700 mb-2"
+                  className="block mb-2 text-sm font-medium text-stone-700"
                 >
                   Your Email *
                 </label>
@@ -164,7 +165,7 @@ export function Contact() {
                   onChange={(e) =>
                     setFormData({ ...formData, contributor_email: e.target.value })
                   }
-                  className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border rounded-xl border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -172,7 +173,7 @@ export function Contact() {
             <div>
               <label
                 htmlFor="contribution_type"
-                className="block text-sm font-medium text-stone-700 mb-2"
+                className="block mb-2 text-sm font-medium text-stone-700"
               >
                 Contribution Type *
               </label>
@@ -183,10 +184,10 @@ export function Contact() {
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    contribution_type: e.target.value as any,
+                    contribution_type: e.target.value as 'story' | 'photo' | 'document' | 'correction',
                   })
                 }
-                className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent bg-white"
+                className="w-full px-4 py-3 bg-white border rounded-xl border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"
               >
                 <option value="story">Personal Story or Memory</option>
                 <option value="photo">Photograph</option>
@@ -198,7 +199,7 @@ export function Contact() {
             <div>
               <label
                 htmlFor="title"
-                className="block text-sm font-medium text-stone-700 mb-2"
+                className="block mb-2 text-sm font-medium text-stone-700"
               >
                 Title *
               </label>
@@ -211,14 +212,14 @@ export function Contact() {
                   setFormData({ ...formData, title: e.target.value })
                 }
                 placeholder="Give your contribution a brief title"
-                className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"
+                className="w-full px-4 py-3 border rounded-xl border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"
               />
             </div>
 
             <div>
               <label
                 htmlFor="content"
-                className="block text-sm font-medium text-stone-700 mb-2"
+                className="block mb-2 text-sm font-medium text-stone-700"
               >
                 Your Contribution *
               </label>
@@ -231,12 +232,12 @@ export function Contact() {
                 }
                 rows={8}
                 placeholder="Please provide as much detail as possible. Include dates, names, locations, and any other relevant information."
-                className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent resize-none"
+                className="w-full px-4 py-3 border resize-none rounded-xl border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"
               />
             </div>
 
             {error && (
-              <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
+              <div className="p-4 text-sm text-red-700 border border-red-200 bg-red-50 rounded-xl">
                 {error}
               </div>
             )}
@@ -248,7 +249,7 @@ export function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn-primary flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center space-x-2 btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span>{isSubmitting ? 'Submitting...' : 'Submit Contribution'}</span>
                 <Send className="w-4 h-4" />
@@ -257,17 +258,17 @@ export function Contact() {
           </div>
         </form>
 
-        <div className="mt-8 p-6 bg-parchment-100 rounded-2xl">
-          <h3 className="font-serif text-lg font-semibold text-stone-900 mb-2">
+        <div className="p-6 mt-8 bg-parchment-100 rounded-2xl">
+          <h3 className="mb-2 font-serif text-lg font-semibold text-stone-900">
             Contact Us Directly
           </h3>
-          <p className="text-stone-700 mb-2">
+          <p className="mb-2 text-stone-700">
             If you'd prefer to discuss your contribution or have questions, please
             feel free to contact us:
           </p>
           <a
             href="mailto:info@thoralbythroughtime.net"
-            className="text-sage-700 hover:text-sage-800 font-medium"
+            className="font-medium text-sage-700 hover:text-sage-800"
           >
             info@thoralbythroughtime.net
           </a>

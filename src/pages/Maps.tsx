@@ -3,10 +3,13 @@ import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { supabase } from '../lib/supabase';
 import { MapIcon } from 'lucide-react';
+import { Database } from '../lib/database.types';
+
+type Map = Database['public']['Tables']['maps']['Row'];
 
 export function Maps() {
-  const [maps, setMaps] = useState<any[]>([]);
-  const [selectedMap, setSelectedMap] = useState<any | null>(null);
+  const [maps, setMaps] = useState<Map[]>([]);
+  const [selectedMap, setSelectedMap] = useState<Map | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -37,44 +40,44 @@ export function Maps() {
 
   return (
     <PageWrapper>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <Breadcrumbs items={[{ label: 'Maps & Geography', path: '/maps' }]} />
 
         <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-serif font-semibold text-stone-900 mb-4">
+          <h1 className="mb-4 font-serif text-4xl font-semibold md:text-5xl text-stone-900">
             Maps & Geography
           </h1>
-          <p className="text-lg text-stone-600 max-w-3xl">
+          <p className="max-w-3xl text-lg text-stone-600">
             Explore historical and modern maps of Thoralby and Bishopdale. Compare
             how the landscape and settlements have evolved over time.
           </p>
         </div>
 
         {loading ? (
-          <div className="text-center py-12">
-            <div className="inline-block w-8 h-8 border-4 border-sage-600 border-t-transparent rounded-full animate-spin" />
+          <div className="py-12 text-center">
+            <div className="inline-block w-8 h-8 border-4 rounded-full border-sage-600 border-t-transparent animate-spin" />
           </div>
         ) : maps.length === 0 ? (
-          <div className="text-center py-12">
-            <MapIcon className="w-12 h-12 text-stone-400 mx-auto mb-4" />
+          <div className="py-12 text-center">
+            <MapIcon className="w-12 h-12 mx-auto mb-4 text-stone-400" />
             <p className="text-stone-600">No maps available yet.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             <div className="lg:col-span-2">
               {selectedMap && (
-                <div className="bg-white rounded-2xl shadow-soft-lg overflow-hidden">
+                <div className="overflow-hidden bg-white rounded-2xl shadow-soft-lg">
                   <div className="aspect-[4/3] bg-stone-100">
                     <img
                       src={selectedMap.map_url}
                       alt={selectedMap.title}
-                      className="w-full h-full object-contain"
+                      className="object-contain w-full h-full"
                     />
                   </div>
                   <div className="p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <h2 className="font-serif text-2xl font-semibold text-stone-900 mb-2">
+                        <h2 className="mb-2 font-serif text-2xl font-semibold text-stone-900">
                           {selectedMap.title}
                         </h2>
                         {selectedMap.map_year && (
@@ -92,7 +95,7 @@ export function Maps() {
                       </span>
                     </div>
                     {selectedMap.description && (
-                      <p className="text-stone-700 leading-relaxed">
+                      <p className="leading-relaxed text-stone-700">
                         {selectedMap.description}
                       </p>
                     )}
@@ -121,15 +124,15 @@ export function Maps() {
                         <img
                           src={map.thumbnail_url}
                           alt={map.title}
-                          className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
+                          className="flex-shrink-0 object-cover w-16 h-16 rounded-lg"
                         />
                       )}
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-serif font-medium text-stone-900 mb-1">
+                        <h4 className="mb-1 font-serif font-medium text-stone-900">
                           {map.title}
                         </h4>
                         {map.map_year && (
-                          <p className="text-sm text-stone-500 mb-2">
+                          <p className="mb-2 text-sm text-stone-500">
                             {map.map_year}
                           </p>
                         )}

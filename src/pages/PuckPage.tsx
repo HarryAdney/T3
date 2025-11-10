@@ -5,6 +5,9 @@ import { config } from '../puck.config';
 import { supabase } from '../lib/supabase';
 import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
+import { Database } from '../lib/database.types';
+
+type PuckPage = Database['public']['Tables']['puck_pages']['Row'];
 
 interface PuckPageProps {
   slug?: string;
@@ -25,8 +28,8 @@ export function PuckPage({ slug: slugProp }: PuckPageProps = {}) {
       const pageSlug = slug || 'home';
 
       try {
-        const { data: pageData, error } = await (supabase as any)
-          .from('puck_pages')
+        const { data: pageData, error } = await (supabase
+          .from('puck_pages') as ReturnType<typeof supabase.from>)
           .select('*')
           .eq('slug', pageSlug)
           .maybeSingle();
@@ -92,7 +95,7 @@ export function PuckPage({ slug: slugProp }: PuckPageProps = {}) {
   return (
     <PageWrapper>
       {pageTitle && (
-        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 pt-12">
+        <div className="px-4 pt-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <Breadcrumbs items={[{ label: pageTitle, path: getBreadcrumbPath() }]} />
         </div>
       )}

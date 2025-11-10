@@ -22,8 +22,8 @@ export function Contribute() {
     setError(null);
 
     try {
-      const { error: submitError } = await (supabase as any)
-        .from('contributions')
+      const { error: submitError } = await (supabase
+        .from('contributions') as ReturnType<typeof supabase.from>)
         .insert([{
           contributor_name: formData.contributor_name,
           contributor_email: formData.contributor_email,
@@ -42,8 +42,9 @@ export function Contribute() {
         title: '',
         content: '',
       });
-    } catch (err: any) {
-      setError(err.message || 'Failed to submit contribution');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to submit contribution';
+      setError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -181,7 +182,7 @@ export function Contribute() {
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    contribution_type: e.target.value as any,
+                    contribution_type: e.target.value as 'story' | 'photo' | 'document' | 'correction',
                   })
                 }
                 className="w-full px-4 py-3 bg-white border rounded-xl border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"

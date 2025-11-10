@@ -5,10 +5,21 @@ import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { supabase } from '../lib/supabase';
 import { Building2, MapIcon, List } from 'lucide-react';
+import { Database } from '../lib/database.types';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-delete (L.Icon.Default.prototype as any)._getIconUrl;
+type Building = Database['public']['Tables']['buildings']['Row'];
+
+// Fix Leaflet icon configuration with proper type assertion
+const iconDefaultPrototype = L.Icon.Default.prototype as {
+  _getIconUrl?: () => string;
+};
+
+if (iconDefaultPrototype._getIconUrl) {
+  delete iconDefaultPrototype._getIconUrl;
+}
+
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
   iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
@@ -16,7 +27,7 @@ L.Icon.Default.mergeOptions({
 });
 
 export function Buildings() {
-  const [buildings, setBuildings] = useState<any[]>([]);
+  const [buildings, setBuildings] = useState<Building[]>([]);
   const [viewMode, setViewMode] = useState<'map' | 'list'>('list');
   const [loading, setLoading] = useState(true);
 
@@ -36,9 +47,9 @@ export function Buildings() {
     fetchBuildings();
   }, []);
 
-  const buildingsWithCoords = buildings.filter((b) => b.latitude && b.longitude);
+  const buildingsWithCoords = buildings.filter((b) => b.latitude !== null && b.longitude !== null);
   const center: [number, number] = buildingsWithCoords.length > 0
-    ? [parseFloat(buildingsWithCoords[0].latitude), parseFloat(buildingsWithCoords[0].longitude)]
+    ? [buildingsWithCoords[0].latitude!, buildingsWithCoords[0].longitude!]
     : [54.2984, -2.0156];
 
   const statusColors = {
@@ -49,15 +60,15 @@ export function Buildings() {
 
   return (
     <PageWrapper>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <Breadcrumbs items={[{ label: 'Buildings & Places', path: '/buildings' }]} />
 
         <div className="mb-12">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-            <h1 className="text-4xl md:text-5xl font-serif font-semibold text-stone-900 mb-4 md:mb-0">
+          <div className="flex flex-col mb-4 md:flex-row md:items-center md:justify-between">
+            <h1 className="mb-4 font-serif text-4xl font-semibold md:text-5xl text-stone-900 md:mb-0">
               Buildings & Places
             </h1>
-            <div className="flex space-x-2 bg-white rounded-xl shadow-soft p-1">
+            <div className="flex p-1 space-x-2 bg-white rounded-xl shadow-soft">
               <button
                 onClick={() => setViewMode('list')}
                 className={`px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
@@ -82,18 +93,18 @@ export function Buildings() {
               </button>
             </div>
           </div>
-          <p className="text-lg text-stone-600 max-w-3xl">
+          <p className="max-w-3xl text-lg text-stone-600">
             Explore the historic buildings and significant places that define the
             architectural heritage of Thoralby and Bishopdale.
           </p>
         </div>
 
         {loading ? (
-          <div className="text-center py-12">
-            <div className="inline-block w-8 h-8 border-4 border-sage-600 border-t-transparent rounded-full animate-spin" />
+          <div className="py-12 text-center">
+            <div className="inline-block w-8 h-8 border-4 rounded-full border-sage-600 border-t-transparent animate-spin" />
           </div>
         ) : viewMode === 'map' ? (
-          <div className="bg-white rounded-2xl shadow-soft p-4 mb-8">
+          <div className="p-4 mb-8 bg-white rounded-2xl shadow-soft">
             <div className="h-[600px] rounded-xl overflow-hidden">
               <MapContainer
                 center={center}
@@ -107,21 +118,21 @@ export function Buildings() {
                 {buildingsWithCoords.map((building) => (
                   <Marker
                     key={building.id}
-                    position={[parseFloat(building.latitude), parseFloat(building.longitude)]}
+                    position={[building.latitude!, building.longitude!]}
                   >
                     <Popup>
                       <div className="p-2">
-                        <h3 className="font-serif font-semibold text-lg mb-1">
+                        <h3 className="mb-1 font-serif text-lg font-semibold">
                           {building.name}
                         </h3>
                         {building.construction_year && (
-                          <p className="text-sm text-stone-600 mb-2">
+                          <p className="mb-2 text-sm text-stone-600">
                             Built: {building.construction_year}
                           </p>
                         )}
                         <Link
                           to={`/buildings/${building.id}`}
-                          className="text-sage-700 hover:text-sage-800 text-sm font-medium"
+                          className="text-sm font-medium text-sage-700 hover:text-sage-800"
                         >
                           View details &rarr;
                         </Link>
@@ -133,12 +144,12 @@ export function Buildings() {
             </div>
           </div>
         ) : buildings.length === 0 ? (
-          <div className="text-center py-12">
-            <Building2 className="w-12 h-12 text-stone-400 mx-auto mb-4" />
+          <div className="py-12 text-center">
+            <Building2 className="w-12 h-12 mx-auto mb-4 text-stone-400" />
             <p className="text-stone-600">No buildings found.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {buildings.map((building) => (
               <Link
                 key={building.id}
@@ -146,16 +157,16 @@ export function Buildings() {
                 className="card group"
               >
                 {building.thumbnail_url && (
-                  <div className="aspect-video overflow-hidden rounded-xl mb-4 sepia-overlay">
+                  <div className="mb-4 overflow-hidden aspect-video rounded-xl sepia-overlay">
                     <img
                       src={building.thumbnail_url}
                       alt={building.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
                 )}
                 <div className="flex items-start justify-between mb-2">
-                  <h3 className="font-serif text-xl font-semibold text-stone-900 group-hover:text-sage-700 transition-colors flex-1">
+                  <h3 className="flex-1 font-serif text-xl font-semibold transition-colors text-stone-900 group-hover:text-sage-700">
                     {building.name}
                   </h3>
                   <span
@@ -167,15 +178,15 @@ export function Buildings() {
                   </span>
                 </div>
                 {building.address && (
-                  <p className="text-sm text-stone-500 mb-2">{building.address}</p>
+                  <p className="mb-2 text-sm text-stone-500">{building.address}</p>
                 )}
                 {building.construction_year && (
-                  <p className="text-sm text-stone-700 font-medium mb-3">
+                  <p className="mb-3 text-sm font-medium text-stone-700">
                     Built: {building.construction_year}
                   </p>
                 )}
                 {building.description && (
-                  <p className="text-stone-600 text-sm line-clamp-3">
+                  <p className="text-sm text-stone-600 line-clamp-3">
                     {building.description}
                   </p>
                 )}

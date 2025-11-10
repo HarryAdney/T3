@@ -1,18 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Login } from '../components/Login';
 import { supabase } from '../lib/supabase';
 import { PageWrapper } from '../components/PageWrapper';
 import { Shield, Users, RefreshCw, Mail, User, CheckCircle, AlertCircle, LogOut } from 'lucide-react';
+import { Database } from '../lib/database.types';
 
-interface UserProfile {
-  id: string;
-  email: string;
-  full_name: string | null;
-  role: 'viewer' | 'editor' | 'admin';
-  created_at: string;
-  updated_at: string;
-}
+type UserProfile = Database['public']['Tables']['user_profiles']['Row'];
 
 export function Admin() {
   const { user, profile, loading: authLoading, isAdmin, signOut } = useAuth();
@@ -20,14 +14,22 @@ export function Admin() {
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState<string | null>(null);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const messageTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    if (user && isAdmin) {
-      loadUsers();
+  const showMessage = useCallback((type: 'success' | 'error', text: string) => {
+    // Clear any existing timeout to prevent memory leaks
+    if (messageTimeoutRef.current) {
+      clearTimeout(messageTimeoutRef.current);
     }
-  }, [user, isAdmin]);
 
-  const loadUsers = async () => {
+    setMessage({ type, text });
+    messageTimeoutRef.current = setTimeout(() => {
+      setMessage(null);
+      messageTimeoutRef.current = null;
+    }, 5000);
+  }, []);
+
+  const loadUsers = useCallback(async () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
@@ -39,19 +41,28 @@ export function Admin() {
         throw error;
       }
 
-      setUsers(data as UserProfile[]);
-    } catch (err: any) {
-      showMessage('error', err.message || 'Failed to load users');
+      setUsers(data || []);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to load users';
+      showMessage('error', errorMessage);
     } finally {
       setLoading(false);
     }
-  };
+  }, [showMessage]);
 
-  const updateUserRole = async (userId: string, newRole: 'viewer' | 'editor' | 'admin') => {
+  useEffect(() => {
+    if (user && isAdmin) {
+      loadUsers();
+    }
+  }, [user, isAdmin, loadUsers]);
+
+  const updateUserRole = useCallback(async (userId: string, newRole: 'viewer' | 'editor' | 'admin') => {
     try {
       setUpdating(userId);
-      const { error } = await supabase
-        .from('user_profiles')
+
+      // Type assertion to handle RLS type inference issues
+      const { error } = await (supabase
+        .from('user_profiles') as ReturnType<typeof supabase.from>)
         .update({ role: newRole })
         .eq('id', userId);
 
@@ -61,17 +72,22 @@ export function Admin() {
 
       showMessage('success', 'User role updated successfully');
       await loadUsers();
-    } catch (err: any) {
-      showMessage('error', err.message || 'Failed to update user role');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to update user role';
+      showMessage('error', errorMessage);
     } finally {
       setUpdating(null);
     }
-  };
+  }, [loadUsers, showMessage]);
 
-  const showMessage = (type: 'success' | 'error', text: string) => {
-    setMessage({ type, text });
-    setTimeout(() => setMessage(null), 5000);
-  };
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (messageTimeoutRef.current) {
+        clearTimeout(messageTimeoutRef.current);
+      }
+    };
+  }, []);
 
   if (authLoading) {
     return (
@@ -90,7 +106,7 @@ export function Admin() {
       <PageWrapper>
         <div className="flex items-center justify-center min-h-screen px-4">
           <div className="w-full max-w-md p-8 text-center bg-white shadow-lg rounded-2xl">
-            <div className="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-red-100">
+            <div className="inline-flex items-center justify-center w-16 h-16 mb-4 bg-red-100 rounded-full">
               <Shield className="w-8 h-8 text-red-600" />
             </div>
             <h1 className="mb-3 font-serif text-2xl font-bold text-stone-900">
@@ -269,7 +285,7 @@ export function Admin() {
           )}
         </div>
 
-        <div className="p-6 mt-6 border rounded-lg bg-blue-50 border-blue-200">
+        <div className="p-6 mt-6 border border-blue-200 rounded-lg bg-blue-50">
           <h3 className="mb-2 font-semibold text-blue-900">Role Descriptions</h3>
           <div className="space-y-2 text-sm text-blue-800">
             <p>

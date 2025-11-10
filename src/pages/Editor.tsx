@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Puck, Data } from '@measured/puck';
 import { config } from '../puck.config';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { Login } from '../components/Login';
-import { LogOut, User, Shield, ArrowLeft, Save } from 'lucide-react';
+import { Shield } from 'lucide-react';
 import '@measured/puck/puck.css';
 
 const initialData: Data = {
@@ -22,23 +22,15 @@ export function Editor() {
   const [saveMessage, setSaveMessage] = useState('');
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (user && isEditor && slug) {
-      loadPageData();
-    } else if (user && isEditor && !slug) {
-      setLoading(false);
-    }
-  }, [user, isEditor, slug]);
-
-  const loadPageData = async () => {
+  const loadPageData = useCallback(async () => {
     if (!slug) {
       setLoading(false);
       return;
     }
 
     try {
-      const { data: pageData, error } = await supabase
-        .from('puck_pages')
+      const { data: pageData, error } = await (supabase
+        .from('puck_pages') as ReturnType<typeof supabase.from>)
         .select('*')
         .eq('slug', slug)
         .maybeSingle();
@@ -72,7 +64,15 @@ export function Editor() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [slug]);
+
+  useEffect(() => {
+    if (user && isEditor && slug) {
+      loadPageData();
+    } else if (user && isEditor && !slug) {
+      setLoading(false);
+    }
+  }, [user, isEditor, slug, loadPageData]);
 
   const handleSave = async (newData: Data) => {
     setSaveMessage('');
@@ -83,8 +83,8 @@ export function Editor() {
     }
 
     try {
-      const { error } = await supabase
-        .from('puck_pages')
+      const { error } = await (supabase
+        .from('puck_pages') as ReturnType<typeof supabase.from>)
         .upsert({
           slug,
           title: newData.root.props?.title || pageTitle || 'Untitled Page',
@@ -97,9 +97,10 @@ export function Editor() {
       if (error) throw error;
       setSaveMessage('Page saved successfully!');
       setTimeout(() => setSaveMessage(''), 3000);
-    } catch (err: any) {
+    } catch (err) {
       console.error('Error saving page:', err);
-      setSaveMessage(`Error: ${err.message}`);
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+      setSaveMessage(`Error: ${errorMessage}`);
       setTimeout(() => setSaveMessage(''), 5000);
     }
   };
@@ -120,7 +121,7 @@ export function Editor() {
     return (
       <div className="flex items-center justify-center min-h-screen px-4 bg-gradient-to-br from-stone-50 to-sage-50">
         <div className="w-full max-w-md p-8 text-center bg-white shadow-lg rounded-2xl">
-          <div className="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-red-100">
+          <div className="inline-flex items-center justify-center w-16 h-16 mb-4 bg-red-100 rounded-full">
             <Shield className="w-8 h-8 text-red-600" />
           </div>
           <h1 className="mb-3 font-serif text-2xl font-bold text-stone-900">
