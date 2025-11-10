@@ -1,28 +1,15 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Search, MapPin, FileEdit, ChevronDown } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { Menu, X, MapPin } from 'lucide-react';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isTownshipsOpen, setIsTownshipsOpen] = useState(false);
   const location = useLocation();
-  const { isEditor } = useAuth();
 
   const navigation = [
     { name: 'Home', path: '/' },
-    { name: 'Bishopdale Valley', path: '/bishopdale-valley' },
-    {
-      name: 'The Four Townships',
-      path: '/four-townships',
-      dropdown: [
-        { name: 'Thoralby', path: '/thoralby' },
-        { name: 'Bishopdale', path: '/bishopdale' },
-        { name: 'West Burton', path: '/west-burton' },
-        { name: 'Newbiggin', path: '/newbiggin' },
-      ]
-    },
+    { name: 'People', path: '/people' },
+    { name: 'Buildings', path: '/buildings' },
     { name: 'Timeline', path: '/timeline' },
     { name: 'Maps', path: '/maps' },
     { name: 'Gallery', path: '/gallery' },
@@ -30,11 +17,6 @@ export function Header() {
   ];
 
   const isActive = (path: string) => location.pathname === path;
-
-  const isTownshipActive = () => {
-    const townshipPaths = ['/four-townships', '/thoralby', '/bishopdale', '/west-burton', '/newbiggin'];
-    return townshipPaths.includes(location.pathname);
-  };
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-soft">
@@ -53,163 +35,46 @@ export function Header() {
           </Link>
 
           <nav className="items-center hidden space-x-1 md:flex">
-            {navigation.map((item) => {
-              if (item.dropdown) {
-                return (
-                  <div
-                    key={item.path}
-                    className="relative"
-                    onMouseEnter={() => setIsTownshipsOpen(true)}
-                    onMouseLeave={() => setIsTownshipsOpen(false)}
-                  >
-                    <Link
-                      to={item.path}
-                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-1 ${
-                        isTownshipActive()
-                          ? 'bg-sage-100 text-sage-900'
-                          : 'text-stone-700 hover:bg-parchment-100'
-                      }`}
-                    >
-                      {item.name}
-                      <ChevronDown className="w-4 h-4" />
-                    </Link>
-                    {isTownshipsOpen && (
-                      <div className="absolute left-0 w-48 py-2 mt-1 bg-white border rounded-lg shadow-lg border-stone-200">
-                        {item.dropdown.map((subItem) => (
-                          <Link
-                            key={subItem.path}
-                            to={subItem.path}
-                            className={`block px-4 py-2 text-sm transition-colors ${
-                              isActive(subItem.path)
-                                ? 'bg-sage-100 text-sage-900'
-                                : 'text-stone-700 hover:bg-parchment-100'
-                            }`}
-                          >
-                            {subItem.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                );
-              }
-              return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                    isActive(item.path)
-                      ? 'bg-sage-100 text-sage-900'
-                      : 'text-stone-700 hover:bg-parchment-100'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
+            {navigation.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  isActive(item.path)
+                    ? 'bg-sage-100 text-sage-900'
+                    : 'text-stone-700 hover:bg-parchment-100'
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
           </nav>
 
-          <div className="flex items-center space-x-3">
-            <button
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="p-2 transition-colors rounded-lg text-stone-700 hover:bg-parchment-100"
-              aria-label="Search"
-            >
-              <Search className="w-5 h-5" />
-            </button>
-
-            {isEditor && (
-              <Link
-                to="/pages"
-                className="p-2 transition-colors rounded-lg text-sage-700 hover:bg-sage-100"
-                aria-label="Manage Pages"
-              >
-                <FileEdit className="w-5 h-5" />
-              </Link>
-            )}
-
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 transition-colors rounded-lg md:hidden text-stone-700 hover:bg-parchment-100"
-              aria-label="Menu"
-            >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 transition-colors rounded-lg md:hidden text-stone-700 hover:bg-parchment-100"
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
 
-        {isSearchOpen && (
-          <div className="pb-4">
-            <input
-              type="search"
-              placeholder="Search people, places, events..."
-              className="w-full px-4 py-3 border rounded-xl border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"
-              autoFocus
-            />
-          </div>
-        )}
-
         {isMenuOpen && (
-          <nav className="pb-4 space-y-1 md:hidden">
-            {navigation.map((item) => {
-              if (item.dropdown) {
-                return (
-                  <div key={item.path} className="space-y-1">
-                    <Link
-                      to={item.path}
-                      onClick={() => setIsMenuOpen(false)}
-                      className={`flex items-center justify-between px-4 py-3 rounded-lg text-sm font-medium transition-all ${
-                        isTownshipActive()
-                          ? 'bg-sage-100 text-sage-900'
-                          : 'text-stone-700 hover:bg-parchment-100'
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                    <div className="pl-4 space-y-1">
-                      {item.dropdown.map((subItem) => (
-                        <Link
-                          key={subItem.path}
-                          to={subItem.path}
-                          onClick={() => setIsMenuOpen(false)}
-                          className={`block px-4 py-2 rounded-lg text-sm transition-all ${
-                            isActive(subItem.path)
-                              ? 'bg-sage-50 text-sage-900'
-                              : 'text-stone-600 hover:bg-parchment-50'
-                          }`}
-                        >
-                          {subItem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                );
-              }
-              return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`block px-4 py-3 rounded-lg text-sm font-medium transition-all ${
-                    isActive(item.path)
-                      ? 'bg-sage-100 text-sage-900'
-                      : 'text-stone-700 hover:bg-parchment-100'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
-            {isEditor && (
+          <nav className="py-4 border-t md:hidden border-stone-200">
+            {navigation.map((item) => (
               <Link
-                to="/pages"
+                key={item.path}
+                to={item.path}
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg text-sage-700 bg-sage-50 hover:bg-sage-100"
+                className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                  isActive(item.path)
+                    ? 'bg-sage-100 text-sage-900'
+                    : 'text-stone-700 hover:bg-parchment-100'
+                }`}
               >
-                <FileEdit className="w-4 h-4" />
-                Manage Pages
+                {item.name}
               </Link>
-            )}
+            ))}
           </nav>
         )}
       </div>

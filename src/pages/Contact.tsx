@@ -1,277 +1,95 @@
-import { useState } from 'react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
-import { supabase } from '../lib/supabase';
-import { Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 export function Contact() {
-  const [formData, setFormData] = useState({
-    contributor_name: '',
-    contributor_email: '',
-    contribution_type: 'story' as 'story' | 'photo' | 'document' | 'correction',
-    title: '',
-    content: '',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError(null);
-
-    try {
-      const { error: submitError } = await (supabase
-        .from('contributions') as ReturnType<typeof supabase.from>)
-        .insert([{
-          contributor_name: formData.contributor_name,
-          contributor_email: formData.contributor_email,
-          contribution_type: formData.contribution_type,
-          title: formData.title,
-          content: formData.content,
-        }]);
-
-      if (submitError) throw submitError;
-
-      setIsSubmitted(true);
-      setFormData({
-        contributor_name: '',
-        contributor_email: '',
-        contribution_type: 'story',
-        title: '',
-        content: '',
-      });
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to submit contribution';
-      setError(errorMessage);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  if (isSubmitted) {
-    return (
-      <PageWrapper>
-        <div className="max-w-2xl px-4 py-12 mx-auto sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 bg-green-100 rounded-full">
-              <CheckCircle className="w-8 h-8 text-green-600" />
-            </div>
-            <h1 className="mb-4 font-serif text-3xl font-semibold text-stone-900">
-              Thank You!
-            </h1>
-            <p className="mb-8 text-lg text-stone-600">
-              Your contribution has been received and will be reviewed by our team.
-              We appreciate you helping us preserve Thoralby's history.
-            </p>
-            <button
-              onClick={() => setIsSubmitted(false)}
-              className="btn-primary"
-            >
-              Submit Another Contribution
-            </button>
-          </div>
-        </div>
-      </PageWrapper>
-    );
-  }
-
   return (
     <PageWrapper>
       <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <Breadcrumbs items={[{ label: 'Contact', path: '/contact' }]} />
 
         <div className="mb-12">
-          <h1 className="mb-4 font-serif text-4xl font-semibold md:text-5xl text-stone-900">
-            Contact Us
+          <h1 className="mb-4 font-serif text-4xl font-bold text-stone-900">
+            Get In Touch
           </h1>
           <p className="text-lg text-stone-600">
-            Help us preserve Thoralby's history by sharing your memories, photographs,
-            documents, or corrections to our archive.
+            Have questions or want to contribute? We'd love to hear from you
           </p>
         </div>
 
-        <div className="mb-8 card">
-          <h2 className="mb-4 font-serif text-xl font-semibold text-stone-900">
-            What Can You Contribute?
-          </h2>
-          <ul className="space-y-3 text-stone-700">
-            <li className="flex items-start">
-              <span className="flex-shrink-0 w-2 h-2 mt-2 mr-3 rounded-full bg-sage-600" />
-              <span>
-                <strong>Personal Stories:</strong> Memories and anecdotes about life
-                in Thoralby and Bishopdale
-              </span>
-            </li>
-            <li className="flex items-start">
-              <span className="flex-shrink-0 w-2 h-2 mt-2 mr-3 rounded-full bg-sage-600" />
-              <span>
-                <strong>Photographs:</strong> Historical images of people, places,
-                and events
-              </span>
-            </li>
-            <li className="flex items-start">
-              <span className="flex-shrink-0 w-2 h-2 mt-2 mr-3 rounded-full bg-sage-600" />
-              <span>
-                <strong>Documents:</strong> Historical records, letters, or other
-                written materials
-              </span>
-            </li>
-            <li className="flex items-start">
-              <span className="flex-shrink-0 w-2 h-2 mt-2 mr-3 rounded-full bg-sage-600" />
-              <span>
-                <strong>Corrections:</strong> Updates or corrections to existing
-                information in our archive
-              </span>
-            </li>
-          </ul>
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h2 className="font-serif text-2xl font-semibold text-stone-900 mb-6">
+              Contact Information
+            </h2>
+            <div className="space-y-4">
+              <div className="flex items-start">
+                <Mail className="w-6 h-6 text-sage-600 mt-1 mr-4" />
+                <div>
+                  <h3 className="font-medium text-stone-900 mb-1">Email</h3>
+                  <p className="text-stone-600">info@thoralby-history.org</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <Phone className="w-6 h-6 text-sage-600 mt-1 mr-4" />
+                <div>
+                  <h3 className="font-medium text-stone-900 mb-1">Phone</h3>
+                  <p className="text-stone-600">+44 (0) 1234 567890</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <MapPin className="w-6 h-6 text-sage-600 mt-1 mr-4" />
+                <div>
+                  <h3 className="font-medium text-stone-900 mb-1">Location</h3>
+                  <p className="text-stone-600">Thoralby, Bishopdale<br />North Yorkshire, England</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <form onSubmit={handleSubmit} className="card">
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="card">
+            <h2 className="font-serif text-2xl font-semibold text-stone-900 mb-6">
+              Send Us a Message
+            </h2>
+            <form className="space-y-4">
               <div>
-                <label
-                  htmlFor="contributor_name"
-                  className="block mb-2 text-sm font-medium text-stone-700"
-                >
-                  Your Name *
+                <label className="block text-sm font-medium text-stone-700 mb-2">
+                  Name
                 </label>
                 <input
                   type="text"
-                  id="contributor_name"
-                  required
-                  value={formData.contributor_name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, contributor_name: e.target.value })
-                  }
-                  className="w-full px-4 py-3 border rounded-xl border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sage-500"
+                  placeholder="Your name"
                 />
               </div>
-
               <div>
-                <label
-                  htmlFor="contributor_email"
-                  className="block mb-2 text-sm font-medium text-stone-700"
-                >
-                  Your Email *
+                <label className="block text-sm font-medium text-stone-700 mb-2">
+                  Email
                 </label>
                 <input
                   type="email"
-                  id="contributor_email"
-                  required
-                  value={formData.contributor_email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, contributor_email: e.target.value })
-                  }
-                  className="w-full px-4 py-3 border rounded-xl border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sage-500"
+                  placeholder="your@email.com"
                 />
               </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor="contribution_type"
-                className="block mb-2 text-sm font-medium text-stone-700"
-              >
-                Contribution Type *
-              </label>
-              <select
-                id="contribution_type"
-                required
-                value={formData.contribution_type}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    contribution_type: e.target.value as 'story' | 'photo' | 'document' | 'correction',
-                  })
-                }
-                className="w-full px-4 py-3 bg-white border rounded-xl border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"
-              >
-                <option value="story">Personal Story or Memory</option>
-                <option value="photo">Photograph</option>
-                <option value="document">Historical Document</option>
-                <option value="correction">Correction or Update</option>
-              </select>
-            </div>
-
-            <div>
-              <label
-                htmlFor="title"
-                className="block mb-2 text-sm font-medium text-stone-700"
-              >
-                Title *
-              </label>
-              <input
-                type="text"
-                id="title"
-                required
-                value={formData.title}
-                onChange={(e) =>
-                  setFormData({ ...formData, title: e.target.value })
-                }
-                placeholder="Give your contribution a brief title"
-                className="w-full px-4 py-3 border rounded-xl border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="content"
-                className="block mb-2 text-sm font-medium text-stone-700"
-              >
-                Your Contribution *
-              </label>
-              <textarea
-                id="content"
-                required
-                value={formData.content}
-                onChange={(e) =>
-                  setFormData({ ...formData, content: e.target.value })
-                }
-                rows={8}
-                placeholder="Please provide as much detail as possible. Include dates, names, locations, and any other relevant information."
-                className="w-full px-4 py-3 border resize-none rounded-xl border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"
-              />
-            </div>
-
-            {error && (
-              <div className="p-4 text-sm text-red-700 border border-red-200 bg-red-50 rounded-xl">
-                {error}
+              <div>
+                <label className="block text-sm font-medium text-stone-700 mb-2">
+                  Message
+                </label>
+                <textarea
+                  rows={5}
+                  className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sage-500"
+                  placeholder="Your message..."
+                />
               </div>
-            )}
-
-            <div className="flex items-center justify-between pt-4">
-              <p className="text-sm text-stone-600">
-                * Required fields
-              </p>
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="flex items-center space-x-2 btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-sage-600 text-white py-3 rounded-lg font-medium hover:bg-sage-700 transition-colors"
               >
-                <span>{isSubmitting ? 'Submitting...' : 'Submit Contribution'}</span>
-                <Send className="w-4 h-4" />
+                Send Message
               </button>
-            </div>
+            </form>
           </div>
-        </form>
-
-        <div className="p-6 mt-8 bg-parchment-100 rounded-2xl">
-          <h3 className="mb-2 font-serif text-lg font-semibold text-stone-900">
-            Contact Us Directly
-          </h3>
-          <p className="mb-2 text-stone-700">
-            If you'd prefer to discuss your contribution or have questions, please
-            feel free to contact us:
-          </p>
-          <a
-            href="mailto:info@thoralbythroughtime.net"
-            className="font-medium text-sage-700 hover:text-sage-800"
-          >
-            info@thoralbythroughtime.net
-          </a>
         </div>
       </div>
     </PageWrapper>
