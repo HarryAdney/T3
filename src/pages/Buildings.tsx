@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
-import { supabase } from '../lib/supabase';
+import { useStaticData } from '../hooks/useStaticData';
 import { Building2, MapIcon, List } from 'lucide-react';
 import { Database } from '../lib/database.types';
 import 'leaflet/dist/leaflet.css';
@@ -27,24 +27,11 @@ L.Icon.Default.mergeOptions({
 });
 
 export function Buildings() {
-  const [buildings, setBuildings] = useState<Building[]>([]);
+  const { data: staticData, loading } = useStaticData();
+  const buildings = staticData?.buildings || [];
   const [viewMode, setViewMode] = useState<'map' | 'list'>('list');
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchBuildings() {
-      const { data, error } = await supabase
-        .from('buildings')
-        .select('*')
-        .order('name', { ascending: true });
-
-      if (data && !error) {
-        setBuildings(data);
-      }
-      setLoading(false);
-    }
-
-    fetchBuildings();
   }, []);
 
   const buildingsWithCoords = buildings.filter((b) => b.latitude !== null && b.longitude !== null);

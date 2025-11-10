@@ -1,0 +1,93 @@
+{
+  "id": "8f7e2651-5ed2-4e53-955e-cc7160b96f7c",
+  "slug": "newbiggin",
+  "title": "Newbiggin",
+  "content": {
+    "root": {
+      "props": {
+        "title": "Newbiggin"
+      }
+    },
+    "content": [
+      {
+        "type": "Hero",
+        "props": {
+          "id": "newbiggin-hero",
+          "title": "Newbiggin",
+          "imageSrc": "https://images.pexels.com/photos/1583582/pexels-photo-1583582.jpeg",
+          "description": "A quiet hamlet nestled in the heart of Bishopdale, where traditional farming life continues amid stunning Yorkshire Dales scenery."
+        }
+      },
+      {
+        "type": "TextBlock",
+        "props": {
+          "id": "newbiggin-intro",
+          "content": "Newbiggin is one of the four ancient townships of Bishopdale, a small farming settlement that has remained remarkably unchanged for centuries. The hamlet exemplifies the traditional Dales way of life, with its scattered farmsteads and close connection to the land."
+        }
+      },
+      {
+        "type": "FeatureCard",
+        "props": {
+          "id": "feature-settlement",
+          "icon": "Map",
+          "title": "A Scattered Settlement",
+          "iconBg": "sage",
+          "content": "Unlike Thoralby, Newbiggin is not a nucleated village but a dispersed hamlet consisting of several farmsteads spread across the landscape. The name \"Newbiggin\" itself means \"new building,\" suggesting it was established as a secondary settlement when the area was first colonized.\n\nThe scattered nature of the township reflects the agricultural organization of the area, with each farm having direct access to grazing land and hay meadows. This pattern of settlement is characteristic of many upland farming areas in the Yorkshire Dales."
+        }
+      },
+      {
+        "type": "FeatureCard",
+        "props": {
+          "id": "feature-farming-life",
+          "icon": "Users",
+          "title": "Farming Life",
+          "iconBg": "parchment",
+          "content": "Farming has been the lifeblood of Newbiggin since medieval times. The farms here practiced mixed agriculture, combining sheep rearing with cattle, hay meadows, and small-scale crops suitable to the upland climate.\n\nTraditional farming practices persisted here longer than in many areas, with haymaking, sheep clipping, and the annual cycle of the agricultural calendar continuing to shape daily life. Many of the field barns that dot the landscape around Newbiggin date from the 17th and 18th centuries and remain in use today."
+        }
+      },
+      {
+        "type": "FeatureCard",
+        "props": {
+          "id": "feature-landscape",
+          "icon": "Heart",
+          "title": "The Landscape",
+          "iconBg": "sage",
+          "content": "The landscape around Newbiggin displays the classic features of the Yorkshire Dales: traditional hay meadows rich in wildflowers, dry-stone walls creating intricate field patterns, field barns positioned for storing hay close to where it was needed, and upland pastures for summer grazing.\n\nThe surrounding fells provide dramatic scenery and walking opportunities, with ancient tracks and paths connecting farms and leading up onto the higher ground. The area offers a glimpse into how the Dales landscape has been shaped by centuries of careful agricultural management."
+        }
+      },
+      {
+        "type": "CardGrid",
+        "props": {
+          "id": "newbiggin-features",
+          "cards": [
+            {
+              "title": "Traditional Farms",
+              "description": "Working farms that have been in the same families for generations, maintaining centuries-old agricultural traditions and land management practices."
+            },
+            {
+              "title": "Field Barns",
+              "description": "Historic stone barns scattered across the meadows, built to store hay close to where cattle would be overwintered, a distinctive feature of Dales farming."
+            },
+            {
+              "title": "Peaceful Setting",
+              "description": "One of the quietest parts of Bishopdale, offering tranquility and a genuine sense of rural isolation, far from modern development."
+            }
+          ],
+          "title": "Newbiggin Heritage"
+        }
+      },
+      {
+        "type": "InfoSection",
+        "props": {
+          "id": "newbiggin-today",
+          "title": "Newbiggin Today",
+          "bgColor": "gradient",
+          "content": "Today, Newbiggin remains a working agricultural landscape. While the number of farms has declined and farming methods have modernized, the essential character of the place remains unchanged. The scattered farms continue to work the land, maintaining the landscape that defines this corner of Bishopdale.\n\nFor visitors seeking to experience the authentic Yorkshire Dales, Newbiggin offers a glimpse into a way of life that has endured for centuries. The public footpaths that cross the township provide access to stunning scenery and a landscape rich in historical features.\n\nThe community, though small, maintains strong connections to Thoralby and the wider Bishopdale area. Despite its size, Newbiggin plays an important role in the history and character of the four townships, representing the traditional farming heritage that defines the valley."
+        }
+      }
+    ]
+  },
+  "published": true,
+  "created_at": "2025-11-09T12:54:52.975125+00:00",
+  "updated_at": "2025-11-09T12:54:52.975125+00:00"
+}

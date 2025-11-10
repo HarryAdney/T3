@@ -1,0 +1,1090 @@
+{
+  "people": [
+    {
+      "id": "32cf69e1-13c6-4ca5-9d9b-a67f4bfb5dae",
+      "first_name": "John",
+      "last_name": "Metcalfe",
+      "maiden_name": null,
+      "birth_year": 1870,
+      "death_year": 1945,
+      "occupation": "Farmer",
+      "biography": "A prominent farmer in Thoralby who owned land near the village green. Known for his prize-winning sheep at the Leyburn Agricultural Show.",
+      "profile_image_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "584212c8-5f73-4a7f-91ee-e3527c3d91f8",
+      "first_name": "Mary",
+      "last_name": "Harker",
+      "maiden_name": null,
+      "birth_year": 1885,
+      "death_year": 1962,
+      "occupation": "Schoolteacher",
+      "biography": "Taught at Thoralby School for over 30 years. Remembered fondly by generations of local children for her kindness and dedication.",
+      "profile_image_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "5a57555c-b460-4ee0-88c7-b7087aad0a42",
+      "first_name": "Thomas",
+      "last_name": "Pratt",
+      "maiden_name": null,
+      "birth_year": 1820,
+      "death_year": 1895,
+      "occupation": "Stonemason",
+      "biography": "Master stonemason responsible for many of the stone walls and buildings in Bishopdale. His craftsmanship is still evident today.",
+      "profile_image_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "7d0bcc87-f293-4b81-8b8c-448a258cd7d7",
+      "first_name": "Elizabeth",
+      "last_name": "Fawcett",
+      "maiden_name": null,
+      "birth_year": 1902,
+      "death_year": 1989,
+      "occupation": "Shopkeeper",
+      "biography": "Ran the village shop from 1925 to 1975, serving as a central gathering place for the community.",
+      "profile_image_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "f7d54f15-aaad-4332-a3e7-25078024b211",
+      "first_name": "William",
+      "last_name": "Dinsdale",
+      "maiden_name": null,
+      "birth_year": 1845,
+      "death_year": 1920,
+      "occupation": "Blacksmith",
+      "biography": "Village blacksmith whose forge was located near the bridge. Essential to the agricultural community.",
+      "profile_image_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    }
+  ],
+  "buildings": [
+    {
+      "id": "0c6bfb26-ef6f-4a0c-b05f-35c00e2be4f5",
+      "name": "St Oswald's Church",
+      "address": "Church Lane, Thoralby",
+      "latitude": 54.2984,
+      "longitude": -2.0156,
+      "construction_year": 1200,
+      "description": "Historic Norman church dating back to the 12th century. Features medieval stonework and beautiful stained glass windows added in the Victorian era.",
+      "current_status": "standing",
+      "thumbnail_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "7ca0e183-fe57-4c96-b928-319cba25b6dc",
+      "name": "The George Inn",
+      "address": "Main Street, Thoralby",
+      "latitude": 54.2976,
+      "longitude": -2.0149,
+      "construction_year": 1750,
+      "description": "Traditional Yorkshire Dales pub that has served the community for over 250 years. Originally a coaching inn.",
+      "current_status": "standing",
+      "thumbnail_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "f0e51089-6443-4376-a843-bedc294d6be0",
+      "name": "Thoralby Old School",
+      "address": "School Lane, Thoralby",
+      "latitude": 54.2979,
+      "longitude": -2.0162,
+      "construction_year": 1875,
+      "description": "Victorian school building that educated local children until 1965. Now converted to residential use.",
+      "current_status": "standing",
+      "thumbnail_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "fbc5808b-bc8c-432e-9012-b291f1d18b6b",
+      "name": "Mill Cottage",
+      "address": "Bishopdale",
+      "latitude": 54.3012,
+      "longitude": -2.0201,
+      "construction_year": 1680,
+      "description": "Former water mill site, once powered by Bishopdale Beck. The millstones are still visible in the garden.",
+      "current_status": "standing",
+      "thumbnail_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "f48c1e5b-4569-4119-bc4d-6e08e459d084",
+      "name": "West Burton Falls",
+      "address": "West Burton",
+      "latitude": 54.3089,
+      "longitude": -2.0345,
+      "construction_year": null,
+      "description": "Picturesque waterfall and historic stepping stones, a popular meeting place for centuries.",
+      "current_status": "standing",
+      "thumbnail_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    }
+  ],
+  "events": [
+    {
+      "id": "c636d7bf-62a6-4f34-a26b-898e3bf23156",
+      "title": "Thoralby School Opening",
+      "description": "The new school building was officially opened, providing education for children from Thoralby and surrounding hamlets.",
+      "event_date": "1875-09-15",
+      "event_year": 1875,
+      "decade": 1870,
+      "category": "social",
+      "image_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "a36e8e4d-c311-4348-9a05-a78a5aa637c4",
+      "title": "The Great Flood",
+      "description": "Bishopdale Beck burst its banks causing significant flooding in the valley. The stone bridge was damaged but later rebuilt.",
+      "event_date": "1889-08-23",
+      "event_year": 1889,
+      "decade": 1880,
+      "category": "natural",
+      "image_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "74be1526-b677-4468-b704-fd42894355d1",
+      "title": "First Agricultural Show",
+      "description": "Inaugural Bishopdale Agricultural Show held, celebrating local farming traditions and produce.",
+      "event_date": "1892-07-12",
+      "event_year": 1892,
+      "decade": 1890,
+      "category": "cultural",
+      "image_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "5127120d-28b0-4c31-b311-98a4943222be",
+      "title": "World War I Memorial Dedication",
+      "description": "Village memorial unveiled to honor the 12 local men who fell in the Great War.",
+      "event_date": "1920-11-11",
+      "event_year": 1920,
+      "decade": 1920,
+      "category": "political",
+      "image_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "d40d3ee2-ffe6-4213-bad0-835ef4231927",
+      "title": "Coronation Celebrations",
+      "description": "Village celebration for the coronation of Queen Elizabeth II, with a tea party on the green.",
+      "event_date": "1953-06-02",
+      "event_year": 1953,
+      "decade": 1950,
+      "category": "social",
+      "image_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "f2fedc3e-0b92-4620-8678-bb4982eca5e0",
+      "title": "School Closure",
+      "description": "Thoralby School closed due to declining enrollment, with pupils transferred to Aysgarth.",
+      "event_date": "1965-07-20",
+      "event_year": 1965,
+      "decade": 1960,
+      "category": "social",
+      "image_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "abdc236d-c860-4dbc-b289-b710dcc49071",
+      "title": "Village Hall Built",
+      "description": "New community hall opened, providing a modern venue for local events and gatherings.",
+      "event_date": "1978-05-06",
+      "event_year": 1978,
+      "decade": 1970,
+      "category": "social",
+      "image_url": null,
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    }
+  ],
+  "photographs": [
+    {
+      "id": "718f087b-e37c-490e-8931-a837783d7057",
+      "title": "Thoralby Village Green 1920s",
+      "description": "View of the village green with sheep grazing, showing traditional stone cottages in the background.",
+      "image_url": "https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg",
+      "thumbnail_url": "https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg?w=300",
+      "photo_date": null,
+      "photo_year": 1925,
+      "location": "Thoralby Green",
+      "photographer": null,
+      "contributor": null,
+      "tags": [
+        "village",
+        "1920s",
+        "buildings"
+      ],
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "7a1e53d4-2b8b-447e-864c-837db5ff2122",
+      "title": "Harvest Festival 1930",
+      "description": "Community gathered at St Oswald's Church for the annual harvest festival celebration.",
+      "image_url": "https://images.pexels.com/photos/208518/pexels-photo-208518.jpeg",
+      "thumbnail_url": "https://images.pexels.com/photos/208518/pexels-photo-208518.jpeg?w=300",
+      "photo_date": null,
+      "photo_year": 1930,
+      "location": "St Oswalds Church",
+      "photographer": null,
+      "contributor": null,
+      "tags": [
+        "festival",
+        "1930s",
+        "church"
+      ],
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "c5713f31-a855-45c1-9b5c-ea131044dcbe",
+      "title": "Bishopdale Sheep Drive",
+      "description": "Farmers driving sheep along the valley road during the autumn sheep sales.",
+      "image_url": "https://images.pexels.com/photos/442583/pexels-photo-442583.jpeg",
+      "thumbnail_url": "https://images.pexels.com/photos/442583/pexels-photo-442583.jpeg?w=300",
+      "photo_date": null,
+      "photo_year": 1948,
+      "location": "Bishopdale",
+      "photographer": null,
+      "contributor": null,
+      "tags": [
+        "farming",
+        "1940s",
+        "sheep"
+      ],
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "36fb4dc5-7185-4432-9cae-483e42dee268",
+      "title": "School Children 1955",
+      "description": "Class photograph from Thoralby School, showing pupils and teacher Mary Harker.",
+      "image_url": "https://images.pexels.com/photos/8923177/pexels-photo-8923177.jpeg",
+      "thumbnail_url": "https://images.pexels.com/photos/8923177/pexels-photo-8923177.jpeg?w=300",
+      "photo_date": null,
+      "photo_year": 1955,
+      "location": "Thoralby School",
+      "photographer": null,
+      "contributor": null,
+      "tags": [
+        "school",
+        "1950s",
+        "children"
+      ],
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    },
+    {
+      "id": "5ece34cd-560c-4f29-a2e0-ee84037cb8cb",
+      "title": "Village Snow Scene",
+      "description": "Deep snow covering the village during the harsh winter, with only chimney smoke visible.",
+      "image_url": "https://images.pexels.com/photos/1612351/pexels-photo-1612351.jpeg",
+      "thumbnail_url": "https://images.pexels.com/photos/1612351/pexels-photo-1612351.jpeg?w=300",
+      "photo_date": null,
+      "photo_year": 1963,
+      "location": "Thoralby",
+      "photographer": null,
+      "contributor": null,
+      "tags": [
+        "winter",
+        "1960s",
+        "weather"
+      ],
+      "created_at": "2025-11-02T18:38:39.2225+00:00",
+      "updated_at": "2025-11-02T18:38:39.2225+00:00"
+    }
+  ],
+  "puckPages": [
+    {
+      "id": "ba985f97-d986-4b6a-9ce6-32a6264c3298",
+      "slug": "timeline",
+      "title": "Timeline",
+      "content": {
+        "root": {
+          "props": {
+            "title": "Timeline"
+          }
+        },
+        "zones": {},
+        "content": [
+          {
+            "type": "Hero",
+            "props": {
+              "id": "timeline-hero",
+              "title": "Historical Timeline",
+              "description": "Journey through the significant events that shaped Thoralby and Bishopdale over the centuries."
+            }
+          },
+          {
+            "type": "TextBlock",
+            "props": {
+              "id": "timeline-intro",
+              "content": "Explore the key moments in our community's history, from medieval times to the present day. Each event has played a role in shaping the character of Thoralby and the surrounding townships."
+            }
+          },
+          {
+            "type": "InfoSection",
+            "props": {
+              "id": "InfoSection-e1fc80fa-ba55-44d2-a7fc-dd7caec9fde3",
+              "title": "Section Title",
+              "bgColor": "gradient",
+              "content": "Info section"
+            }
+          }
+        ]
+      },
+      "published": true,
+      "created_at": "2025-11-07T15:14:11.962214+00:00",
+      "updated_at": "2025-11-07T17:30:18.216867+00:00"
+    },
+    {
+      "id": "ca2a4cee-a3e7-4fae-86af-602d97279213",
+      "slug": "maps",
+      "title": "Maps",
+      "content": {
+        "root": {
+          "props": {
+            "title": "Maps"
+          }
+        },
+        "content": [
+          {
+            "type": "Hero",
+            "props": {
+              "id": "maps-hero",
+              "title": "Maps & Geography",
+              "description": "Explore historical and modern maps of Thoralby and Bishopdale. Compare how the landscape and settlements have evolved over time."
+            }
+          },
+          {
+            "type": "TextBlock",
+            "props": {
+              "id": "maps-intro",
+              "content": "Our collection of maps spans several centuries, revealing how the landscape, field boundaries, roads, and buildings have changed. From early estate maps to modern Ordnance Survey sheets, these cartographic records provide a unique perspective on the development of our community."
+            }
+          }
+        ]
+      },
+      "published": true,
+      "created_at": "2025-11-07T15:14:11.962214+00:00",
+      "updated_at": "2025-11-07T17:22:46.982523+00:00"
+    },
+    {
+      "id": "19aef3dd-1642-45b4-a186-44828efc5ac3",
+      "slug": "gallery",
+      "title": "Gallery",
+      "content": {
+        "root": {
+          "props": {
+            "title": "Gallery"
+          }
+        },
+        "content": [
+          {
+            "type": "Hero",
+            "props": {
+              "id": "gallery-hero",
+              "title": "Gallery",
+              "description": "Browse our growing collection of historical photographs capturing life, landscapes, and events in Thoralby and Bishopdale throughout the years."
+            }
+          },
+          {
+            "type": "TextBlock",
+            "props": {
+              "id": "gallery-intro",
+              "content": "Our photograph archive contains images dating from the earliest days of photography to recent decades. These precious records capture faces, places, and moments that would otherwise be lost to time. Each photograph tells a story and helps us understand how life in Bishopdale has changed and what has endured."
+            }
+          }
+        ]
+      },
+      "published": true,
+      "created_at": "2025-11-07T15:14:11.962214+00:00",
+      "updated_at": "2025-11-07T17:22:48.707517+00:00"
+    },
+    {
+      "id": "564b1b4d-7ccf-41d1-94ab-865ba0bfd38c",
+      "slug": "contact",
+      "title": "Contact",
+      "content": {
+        "root": {
+          "props": {
+            "title": "Contact"
+          }
+        },
+        "content": [
+          {
+            "type": "Hero",
+            "props": {
+              "id": "contact-hero",
+              "title": "Contact Us",
+              "description": "Help us preserve Thoralby's history by sharing your memories, photographs, documents, or corrections to our archive."
+            }
+          },
+          {
+            "type": "TextBlock",
+            "props": {
+              "id": "contact-intro",
+              "content": "We welcome contributions from anyone with connections to Thoralby and Bishopdale. Whether you have personal stories, historical photographs, documents, or corrections to existing information, your input helps make our archive more complete and accurate."
+            }
+          },
+          {
+            "type": "InfoSection",
+            "props": {
+              "id": "contact-types",
+              "title": "What Can You Contribute?",
+              "bgColor": "parchment",
+              "content": "• Personal Stories: Memories and anecdotes about life in Thoralby and Bishopdale\n• Photographs: Historical images of people, places, and events\n• Documents: Historical records, letters, or other written materials\n• Corrections: Updates or corrections to existing information in our archive"
+            }
+          },
+          {
+            "type": "InfoSection",
+            "props": {
+              "id": "contact-direct",
+              "title": "Contact Us Directly",
+              "bgColor": "gradient",
+              "content": "If you'd prefer to discuss your contribution or have questions, please feel free to contact us at info@thoralbythroughtime.net"
+            }
+          }
+        ]
+      },
+      "published": true,
+      "created_at": "2025-11-07T15:14:11.962214+00:00",
+      "updated_at": "2025-11-07T17:22:50.42936+00:00"
+    },
+    {
+      "id": "7ae7da84-bc74-4e29-af7c-0f2f2c3337f6",
+      "slug": "four-townships",
+      "title": "The Four Townships",
+      "content": {
+        "root": {
+          "props": {
+            "title": "The Four Townships"
+          }
+        },
+        "zones": {},
+        "content": [
+          {
+            "type": "Hero",
+            "props": {
+              "id": "townships-hero",
+              "title": "The Four Townships",
+              "description": "Bishopdale is comprised of four historic townships, each with its own distinct character and heritage. Together they form a unique community in the heart of the Yorkshire Dales."
+            }
+          },
+          {
+            "type": "TextBlock",
+            "props": {
+              "id": "townships-intro",
+              "content": "The ecclesiastical parish of Thoralby encompasses four distinct townships that have shared a common history for centuries. This medieval administrative structure reflects the traditional organization of rural Yorkshire, where scattered settlements were grouped together for ecclesiastical and civil purposes.\n\nWhile each township maintained its own identity and local customs, they were united through the parish church at Thoralby and shared responsibilities for maintaining roads, supporting the poor, and other communal obligations."
+            }
+          },
+          {
+            "type": "CardGrid",
+            "props": {
+              "id": "townships-grid",
+              "cards": [
+                {
+                  "title": "Thoralby",
+                  "content": "The largest of the four townships, home to St. Oswald's Church with its Norman architecture from the 12th century. Notable features include the village green, historic stone cottages, and The George Inn."
+                },
+                {
+                  "title": "Newbiggin",
+                  "content": "A scattered hamlet whose name means \"new building,\" reflecting its origins as a medieval settlement. Known for traditional farmsteads, medieval field patterns, and stone barns."
+                },
+                {
+                  "title": "Bishopdale",
+                  "content": "The valley that gives its name to the wider area, known for its distinctive landscape and farming heritage. Features include Bishopdale Beck, ancient field boundaries, and traditional hay meadows."
+                },
+                {
+                  "title": "West Burton",
+                  "content": "A picturesque village with one of the largest village greens in England. Renowned for its waterfall (Cauldron Falls), market cross, and stone bridges."
+                }
+              ]
+            }
+          },
+          {
+            "type": "InfoSection",
+            "props": {
+              "id": "townships-conclusion",
+              "title": "Community Through the Ages",
+              "bgColor": "gradient",
+              "content": "The four townships have shared centuries of history, from medieval farming practices to the social changes of the Industrial Revolution and beyond. Each community contributed to the broader life of the dale through agriculture, crafts, and trade.\n\nThe people of these townships have long been connected through family ties, shared work on the land, and participation in parish life. Church records, estate documents, and census returns reveal the intricate web of relationships that bound these communities together.\n\nToday, while modern administrative boundaries have evolved, the four townships remain linked by their shared heritage and the enduring beauty of the Bishopdale landscape."
+            }
+          },
+          {
+            "type": "InfoSection",
+            "props": {
+              "id": "InfoSection-dbff1c5a-24f5-4d88-a2c2-14aa2eafb491",
+              "title": "New section",
+              "bgColor": "gradient",
+              "content": "The four townships have shared centuries of history, from medieval farming practices to the social changes of the Industrial Revolution and beyond. Each community contributed to the broader life of the dale through agriculture, crafts, and trade.\n\nThe people of these townships have long been connected through family ties, shared work on the land, and participation in parish life. Church records, estate documents, and census returns reveal the intricate web of relationships that bound these communities together.\n\nToday, while modern administrative boundaries have evolved, the four townships remain linked by their shared heritage and the enduring beauty of the Bishopdale landscape."
+            }
+          }
+        ]
+      },
+      "published": true,
+      "created_at": "2025-11-07T15:14:11.962214+00:00",
+      "updated_at": "2025-11-07T17:28:26.850372+00:00"
+    },
+    {
+      "id": "3e96d151-83cc-4a98-82e1-c50e846ac30a",
+      "slug": "home",
+      "title": "Home",
+      "content": {
+        "root": {
+          "props": {
+            "title": "Home"
+          }
+        },
+        "zones": {},
+        "content": [
+          {
+            "type": "Hero",
+            "props": {
+              "id": "home-hero",
+              "title": "Thoralby Through Time 2",
+              "imageSrc": "https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg",
+              "description": "Discover the rich heritage of Thoralby and Bishopdale through stories, photographs, and maps spanning centuries of Yorkshire Dales history."
+            }
+          },
+          {
+            "type": "TextBlock",
+            "props": {
+              "id": "home-intro",
+              "align": "center",
+              "content": "Dive into different aspects of Thoralby history through our curated collections of people, places, events, and photographs."
+            }
+          },
+          {
+            "type": "CardGrid",
+            "props": {
+              "id": "home-sections",
+              "cards": [
+                {
+                  "image": "https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg",
+                  "title": "People & Families",
+                  "description": "Discover the stories of families who shaped Thoralby through generations."
+                },
+                {
+                  "image": "https://images.pexels.com/photos/208518/pexels-photo-208518.jpeg",
+                  "title": "Buildings & Placess",
+                  "description": "Explore the historic architecture and landmarks of Bishopdale."
+                },
+                {
+                  "image": "https://images.pexels.com/photos/442583/pexels-photo-442583.jpeg",
+                  "title": "Historical Timeline",
+                  "description": "Journey through centuries of events that defined our community."
+                },
+                {
+                  "image": "https://images.pexels.com/photos/1612351/pexels-photo-1612351.jpeg",
+                  "title": "Photo Archive",
+                  "description": "Browse our collection of historical photographs and images."
+                },
+                {
+                  "image": "https://images.pexels.com/photos/2859169/pexels-photo-2859169.jpeg",
+                  "title": "Maps & Geography",
+                  "description": "Compare historical and modern maps of Thoralby and surroundings."
+                },
+                {
+                  "image": "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg",
+                  "title": "About This Project",
+                  "description": "Learn about our mission to preserve local history for future generations."
+                }
+              ],
+              "title": "Explore Our Collections"
+            }
+          },
+          {
+            "type": "InfoSection",
+            "props": {
+              "id": "home-cta",
+              "title": "Help Us Preserve Our Heritage",
+              "bgColor": "sage",
+              "content": "Do you have photographs, documents, or stories about Thoralby and Bishopdale? We would love to hear from you and add your contributions to our archive."
+            }
+          }
+        ]
+      },
+      "published": true,
+      "created_at": "2025-11-07T15:14:11.962214+00:00",
+      "updated_at": "2025-11-09T19:30:44.385209+00:00"
+    },
+    {
+      "id": "0ed8119f-dacc-4fb3-a78c-f0d37abf9ce5",
+      "slug": "bishopdale-valley",
+      "title": "Bishopdale Valley",
+      "content": {
+        "root": {
+          "props": {
+            "title": "Bishopdale Valley"
+          }
+        },
+        "content": [
+          {
+            "type": "Hero",
+            "props": {
+              "id": "bishopdale-hero",
+              "title": "About Thoralby Through Time",
+              "description": "A community project dedicated to preserving and sharing the rich history of Thoralby and the surrounding Bishopdale area in North Yorkshire."
+            }
+          },
+          {
+            "type": "TextBlock",
+            "props": {
+              "id": "bishopdale-intro",
+              "content": "Thoralby Through Time is a grassroots initiative born from a passion for local history and a desire to preserve the stories, photographs, and memories that make our community unique. We believe that by understanding our past, we can better appreciate our present and shape our future."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-mission",
+              "icon": "Target",
+              "title": "Our Mission",
+              "iconBg": "sage",
+              "content": "To collect, preserve, and share the stories, photographs, and records that tell the tale of Thoralby and Bishopdale. We believe that local history matters, and that by understanding where we have come from, we can better appreciate where we are and where we are going."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-archive",
+              "icon": "Archive",
+              "title": "The Archive",
+              "iconBg": "parchment",
+              "content": "Our growing archive includes historical photographs, documents, maps, and personal stories dating back centuries. Each item has been carefully catalogued and preserved for future generations.\n\nThe collection covers all aspects of life in Thoralby and Bishopdale: from farming and industry to education, religion, and community events. We are particularly interested in ordinary, everyday life as well as extraordinary moments that shaped our community."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-community",
+              "icon": "Users",
+              "title": "Community Involvement",
+              "iconBg": "sage",
+              "content": "This project belongs to the community. Many of the photographs, stories, and documents in our archive have been generously contributed by local residents and their families.\n\nIf you have memories, photographs, or documents related to Thoralby and Bishopdale that you would like to share, we would love to hear from you. Every contribution, no matter how small, helps us build a more complete picture of our shared history."
+            }
+          },
+          {
+            "type": "InfoSection",
+            "props": {
+              "id": "about-thoralby",
+              "title": "About Thoralby",
+              "bgColor": "gradient",
+              "content": "Thoralby is a small village in Bishopdale, one of the side dales of Wensleydale in the Yorkshire Dales National Park. The village has a rich history dating back to medieval times, with St. Oswald Church featuring Norman architecture from the 12th century.\n\nThroughout its history, Thoralby has been primarily an agricultural community, with farming and sheep rearing forming the backbone of local life. The village has also been home to various craftspeople, including stonemasons, blacksmiths, and shopkeepers who served the surrounding area.\n\nToday, Thoralby maintains its rural character while welcoming visitors who come to enjoy the stunning Yorkshire Dales landscape and explore its rich heritage."
+            }
+          }
+        ]
+      },
+      "published": true,
+      "created_at": "2025-11-09T12:13:38.441914+00:00",
+      "updated_at": "2025-11-09T12:13:38.441914+00:00"
+    },
+    {
+      "id": "bfc1d63d-56d0-4adb-9bc0-030564fef54c",
+      "slug": "thoralby",
+      "title": "Thoralby",
+      "content": {
+        "root": {
+          "props": {
+            "title": "Thoralby"
+          }
+        },
+        "content": [
+          {
+            "type": "Hero",
+            "props": {
+              "id": "thoralby-hero",
+              "title": "Thoralby",
+              "imageSrc": "https://images.pexels.com/photos/208518/pexels-photo-208518.jpeg",
+              "description": "The heart of Bishopdale, a historic village with centuries of stories woven into its stone cottages and surrounding landscape."
+            }
+          },
+          {
+            "type": "TextBlock",
+            "props": {
+              "id": "thoralby-intro",
+              "content": "Thoralby is the principal settlement in Bishopdale, one of the quieter side valleys of Wensleydale in the Yorkshire Dales National Park. The village has maintained its agricultural character while preserving a rich heritage that spans from medieval times to the present day."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-church",
+              "icon": "Book",
+              "title": "St. Oswald's Church",
+              "iconBg": "sage",
+              "content": "The Parish Church of St. Oswald stands as Thoralby's most significant historical landmark. Dating from the 12th century, the church features Norman architecture with later additions from various periods. The church has served as the spiritual heart of the four townships for over 800 years.\n\nThe building contains fascinating architectural details including medieval stonework, historical monuments, and records that provide invaluable insights into the lives of generations of Bishopdale residents."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-village",
+              "icon": "Map",
+              "title": "The Village",
+              "iconBg": "parchment",
+              "content": "Thoralby's layout reflects its agricultural heritage, with stone cottages clustered around the church and along narrow lanes. Many buildings date from the 17th and 18th centuries, built from the local limestone that characterizes Yorkshire Dales architecture.\n\nThe village green and surrounding farms create a traditional Dales landscape that has changed remarkably little over the centuries. Historic features include the George Inn, traditional stone barns, and dry-stone walls that define the field patterns."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-farming",
+              "icon": "Users",
+              "title": "Farming Heritage",
+              "iconBg": "sage",
+              "content": "For centuries, Thoralby's economy and way of life have been intimately connected to farming and sheep rearing. The village lies at the heart of traditional hill farming country, where generations of families have worked the land and tended flocks on the surrounding fells.\n\nThe annual agricultural cycle shaped community life, from lambing in spring to haymaking in summer and sheep sales in autumn. This farming tradition continues today, maintaining the landscape and rural character that define Thoralby."
+            }
+          },
+          {
+            "type": "CardGrid",
+            "props": {
+              "id": "thoralby-features",
+              "cards": [
+                {
+                  "title": "Historic Buildings",
+                  "description": "Stone cottages and farmhouses dating from the 17th-19th centuries, showcasing traditional Yorkshire Dales architecture and craftsmanship."
+                },
+                {
+                  "title": "Community Life",
+                  "description": "A close-knit community that has maintained its traditions while welcoming visitors who appreciate its quiet beauty and heritage."
+                },
+                {
+                  "title": "Natural Setting",
+                  "description": "Surrounded by beautiful fell country with ancient field patterns, dry-stone walls, and traditional hay meadows characteristic of the Yorkshire Dales."
+                }
+              ],
+              "title": "Notable Features"
+            }
+          },
+          {
+            "type": "InfoSection",
+            "props": {
+              "id": "thoralby-today",
+              "title": "Thoralby Today",
+              "bgColor": "gradient",
+              "content": "Modern Thoralby retains its rural character and strong sense of community. While farming remains important, the village has adapted to changing times, with residents engaged in diverse occupations while maintaining traditional values.\n\nThe village serves as a gateway for walkers exploring the Yorkshire Dales, with numerous footpaths leading into the surrounding countryside. Visitors are drawn to Thoralby's unspoiled character, historic church, and the peaceful beauty of Bishopdale.\n\nDespite modern changes, Thoralby remains recognizably connected to its past, with many families maintaining ties to the area stretching back generations. The village continues to be a living community rather than a museum piece, balancing preservation of heritage with the needs of contemporary life."
+            }
+          }
+        ]
+      },
+      "published": true,
+      "created_at": "2025-11-09T12:41:24.522983+00:00",
+      "updated_at": "2025-11-09T12:51:43.217917+00:00"
+    },
+    {
+      "id": "8f7e2651-5ed2-4e53-955e-cc7160b96f7c",
+      "slug": "newbiggin",
+      "title": "Newbiggin",
+      "content": {
+        "root": {
+          "props": {
+            "title": "Newbiggin"
+          }
+        },
+        "content": [
+          {
+            "type": "Hero",
+            "props": {
+              "id": "newbiggin-hero",
+              "title": "Newbiggin",
+              "imageSrc": "https://images.pexels.com/photos/1583582/pexels-photo-1583582.jpeg",
+              "description": "A quiet hamlet nestled in the heart of Bishopdale, where traditional farming life continues amid stunning Yorkshire Dales scenery."
+            }
+          },
+          {
+            "type": "TextBlock",
+            "props": {
+              "id": "newbiggin-intro",
+              "content": "Newbiggin is one of the four ancient townships of Bishopdale, a small farming settlement that has remained remarkably unchanged for centuries. The hamlet exemplifies the traditional Dales way of life, with its scattered farmsteads and close connection to the land."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-settlement",
+              "icon": "Map",
+              "title": "A Scattered Settlement",
+              "iconBg": "sage",
+              "content": "Unlike Thoralby, Newbiggin is not a nucleated village but a dispersed hamlet consisting of several farmsteads spread across the landscape. The name \"Newbiggin\" itself means \"new building,\" suggesting it was established as a secondary settlement when the area was first colonized.\n\nThe scattered nature of the township reflects the agricultural organization of the area, with each farm having direct access to grazing land and hay meadows. This pattern of settlement is characteristic of many upland farming areas in the Yorkshire Dales."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-farming-life",
+              "icon": "Users",
+              "title": "Farming Life",
+              "iconBg": "parchment",
+              "content": "Farming has been the lifeblood of Newbiggin since medieval times. The farms here practiced mixed agriculture, combining sheep rearing with cattle, hay meadows, and small-scale crops suitable to the upland climate.\n\nTraditional farming practices persisted here longer than in many areas, with haymaking, sheep clipping, and the annual cycle of the agricultural calendar continuing to shape daily life. Many of the field barns that dot the landscape around Newbiggin date from the 17th and 18th centuries and remain in use today."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-landscape",
+              "icon": "Heart",
+              "title": "The Landscape",
+              "iconBg": "sage",
+              "content": "The landscape around Newbiggin displays the classic features of the Yorkshire Dales: traditional hay meadows rich in wildflowers, dry-stone walls creating intricate field patterns, field barns positioned for storing hay close to where it was needed, and upland pastures for summer grazing.\n\nThe surrounding fells provide dramatic scenery and walking opportunities, with ancient tracks and paths connecting farms and leading up onto the higher ground. The area offers a glimpse into how the Dales landscape has been shaped by centuries of careful agricultural management."
+            }
+          },
+          {
+            "type": "CardGrid",
+            "props": {
+              "id": "newbiggin-features",
+              "cards": [
+                {
+                  "title": "Traditional Farms",
+                  "description": "Working farms that have been in the same families for generations, maintaining centuries-old agricultural traditions and land management practices."
+                },
+                {
+                  "title": "Field Barns",
+                  "description": "Historic stone barns scattered across the meadows, built to store hay close to where cattle would be overwintered, a distinctive feature of Dales farming."
+                },
+                {
+                  "title": "Peaceful Setting",
+                  "description": "One of the quietest parts of Bishopdale, offering tranquility and a genuine sense of rural isolation, far from modern development."
+                }
+              ],
+              "title": "Newbiggin Heritage"
+            }
+          },
+          {
+            "type": "InfoSection",
+            "props": {
+              "id": "newbiggin-today",
+              "title": "Newbiggin Today",
+              "bgColor": "gradient",
+              "content": "Today, Newbiggin remains a working agricultural landscape. While the number of farms has declined and farming methods have modernized, the essential character of the place remains unchanged. The scattered farms continue to work the land, maintaining the landscape that defines this corner of Bishopdale.\n\nFor visitors seeking to experience the authentic Yorkshire Dales, Newbiggin offers a glimpse into a way of life that has endured for centuries. The public footpaths that cross the township provide access to stunning scenery and a landscape rich in historical features.\n\nThe community, though small, maintains strong connections to Thoralby and the wider Bishopdale area. Despite its size, Newbiggin plays an important role in the history and character of the four townships, representing the traditional farming heritage that defines the valley."
+            }
+          }
+        ]
+      },
+      "published": true,
+      "created_at": "2025-11-09T12:54:52.975125+00:00",
+      "updated_at": "2025-11-09T12:54:52.975125+00:00"
+    },
+    {
+      "id": "e64df2cd-9389-487f-b969-92c3fb25f8a5",
+      "slug": "bishopdale",
+      "title": "Bishopdale",
+      "content": {
+        "root": {
+          "props": {
+            "title": "Bishopdale"
+          }
+        },
+        "content": [
+          {
+            "type": "Hero",
+            "props": {
+              "id": "bishopdale-hero",
+              "title": "Bishopdale",
+              "imageSrc": "https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg",
+              "description": "A historic township in the upper reaches of the valley, where ancient farming traditions meet dramatic moorland scenery."
+            }
+          },
+          {
+            "type": "TextBlock",
+            "props": {
+              "id": "bishopdale-intro",
+              "content": "Bishopdale township is one of the four ancient townships that historically formed the ecclesiastical parish centered on Thoralby. Located in the upper part of the valley, it represents the more remote and upland character of the area, where farms are scattered across a landscape that transitions from enclosed pastures to open moorland."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-upper-valley",
+              "icon": "Mountain",
+              "title": "The Upper Valley",
+              "iconBg": "sage",
+              "content": "Bishopdale township occupies the upper reaches of the valley, where the landscape becomes more rugged and open. The transition from the more sheltered lower valley to the exposed uplands is gradual but marked, with farms becoming more scattered and the proportion of enclosed land giving way to open moorland.\n\nThis upland position meant that farming here was more challenging than in the lower valley, with a shorter growing season and exposure to harsh weather. Despite these challenges, generations of farming families have worked this land, developing practices suited to the environment."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-farming-character",
+              "icon": "Users",
+              "title": "Upland Farming",
+              "iconBg": "parchment",
+              "content": "The farms of Bishopdale township were primarily focused on sheep rearing, with the higher ground providing summer grazing on the moorland. Each farm typically had a combination of intake land (enclosed from the moor), hay meadows, and rights to graze sheep on the common land above.\n\nTraditional farming practices persisted here, with activities following the seasonal cycle: lambing in spring, haymaking in summer, sheep sales in autumn, and the hard work of feeding and maintaining animals through the winter months. The landscape still bears the marks of this agricultural history in its field patterns, walls, and scattered barns."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-community",
+              "icon": "Heart",
+              "title": "Community Connections",
+              "iconBg": "sage",
+              "content": "Despite the scattered nature of settlement in the township, Bishopdale maintained strong community ties with the other three townships. Residents worshipped at St. Oswald's Church in Thoralby and participated in parish affairs, traveling down the valley for markets, social gatherings, and religious occasions.\n\nThe isolation of individual farms made community connections all the more important. Neighbors helped each other during busy periods like haymaking and sheep clipping, and families maintained close relationships across the township and with the wider valley community."
+            }
+          },
+          {
+            "type": "CardGrid",
+            "props": {
+              "id": "bishopdale-features",
+              "cards": [
+                {
+                  "title": "Moorland Setting",
+                  "description": "Access to extensive moorland grazing, with dramatic upland scenery and traditional common grazing rights that shaped farming practices."
+                },
+                {
+                  "title": "Hardy Heritage",
+                  "description": "A history of resilient farming families who adapted to the challenges of upland agriculture and harsh weather conditions."
+                },
+                {
+                  "title": "Remote Beauty",
+                  "description": "Spectacular landscapes where enclosed pastures gradually give way to open moorland, offering solitude and stunning views."
+                }
+              ],
+              "title": "Bishopdale Character"
+            }
+          },
+          {
+            "type": "InfoSection",
+            "props": {
+              "id": "bishopdale-today",
+              "title": "Bishopdale Today",
+              "bgColor": "gradient",
+              "content": "Today, Bishopdale township remains sparsely populated, with a handful of working farms continuing the agricultural traditions that have defined the area for centuries. Modern farming methods have brought changes, but the essential character of the place—its openness, its connection to the moorland, and its sense of remoteness—remains intact.\n\nThe township offers walkers access to some of the finest upland scenery in the Yorkshire Dales. Footpaths cross the moorland, following ancient tracks and providing routes to neighboring valleys. The landscape rewards exploration, with its combination of enclosed fields, open moors, and long views across the valley.\n\nAs one of the four townships, Bishopdale contributes its distinctive upland character to the shared heritage of the area. While Thoralby developed as a village center, West Burton grew around its green, and Newbiggin maintained its scattered farms in the middle valley, Bishopdale represented the challenging but rewarding life of the upper valley—a testament to the determination and skill of the farming families who made their homes here."
+            }
+          }
+        ]
+      },
+      "published": true,
+      "created_at": "2025-11-09T12:55:25.157705+00:00",
+      "updated_at": "2025-11-09T14:14:40.675314+00:00"
+    },
+    {
+      "id": "59134006-c2e4-4854-8722-c3b4b8716115",
+      "slug": "west-burton",
+      "title": "West Burton",
+      "content": {
+        "root": {
+          "props": {
+            "title": "West Burton"
+          }
+        },
+        "zones": {},
+        "content": [
+          {
+            "type": "Hero",
+            "props": {
+              "id": "west-burton-hero",
+              "title": "West Burton",
+              "imageSrc": "https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg",
+              "description": "One of the most picturesque villages in the Yorkshire Dales, renowned for its spacious green and distinctive layout."
+            }
+          },
+          {
+            "type": "TextBlock",
+            "props": {
+              "id": "west-burton-intro",
+              "content": "West Burton is the 4th of the ancient townships that historically formed the ecclesiastical parish centered on Thoralby. Located at the entrance to Walden, a side valley off Bishopdale, West Burton has developed into a substantial village with a character quite distinct from the other three townships."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-village-green",
+              "icon": "Heart",
+              "title": "The Village Green",
+              "iconBg": "sage",
+              "content": "West Burton is famous for its unusually large and beautifully maintained village green, one of the finest in the Yorkshire Dales. The green forms the heart of the village, with stone cottages facing inward around its perimeter.\n\nAt the center stands a market cross dating from 1820, though the village's market charter is much older. The green was traditionally used for markets, fairs, and community gatherings. Today it provides a peaceful central space that gives the village its distinctive character and serves as the focus for village life."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-architecture",
+              "icon": "Archive",
+              "title": "Village Architecture",
+              "iconBg": "parchment",
+              "content": "The cottages and houses surrounding the green display excellent examples of traditional Dales architecture. Many buildings date from the 17th and 18th centuries, built from local limestone with characteristic stone slate roofs.\n\nThe village shows evidence of prosperity from the 18th and 19th centuries, with some larger houses reflecting wealth from farming, lead mining, and other enterprises. The consistent quality of the buildings and their careful arrangement around the green create an exceptionally harmonious village scene."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-waterfall",
+              "icon": "Map",
+              "title": "Cauldron Falls",
+              "iconBg": "sage",
+              "content": "A short walk from the village center leads to Cauldron Falls (also known as West Burton Falls), a beautiful waterfall on Walden Beck. The falls cascade over limestone steps, creating a scenic spot that has attracted visitors for generations.\n\nThe path to the falls provides a pleasant walk through woodland and meadow, offering a taste of the beautiful Walden valley beyond. The falls are accessible year-round and particularly impressive after rainfall when the beck runs high."
+            }
+          },
+          {
+            "type": "FeatureCard",
+            "props": {
+              "id": "feature-community",
+              "icon": "Users",
+              "title": "A Living Village",
+              "iconBg": "parchment",
+              "content": "Unlike some Dales villages, West Burton has maintained a strong community with local shops, a public house, and various services. The village has successfully balanced its role as a popular visitor destination with the needs of its resident community.\n\nTraditional activities like the annual Feast have been maintained, and the village continues to be a vibrant place rather than simply a showpiece. This combination of historical beauty and contemporary vitality makes West Burton stand out among Yorkshire Dales villages."
+            }
+          },
+          {
+            "type": "CardGrid",
+            "props": {
+              "id": "west-burton-features",
+              "cards": [
+                {
+                  "title": "Historic Green",
+                  "description": "One of the largest and most beautiful village greens in England, with the market cross as its focal point and stone cottages creating a perfect enclosure."
+                },
+                {
+                  "title": "Cauldron Falls",
+                  "description": "A picturesque waterfall just a short walk from the village, offering a delightful destination for visitors and a gateway to the Walden valley."
+                },
+                {
+                  "title": "Active Community",
+                  "description": "A thriving village with local amenities and a strong sense of community, successfully balancing heritage preservation with modern village life."
+                }
+              ],
+              "title": "West Burton Highlights"
+            }
+          },
+          {
+            "type": "InfoSection",
+            "props": {
+              "id": "west-burton-today",
+              "title": "West Burton Today",
+              "bgColor": "gradient",
+              "content": "Modern West Burton is recognized as one of the most attractive villages in the Yorkshire Dales, regularly appearing on lists of England's most beautiful villages. The village green and surrounding architecture create a scene of remarkable harmony that has changed surprisingly little over the past two centuries.\n\nWhile tourism is important to the village economy, West Burton has maintained its authenticity as a working community. Local businesses serve both residents and visitors, and the village continues to support community events and traditions that connect past and present.\n\nAs one of the four townships historically associated with Thoralby, West Burton represents the development of a distinct village identity while maintaining connections to its neighbors. Though larger and more developed than the other townships, it remains part of the shared heritage of Bishopdale and the surrounding area, its story intertwined with that of Thoralby, Newbiggin, and Street."
+            }
+          }
+        ]
+      },
+      "published": true,
+      "created_at": "2025-11-09T12:56:00.268261+00:00",
+      "updated_at": "2025-11-09T16:55:34.987086+00:00"
+    }
+  ],
+  "generatedAt": "2025-11-10T14:50:43.226Z"
+}

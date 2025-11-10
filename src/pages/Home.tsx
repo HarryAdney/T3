@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Building2, Clock, Image, Map, ArrowRight, BookOpen } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
-import { supabase } from '../lib/supabase';
+import { useStaticData } from '../hooks/useStaticData';
 // import { sampleImages } from '../config/sampleImages';
 
 interface Photograph {
@@ -33,39 +33,21 @@ const heroImages: string[] = [
 
 export function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [latestPhotos, setLatestPhotos] = useState<Photograph[]>([]);
-  const [stats, setStats] = useState({ people: 0, buildings: 0, events: 0, gallery: 0 });
+  const { data: staticData } = useStaticData();
+
+  const latestPhotos = staticData?.photographs.slice(0, 3) || [];
+  const stats = {
+    people: staticData?.people.length || 0,
+    buildings: staticData?.buildings.length || 0,
+    events: staticData?.events.length || 0,
+    gallery: staticData?.photographs.length || 0,
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    async function fetchData() {
-      const [peopleRes, buildingsRes, eventsRes, photosRes, latestPhotosRes] = await Promise.all([
-        supabase.from('people').select('id', { count: 'exact', head: true }),
-        supabase.from('buildings').select('id', { count: 'exact', head: true }),
-        supabase.from('events').select('id', { count: 'exact', head: true }),
-        supabase.from('photographs').select('id', { count: 'exact', head: true }),
-        supabase.from('photographs').select('*').order('created_at', { ascending: false }).limit(3),
-      ]);
-
-      setStats({
-        people: peopleRes.count || 0,
-        buildings: buildingsRes.count || 0,
-        events: eventsRes.count || 0,
-        gallery: photosRes.count || 0,
-      });
-
-      if (latestPhotosRes.data) {
-        setLatestPhotos(latestPhotosRes.data);
-      }
-    }
-
-    fetchData();
   }, []);
 
   const sections = [

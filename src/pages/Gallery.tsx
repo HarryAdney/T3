@@ -1,36 +1,25 @@
 import { useState, useEffect } from 'react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
-import { supabase } from '../lib/supabase';
+import { useStaticData } from '../hooks/useStaticData';
 import { Image as ImageIcon, Search, X } from 'lucide-react';
 import { Database } from '../lib/database.types';
 
 type Photograph = Database['public']['Tables']['photographs']['Row'];
 
 export function Gallery() {
-  const [photos, setPhotos] = useState<Photograph[]>([]);
+  const { data: staticData, loading } = useStaticData();
+  const photos = staticData?.photographs || [];
   const [filteredPhotos, setFilteredPhotos] = useState<Photograph[]>([]);
   const [selectedPhoto, setSelectedPhoto] = useState<Photograph | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTag, setSelectedTag] = useState<string>('all');
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchPhotos() {
-      const { data, error } = await supabase
-        .from('photographs')
-        .select('*')
-        .order('photo_year', { ascending: false });
-
-      if (data && !error) {
-        setPhotos(data);
-        setFilteredPhotos(data);
-      }
-      setLoading(false);
+    if (photos.length > 0) {
+      setFilteredPhotos(photos);
     }
-
-    fetchPhotos();
-  }, []);
+  }, [photos]);
 
   useEffect(() => {
     let filtered = photos;

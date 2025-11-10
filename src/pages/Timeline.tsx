@@ -1,32 +1,21 @@
 import { useState, useEffect } from 'react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
-import { supabase } from '../lib/supabase';
+import { useStaticData } from '../hooks/useStaticData';
 import { format } from 'date-fns';
 import { Calendar, Filter } from 'lucide-react';
 
 export function Timeline() {
-  const [events, setEvents] = useState<any[]>([]);
+  const { data: staticData, loading } = useStaticData();
+  const events = staticData?.events || [];
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchEvents() {
-      const { data, error } = await supabase
-        .from('events')
-        .select('*')
-        .order('event_year', { ascending: true });
-
-      if (data && !error) {
-        setEvents(data);
-        setFilteredEvents(data);
-      }
-      setLoading(false);
+    if (events.length > 0) {
+      setFilteredEvents(events);
     }
-
-    fetchEvents();
-  }, []);
+  }, [events]);
 
   useEffect(() => {
     if (selectedCategory === 'all') {

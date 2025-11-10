@@ -21,11 +21,31 @@ Thoralby Through Time is a digital archive that brings together historical photo
 - **Routing**: React Router v7
 - **Styling**: Tailwind CSS with custom design system
 - **Database**: Supabase (PostgreSQL)
+- **Static Generation**: Build-time data fetching with static JSON files
 - **Maps**: Leaflet with React Leaflet
 - **Animations**: Framer Motion
 - **Build Tool**: Vite
 - **Date Handling**: date-fns
 - **Search**: Fuse.js for fuzzy search
+
+## Static Site Architecture
+
+This application uses a hybrid static/dynamic approach:
+
+- **Public Pages** (Home, People, Buildings, Timeline, Gallery, Puck Pages): Use pre-generated static JSON data fetched from Supabase at build time
+- **Admin Pages** (Editor, Page Manager, Admin): Connect directly to Supabase for real-time data management
+- **Benefits**: Fast page loads, reduced database queries, better SEO, CDN-friendly
+
+### Build-Time Data Generation
+
+During the build process (`npm run build`), the application:
+
+1. Connects to Supabase using credentials from `.env`
+2. Fetches all content (people, buildings, events, photographs, puck pages)
+3. Generates static JSON files in `public/data/`
+4. These files are included in the production build at `dist/data/`
+
+The frontend loads data from these JSON files using the `useStaticData` hook, providing instant page loads without database queries.
 
 ## Getting Started
 
@@ -56,12 +76,20 @@ The application will be available at `http://localhost:5173`
 # Type check
 npm run typecheck
 
-# Build for production
+# Build for production (automatically generates static data first)
 npm run build
 
 # Preview production build
 npm run preview
 ```
+
+To manually regenerate static data without building:
+
+```bash
+npm run generate:data
+```
+
+This will fetch the latest content from Supabase and update the JSON files in `public/data/`.
 
 ## Database Schema
 

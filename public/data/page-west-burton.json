@@ -1,0 +1,104 @@
+{
+  "id": "59134006-c2e4-4854-8722-c3b4b8716115",
+  "slug": "west-burton",
+  "title": "West Burton",
+  "content": {
+    "root": {
+      "props": {
+        "title": "West Burton"
+      }
+    },
+    "zones": {},
+    "content": [
+      {
+        "type": "Hero",
+        "props": {
+          "id": "west-burton-hero",
+          "title": "West Burton",
+          "imageSrc": "https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg",
+          "description": "One of the most picturesque villages in the Yorkshire Dales, renowned for its spacious green and distinctive layout."
+        }
+      },
+      {
+        "type": "TextBlock",
+        "props": {
+          "id": "west-burton-intro",
+          "content": "West Burton is the 4th of the ancient townships that historically formed the ecclesiastical parish centered on Thoralby. Located at the entrance to Walden, a side valley off Bishopdale, West Burton has developed into a substantial village with a character quite distinct from the other three townships."
+        }
+      },
+      {
+        "type": "FeatureCard",
+        "props": {
+          "id": "feature-village-green",
+          "icon": "Heart",
+          "title": "The Village Green",
+          "iconBg": "sage",
+          "content": "West Burton is famous for its unusually large and beautifully maintained village green, one of the finest in the Yorkshire Dales. The green forms the heart of the village, with stone cottages facing inward around its perimeter.\n\nAt the center stands a market cross dating from 1820, though the village's market charter is much older. The green was traditionally used for markets, fairs, and community gatherings. Today it provides a peaceful central space that gives the village its distinctive character and serves as the focus for village life."
+        }
+      },
+      {
+        "type": "FeatureCard",
+        "props": {
+          "id": "feature-architecture",
+          "icon": "Archive",
+          "title": "Village Architecture",
+          "iconBg": "parchment",
+          "content": "The cottages and houses surrounding the green display excellent examples of traditional Dales architecture. Many buildings date from the 17th and 18th centuries, built from local limestone with characteristic stone slate roofs.\n\nThe village shows evidence of prosperity from the 18th and 19th centuries, with some larger houses reflecting wealth from farming, lead mining, and other enterprises. The consistent quality of the buildings and their careful arrangement around the green create an exceptionally harmonious village scene."
+        }
+      },
+      {
+        "type": "FeatureCard",
+        "props": {
+          "id": "feature-waterfall",
+          "icon": "Map",
+          "title": "Cauldron Falls",
+          "iconBg": "sage",
+          "content": "A short walk from the village center leads to Cauldron Falls (also known as West Burton Falls), a beautiful waterfall on Walden Beck. The falls cascade over limestone steps, creating a scenic spot that has attracted visitors for generations.\n\nThe path to the falls provides a pleasant walk through woodland and meadow, offering a taste of the beautiful Walden valley beyond. The falls are accessible year-round and particularly impressive after rainfall when the beck runs high."
+        }
+      },
+      {
+        "type": "FeatureCard",
+        "props": {
+          "id": "feature-community",
+          "icon": "Users",
+          "title": "A Living Village",
+          "iconBg": "parchment",
+          "content": "Unlike some Dales villages, West Burton has maintained a strong community with local shops, a public house, and various services. The village has successfully balanced its role as a popular visitor destination with the needs of its resident community.\n\nTraditional activities like the annual Feast have been maintained, and the village continues to be a vibrant place rather than simply a showpiece. This combination of historical beauty and contemporary vitality makes West Burton stand out among Yorkshire Dales villages."
+        }
+      },
+      {
+        "type": "CardGrid",
+        "props": {
+          "id": "west-burton-features",
+          "cards": [
+            {
+              "title": "Historic Green",
+              "description": "One of the largest and most beautiful village greens in England, with the market cross as its focal point and stone cottages creating a perfect enclosure."
+            },
+            {
+              "title": "Cauldron Falls",
+              "description": "A picturesque waterfall just a short walk from the village, offering a delightful destination for visitors and a gateway to the Walden valley."
+            },
+            {
+              "title": "Active Community",
+              "description": "A thriving village with local amenities and a strong sense of community, successfully balancing heritage preservation with modern village life."
+            }
+          ],
+          "title": "West Burton Highlights"
+        }
+      },
+      {
+        "type": "InfoSection",
+        "props": {
+          "id": "west-burton-today",
+          "title": "West Burton Today",
+          "bgColor": "gradient",
+          "content": "Modern West Burton is recognized as one of the most attractive villages in the Yorkshire Dales, regularly appearing on lists of England's most beautiful villages. The village green and surrounding architecture create a scene of remarkable harmony that has changed surprisingly little over the past two centuries.\n\nWhile tourism is important to the village economy, West Burton has maintained its authenticity as a working community. Local businesses serve both residents and visitors, and the village continues to support community events and traditions that connect past and present.\n\nAs one of the four townships historically associated with Thoralby, West Burton represents the development of a distinct village identity while maintaining connections to its neighbors. Though larger and more developed than the other townships, it remains part of the shared heritage of Bishopdale and the surrounding area, its story intertwined with that of Thoralby, Newbiggin, and Street."
+        }
+      }
+    ]
+  },
+  "published": true,
+  "created_at": "2025-11-09T12:56:00.268261+00:00",
+  "updated_at": "2025-11-09T16:55:34.987086+00:00"
+}

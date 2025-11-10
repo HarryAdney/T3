@@ -1,0 +1,71 @@
+{
+  "id": "0ed8119f-dacc-4fb3-a78c-f0d37abf9ce5",
+  "slug": "bishopdale-valley",
+  "title": "Bishopdale Valley",
+  "content": {
+    "root": {
+      "props": {
+        "title": "Bishopdale Valley"
+      }
+    },
+    "content": [
+      {
+        "type": "Hero",
+        "props": {
+          "id": "bishopdale-hero",
+          "title": "About Thoralby Through Time",
+          "description": "A community project dedicated to preserving and sharing the rich history of Thoralby and the surrounding Bishopdale area in North Yorkshire."
+        }
+      },
+      {
+        "type": "TextBlock",
+        "props": {
+          "id": "bishopdale-intro",
+          "content": "Thoralby Through Time is a grassroots initiative born from a passion for local history and a desire to preserve the stories, photographs, and memories that make our community unique. We believe that by understanding our past, we can better appreciate our present and shape our future."
+        }
+      },
+      {
+        "type": "FeatureCard",
+        "props": {
+          "id": "feature-mission",
+          "icon": "Target",
+          "title": "Our Mission",
+          "iconBg": "sage",
+          "content": "To collect, preserve, and share the stories, photographs, and records that tell the tale of Thoralby and Bishopdale. We believe that local history matters, and that by understanding where we have come from, we can better appreciate where we are and where we are going."
+        }
+      },
+      {
+        "type": "FeatureCard",
+        "props": {
+          "id": "feature-archive",
+          "icon": "Archive",
+          "title": "The Archive",
+          "iconBg": "parchment",
+          "content": "Our growing archive includes historical photographs, documents, maps, and personal stories dating back centuries. Each item has been carefully catalogued and preserved for future generations.\n\nThe collection covers all aspects of life in Thoralby and Bishopdale: from farming and industry to education, religion, and community events. We are particularly interested in ordinary, everyday life as well as extraordinary moments that shaped our community."
+        }
+      },
+      {
+        "type": "FeatureCard",
+        "props": {
+          "id": "feature-community",
+          "icon": "Users",
+          "title": "Community Involvement",
+          "iconBg": "sage",
+          "content": "This project belongs to the community. Many of the photographs, stories, and documents in our archive have been generously contributed by local residents and their families.\n\nIf you have memories, photographs, or documents related to Thoralby and Bishopdale that you would like to share, we would love to hear from you. Every contribution, no matter how small, helps us build a more complete picture of our shared history."
+        }
+      },
+      {
+        "type": "InfoSection",
+        "props": {
+          "id": "about-thoralby",
+          "title": "About Thoralby",
+          "bgColor": "gradient",
+          "content": "Thoralby is a small village in Bishopdale, one of the side dales of Wensleydale in the Yorkshire Dales National Park. The village has a rich history dating back to medieval times, with St. Oswald Church featuring Norman architecture from the 12th century.\n\nThroughout its history, Thoralby has been primarily an agricultural community, with farming and sheep rearing forming the backbone of local life. The village has also been home to various craftspeople, including stonemasons, blacksmiths, and shopkeepers who served the surrounding area.\n\nToday, Thoralby maintains its rural character while welcoming visitors who come to enjoy the stunning Yorkshire Dales landscape and explore its rich heritage."
+        }
+      }
+    ]
+  },
+  "published": true,
+  "created_at": "2025-11-09T12:13:38.441914+00:00",
+  "updated_at": "2025-11-09T12:13:38.441914+00:00"
+}

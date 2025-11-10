@@ -1,0 +1,50 @@
+{
+  "id": "564b1b4d-7ccf-41d1-94ab-865ba0bfd38c",
+  "slug": "contact",
+  "title": "Contact",
+  "content": {
+    "root": {
+      "props": {
+        "title": "Contact"
+      }
+    },
+    "content": [
+      {
+        "type": "Hero",
+        "props": {
+          "id": "contact-hero",
+          "title": "Contact Us",
+          "description": "Help us preserve Thoralby's history by sharing your memories, photographs, documents, or corrections to our archive."
+        }
+      },
+      {
+        "type": "TextBlock",
+        "props": {
+          "id": "contact-intro",
+          "content": "We welcome contributions from anyone with connections to Thoralby and Bishopdale. Whether you have personal stories, historical photographs, documents, or corrections to existing information, your input helps make our archive more complete and accurate."
+        }
+      },
+      {
+        "type": "InfoSection",
+        "props": {
+          "id": "contact-types",
+          "title": "What Can You Contribute?",
+          "bgColor": "parchment",
+          "content": "• Personal Stories: Memories and anecdotes about life in Thoralby and Bishopdale\n• Photographs: Historical images of people, places, and events\n• Documents: Historical records, letters, or other written materials\n• Corrections: Updates or corrections to existing information in our archive"
+        }
+      },
+      {
+        "type": "InfoSection",
+        "props": {
+          "id": "contact-direct",
+          "title": "Contact Us Directly",
+          "bgColor": "gradient",
+          "content": "If you'd prefer to discuss your contribution or have questions, please feel free to contact us at info@thoralbythroughtime.net"
+        }
+      }
+    ]
+  },
+  "published": true,
+  "created_at": "2025-11-07T15:14:11.962214+00:00",
+  "updated_at": "2025-11-07T17:22:50.42936+00:00"
+}

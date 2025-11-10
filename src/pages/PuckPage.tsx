@@ -2,12 +2,9 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Render, Data } from '@measured/puck';
 import { config } from '../puck.config';
-import { supabase } from '../lib/supabase';
+import { fetchStaticPageData } from '../hooks/useStaticData';
 import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
-import { Database } from '../lib/database.types';
-
-type PuckPage = Database['public']['Tables']['puck_pages']['Row'];
 
 interface PuckPageProps {
   slug?: string;
@@ -28,21 +25,16 @@ export function PuckPage({ slug: slugProp }: PuckPageProps = {}) {
       const pageSlug = slug || 'home';
 
       try {
-        const { data: pageData, error } = await (supabase
-          .from('puck_pages') as ReturnType<typeof supabase.from>)
-          .select('*')
-          .eq('slug', pageSlug)
-          .maybeSingle();
+        const pageData = await fetchStaticPageData(pageSlug);
 
-        if (pageData && !error) {
-          // Supabase returns JSONB as objects, not strings
+        if (pageData) {
           const parsedData = typeof pageData.content === 'string'
             ? JSON.parse(pageData.content)
             : pageData.content;
           setData(parsedData);
           setPageTitle(pageData.title || '');
         } else {
-          console.error('Error loading page:', error);
+          console.error('Page not found:', pageSlug);
         }
       } catch (err) {
         console.error('Error loading page:', err);

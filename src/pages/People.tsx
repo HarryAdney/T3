@@ -2,35 +2,24 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
-import { supabase } from '../lib/supabase';
+import { useStaticData } from '../hooks/useStaticData';
 import { User, Search } from 'lucide-react';
 import { Database } from '../lib/database.types';
 
 type Person = Database['public']['Tables']['people']['Row'];
 
 export function People() {
-  const [people, setPeople] = useState<Person[]>([]);
+  const { data: staticData, loading } = useStaticData();
+  const people = staticData?.people || [];
   const [filteredPeople, setFilteredPeople] = useState<Person[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDecade, setSelectedDecade] = useState<string>('all');
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchPeople() {
-      const { data, error } = await supabase
-        .from('people')
-        .select('*')
-        .order('last_name', { ascending: true });
-
-      if (data && !error) {
-        setPeople(data);
-        setFilteredPeople(data);
-      }
-      setLoading(false);
+    if (people.length > 0) {
+      setFilteredPeople(people);
     }
-
-    fetchPeople();
-  }, []);
+  }, [people]);
 
   useEffect(() => {
     let filtered = people;

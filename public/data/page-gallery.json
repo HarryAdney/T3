@@ -1,0 +1,32 @@
+{
+  "id": "19aef3dd-1642-45b4-a186-44828efc5ac3",
+  "slug": "gallery",
+  "title": "Gallery",
+  "content": {
+    "root": {
+      "props": {
+        "title": "Gallery"
+      }
+    },
+    "content": [
+      {
+        "type": "Hero",
+        "props": {
+          "id": "gallery-hero",
+          "title": "Gallery",
+          "description": "Browse our growing collection of historical photographs capturing life, landscapes, and events in Thoralby and Bishopdale throughout the years."
+        }
+      },
+      {
+        "type": "TextBlock",
+        "props": {
+          "id": "gallery-intro",
+          "content": "Our photograph archive contains images dating from the earliest days of photography to recent decades. These precious records capture faces, places, and moments that would otherwise be lost to time. Each photograph tells a story and helps us understand how life in Bishopdale has changed and what has endured."
+        }
+      }
+    ]
+  },
+  "published": true,
+  "created_at": "2025-11-07T15:14:11.962214+00:00",
+  "updated_at": "2025-11-07T17:22:48.707517+00:00"
+}
