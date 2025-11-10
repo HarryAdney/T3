@@ -5,17 +5,28 @@ import { Clock } from 'lucide-react';
 export function Timeline() {
   return (
     <PageWrapper>
+      <div className="relative h-64 mb-8 overflow-hidden md:h-80 lg:h-96">
+        <div className="absolute inset-0 sepia-overlay">
+          <img
+            src="https://images.pexels.com/photos/1089568/pexels-photo-1089568.jpeg?auto=compress&cs=tinysrgb&w=1200"
+            alt="Antique pocket watch and historical documents"
+            className="object-cover w-full h-full"
+          />
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-stone-900/70 to-stone-900/20">
+          <div className="text-center text-white">
+            <h1 className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
+              Historical Timeline
+            </h1>
+            <p className="text-lg md:text-xl">
+              Journey through centuries of events that defined our community
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <Breadcrumbs items={[{ label: 'Historical Timeline', path: '/timeline' }]} />
-
-        <div className="mb-12">
-          <h1 className="mb-4 font-serif text-4xl font-bold text-stone-900">
-            Historical Timeline
-          </h1>
-          <p className="text-lg text-stone-600">
-            Journey through centuries of events that defined our community
-          </p>
-        </div>
 
         <div className="text-center py-12">
           <Clock className="w-16 h-16 mx-auto mb-4 text-stone-300" />

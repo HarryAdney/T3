@@ -52,17 +52,28 @@ export function Gallery() {
 
   return (
     <PageWrapper>
+      <div className="relative h-64 mb-8 overflow-hidden md:h-80 lg:h-96">
+        <div className="absolute inset-0 sepia-overlay">
+          <img
+            src="https://images.pexels.com/photos/1108814/pexels-photo-1108814.jpeg?auto=compress&cs=tinysrgb&w=1200"
+            alt="Vintage camera and photographs"
+            className="object-cover w-full h-full"
+          />
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-stone-900/70 to-stone-900/20">
+          <div className="text-center text-white">
+            <h1 className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
+              Photo Archive
+            </h1>
+            <p className="text-lg md:text-xl">
+              Browse our collection of historical photographs from Thoralby and surrounding areas
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <Breadcrumbs items={[{ label: 'Photo Archive', path: '/gallery' }]} />
-
-        <div className="mb-8">
-          <h1 className="mb-4 font-serif text-4xl font-bold text-stone-900">
-            Photo Archive
-          </h1>
-          <p className="text-lg text-stone-600">
-            Browse our collection of historical photographs from Thoralby and surrounding areas
-          </p>
-        </div>
 
         <div className="mb-8">
           <div className="relative">
