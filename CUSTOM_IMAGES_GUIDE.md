@@ -1,42 +1,74 @@
 # Custom Images Guide for Thoralby Through Time
 
-This guide explains how to replace the default Pexels images with your own custom images throughout the Thoralby Through Time website.
+This guide explains how to store and manage your own local images in the Thoralby Through Time website.
 
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Quick Start](#quick-start)
-3. [Adding Hero Images to Home Page](#adding-hero-images-to-home-page)
-4. [Using Puck Editor for Custom Content](#using-puck-editor-for-custom-content)
-5. [Image Upload and Management](#image-upload-and-management)
-6. [Gallery Integration](#gallery-integration)
-7. [Best Practices](#best-practices)
-8. [Troubleshooting](#troubleshooting)
+2. [Local Storage Structure](#local-storage-structure)
+3. [Quick Start](#quick-start)
+4. [Adding Images to Directories](#adding-images-to-directories)
+5. [Using Puck Editor for Custom Content](#using-puck-editor-for-custom-content)
+6. [Image Upload and Management](#image-upload-and-management)
+7. [Gallery Integration](#gallery-integration)
+8. [Best Practices](#best-practices)
+9. [Troubleshooting](#troubleshooting)
 
 ## Overview
 
-The Thoralby Through Time website has been updated to support custom images instead of relying on Pexels. You have several options for managing images:
+The Thoralby Through Time website now supports local image storage for better control and performance. Images are stored in organized directories within the `public/images/` folder:
 
-- **Hardcoded Hero Images**: Replace the hero carousel on the home page
+- **Local Hero Images**: Homepage carousel images stored locally
 - **Puck Editor Components**: Use editable image components for custom pages
 - **Image Upload System**: Upload images directly through the interface
 - **Gallery System**: Add images to the main photograph collection
 
+## Local Storage Structure
+
+The website now uses a well-organized local image storage structure in the `public/images/` directory:
+
+```
+public/images/
+├── README.md                 # This guide
+├── hero/                     # Homepage carousel images
+│   └── README.md
+├── gallery/                  # Main gallery photographs
+│   └── README.md
+├── buildings/                # Historical building photos
+│   └── README.md
+├── people/                   # Portrait and people photos
+│   └── README.md
+├── events/                   # Historical events and community photos
+│   └── README.md
+└── maps/                     # Historical and modern maps
+    └── README.md
+```
+
+### Image Directory Specifications
+
+- **hero/**: 1920x1080px images for homepage carousel
+- **gallery/**: 800x600px images for main photograph collection
+- **buildings/**: 800x600px historical building photographs
+- **people/**: 600x600px portrait and community photos
+- **events/**: 800x600px community events and historical gatherings
+- **maps/**: 800x600px or 1200x800px historical and modern maps
+
 ## Quick Start
 
-### Option 1: Replace Hero Images (Fastest)
+### Option 1: Add Local Hero Images (Fastest)
 
-1. Open `src/pages/Home.tsx`
-2. Find the `heroImages` array (around line 8)
-3. Replace the commented URLs with your image URLs
+1. Add your images to the `public/images/hero/` directory
+2. Name them according to the examples in the hero/README.md
+3. The configuration in `src/config/sampleImages.ts` has been updated with local paths
 4. Save and rebuild the site
 
 ```typescript
+// Current configuration uses local paths
 const heroImages: string[] = [
-  'https://your-domain.com/images/thoralby-village-1.jpg',
-  'https://your-domain.com/images/bishopdale-landscape-2.jpg',
-  'https://your-domain.com/images/historical-building-3.jpg',
-  'https://your-domain.com/images/valley-view-4.jpg',
+  '/images/hero/thoralby-village-green.jpg',
+  '/images/hero/bishopdale-valley-landscape.jpg',
+  '/images/hero/traditional-yorkshire-countryside.jpg',
+  '/images/hero/river-bishop-valley-view.jpg',
 ];
 ```
 
@@ -46,40 +78,52 @@ const heroImages: string[] = [
 2. Navigate to the Page Manager
 3. Edit any page using the visual editor
 4. Add or modify Image components
-5. Enter your image URLs or upload images directly
+5. Enter your local image paths (e.g., `/images/hero/your-image.jpg`) or upload images
 
-## Adding Hero Images to Home Page
+## Adding Images to Directories
 
-The home page features a rotating hero image carousel. To customize it:
+### Step 1: Prepare Your Images
 
-1. **Prepare Your Images**:
-   - Recommended size: 1920x1080px (16:9 aspect ratio)
-   - Format: JPG or WebP
-   - File size: Under 2MB for best performance
-   - Content: Landscape views of Thoralby, Bishopdale, or historical scenes
+1. Optimize your images according to the specifications in each directory's README.md
+2. Use descriptive, SEO-friendly filenames
+3. Ensure images are in JPG or WebP format
 
-2. **Upload Images** to your preferred hosting service:
-   - Your own web server
-   - Cloud storage (AWS S3, Google Cloud Storage)
-   - CDN service
-   - Supabase Storage (if using the included setup)
+### Step 2: Add Images to Directories
 
-3. **Update the Code**:
+1. **Hero Images**: Place in `public/images/hero/`
+   - Example: `thoralby-village-green.jpg`
+   - Size: 1920x1080px, under 2MB
 
-   ```typescript
-   const heroImages: string[] = [
-     'https://your-domain.com/images/hero-1.jpg',
-     'https://your-domain.com/images/hero-2.jpg',
-     'https://your-domain.com/images/hero-3.jpg',
-     'https://your-domain.com/images/hero-4.jpg',
-   ];
-   ```
+2. **Gallery Images**: Place in `public/images/gallery/`
+   - Example: `church-exterior-1965.jpg`
+   - Size: 800x600px, under 1MB
 
-4. **Test the Changes**:
-   - Start the development server
-   - Navigate to the home page
-   - Verify images load correctly
-   - Check the carousel functionality
+3. **Building Images**: Place in `public/images/buildings/`
+   - Example: `traditional-cottage.jpg`
+   - Size: 800x600px, under 1MB
+
+4. **People Images**: Place in `public/images/people/`
+   - Example: `village-community-1960s.jpg`
+   - Size: 600x600px, under 500KB
+
+5. **Event Images**: Place in `public/images/events/`
+   - Example: `village-fete-1975.jpg`
+   - Size: 800x600px, under 1MB
+
+6. **Map Images**: Place in `public/images/maps/`
+   - Example: `bishopdale-1900-ordnance-survey.jpg`
+   - Size: 800x600px or 1200x800px, under 1MB
+
+### Step 3: Update Configuration (if needed)
+
+The image configuration in `src/config/sampleImages.ts` has been pre-configured with local paths that match the recommended filenames above. Simply add your images with the specified names, or update the configuration with your preferred filenames.
+
+### Step 4: Test the Changes
+
+- Start the development server: `npm run dev`
+- Navigate to the home page
+- Verify images load correctly
+- Check the carousel functionality
 
 ## Using Puck Editor for Custom Content
 
@@ -111,8 +155,7 @@ The site uses Puck for visual content editing. Here's how to use image component
   - Grid title
   - Card array with title, description, and optional image
 
-### How to Edit Images in Puck:
-
+### How to Edit Images in Puck
 
 1. **Access the Editor**:
    - Go to `/admin` in your browser
@@ -139,21 +182,22 @@ The site uses Puck for visual content editing. Here's how to use image component
 
 ### Development vs Production
 
-
 **Development (Current Setup)**:
+
 - Image upload creates local blob URLs
 - Images are temporary and lost on page refresh
 - Good for testing and development
 
 **Production (Recommended Setup)**:
+
 - Integrate with Supabase Storage or similar service
 - Images are permanently stored and served via CDN
 - Provides better performance and reliability
 
 ### Setting Up Supabase Storage (Recommended)
 
-
 1. **Create Storage Bucket**:
+
    ```sql
    -- Run in Supabase SQL Editor
    INSERT INTO storage.buckets (id, name, public)
@@ -161,6 +205,7 @@ The site uses Puck for visual content editing. Here's how to use image component
    ```
 
 2. **Update RLS Policies**:
+
    ```sql
    -- Allow public read access
    CREATE POLICY "Public Access" ON storage.objects
@@ -177,7 +222,6 @@ The site uses Puck for visual content editing. Here's how to use image component
    - Handle upload errors gracefully
 
 ### Alternative Storage Solutions
-
 
 - **AWS S3**: Enterprise-grade object storage
 - **Google Cloud Storage**: Integrated with Google services
@@ -248,29 +292,31 @@ The main gallery (`/gallery`) pulls images from the `photographs` table in Supab
 
 ### Common Issues
 
-
 **Images Not Loading**:
+
 - Check URL correctness
 - Verify CORS settings on your storage service
 - Ensure images are publicly accessible
 
 **Upload Not Working**:
+
 - Check browser console for errors
 - Verify file size limits (currently 5MB)
 - Ensure supported image format
 
 **Performance Issues**:
+
 - Optimize image file sizes
 - Use appropriate image dimensions
 - Consider implementing lazy loading
 
 **Puck Editor Issues**:
+
 - Clear browser cache
 - Check network connectivity
 - Verify all required fields are filled
 
 ### Getting Help
-
 
 1. **Check Browser Console**: Look for JavaScript errors
 2. **Network Tab**: Verify image requests are successful
@@ -279,11 +325,10 @@ The main gallery (`/gallery`) pulls images from the `photographs` table in Supab
 
 ### Support Resources
 
-
-- **Puck Documentation**: https://measured.io/puck/
-- **React Documentation**: https://react.dev/
-- **Tailwind CSS**: https://tailwindcss.com/
-- **Supabase Documentation**: https://supabase.com/docs
+- **Puck Documentation**: <https://measured.io/puck/>
+- **React Documentation**: <https://react.dev/>
+- **Tailwind CSS**: <https://tailwindcss.com/>
+- **Supabase Documentation**: <https://supabase.com/docs>
 
 ---
 
