@@ -13,6 +13,7 @@ export function Header() {
     { name: 'Timeline', path: '/timeline' },
     { name: 'Maps', path: '/maps' },
     { name: 'Gallery', path: '/gallery' },
+    { name: 'Official Records', path: '/official-records' },
     { name: 'Contact', path: '/contact' },
   ];
 

@@ -8,6 +8,7 @@ import { Gallery } from './pages/Gallery';
 import { Contact } from './pages/Contact';
 import { People } from './pages/People';
 import { Buildings } from './pages/Buildings';
+import { OfficialRecords } from './pages/OfficialRecords';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/timeline" element={<Timeline />} />
           <Route path="/maps" element={<Maps />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/official-records" element={<OfficialRecords />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
