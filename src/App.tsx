@@ -7,6 +7,10 @@ import { FourTownships } from './pages/FourTownships';
 import { People } from './pages/People';
 import { Timeline } from './pages/Timeline';
 import { Archive } from './pages/Archive';
+import { Bishopdale } from './pages/townships/Bishopdale';
+import { Thoralby } from './pages/townships/Thoralby';
+import { BurtonCumWalden } from './pages/townships/BurtonCumWalden';
+import { Newbiggin } from './pages/townships/Newbiggin';
 
 function App() {
   return (
@@ -17,6 +21,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/bishopdale-valley" element={<BishopdaleValley />} />
           <Route path="/four-townships" element={<FourTownships />} />
+          <Route path="/townships/bishopdale" element={<Bishopdale />} />
+          <Route path="/townships/thoralby" element={<Thoralby />} />
+          <Route path="/townships/burton-cum-walden" element={<BurtonCumWalden />} />
+          <Route path="/townships/newbiggin" element={<Newbiggin />} />
           <Route path="/people" element={<People />} />
           <Route path="/timeline" element={<Timeline />} />
           <Route path="/archive" element={<Archive />} />
