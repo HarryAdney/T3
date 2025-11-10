@@ -8,13 +8,11 @@ export function Header() {
 
   const navigation = [
     { name: 'Home', path: '/' },
+    { name: 'Bishopdale Valley', path: '/bishopdale-valley' },
+    { name: 'The Four Townships', path: '/four-townships' },
     { name: 'People', path: '/people' },
-    { name: 'Buildings', path: '/buildings' },
     { name: 'Timeline', path: '/timeline' },
-    { name: 'Maps', path: '/maps' },
-    { name: 'Gallery', path: '/gallery' },
-    { name: 'Official Records', path: '/official-records' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Archive', path: '/archive' },
   ];
 
   const isActive = (path: string) => location.pathname === path;

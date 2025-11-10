@@ -2,13 +2,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
-import { Timeline } from './pages/Timeline';
-import { Maps } from './pages/Maps';
-import { Gallery } from './pages/Gallery';
-import { Contact } from './pages/Contact';
+import { BishopdaleValley } from './pages/BishopdaleValley';
+import { FourTownships } from './pages/FourTownships';
 import { People } from './pages/People';
-import { Buildings } from './pages/Buildings';
-import { OfficialRecords } from './pages/OfficialRecords';
+import { Timeline } from './pages/Timeline';
+import { Archive } from './pages/Archive';
 
 function App() {
   return (
@@ -17,13 +15,11 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/bishopdale-valley" element={<BishopdaleValley />} />
+          <Route path="/four-townships" element={<FourTownships />} />
           <Route path="/people" element={<People />} />
-          <Route path="/buildings" element={<Buildings />} />
           <Route path="/timeline" element={<Timeline />} />
-          <Route path="/maps" element={<Maps />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/official-records" element={<OfficialRecords />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/archive" element={<Archive />} />
         </Routes>
         <Footer />
       </div>
