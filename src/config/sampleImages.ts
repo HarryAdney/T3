@@ -23,10 +23,10 @@ export const sampleImages: {
 } = {
   // Hero carousel images - landscape views
   hero: [
-    '/images/hero/thoralby-village-green.jpg', // Village green view
-    '/images/hero/bishopdale-valley-landscape.jpg', // Valley landscape
-    '/images/hero/traditional-yorkshire-countryside.jpg', // Yorkshire countryside
-    '/images/hero/river-bishop-valley-view.jpg', // River valley view
+    '/images/hero/home-page.webp',
+    '/images/hero/bishopdale-valley.webp',
+    '/images/hero/west-burton-village-green.webp',
+    '/images/hero/bishopdale-beck-1938.webp',
   ],
 
   // General images for content blocks

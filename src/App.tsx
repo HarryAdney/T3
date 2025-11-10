@@ -7,21 +7,26 @@ import { Admin } from './pages/Admin';
 import { PuckPage } from './pages/PuckPage';
 import { PageManager } from './pages/PageManager';
 import { Home } from './pages/Home';
-import { BishopdaleValley } from './pages/BishopdaleValley';
 import { FourTownships } from './pages/FourTownships';
 import { Timeline } from './pages/Timeline';
 import { Maps } from './pages/Maps';
 import { Gallery } from './pages/Gallery';
 import { Contact } from './pages/Contact';
+import { Contribute } from './pages/Contribute';
+import { People } from './pages/People';
+import { Buildings } from './pages/Buildings';
 
 function App() {
   return (
-    <BrowserRouter className="">
+    <BrowserRouter>
       <AuthProvider>
         <div className="flex flex-col min-h-screen bg-texture">
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/people" element={<People />} />
+            <Route path="/buildings" element={<Buildings />} />
+            <Route path="/contribute" element={<Contribute />} />
             <Route path="/bishopdale-valley" element={<PuckPage slug="bishopdale-valley" />} />
             <Route path="/four-townships" element={<FourTownships />} />
             <Route path="/thoralby" element={<PuckPage slug="thoralby" />} />

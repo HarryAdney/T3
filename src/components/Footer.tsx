@@ -5,54 +5,54 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-stone-900 text-stone-300 mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+    <footer className="mt-auto bg-stone-900 text-stone-300">
+      <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 mb-8 md:grid-cols-3">
           <div>
-            <h3 className="text-white font-serif text-lg mb-4">About This Project</h3>
-            <p className="text-sm leading-relaxed mb-4">
+            <h3 className="mb-4 font-serif text-lg text-white">About This Project</h3>
+            <p className="mb-4 text-sm leading-relaxed">
               Preserving and sharing the rich history of Thoralby and Bishopdale
               for future generations. Explore centuries of stories, people, and
               places that shaped our community.
             </p>
             <Link
               to="/about"
-              className="text-sage-400 hover:text-sage-300 text-sm font-medium transition-colors"
+              className="text-sm font-medium transition-colors text-sage-400 hover:text-sage-300"
             >
               Learn more &rarr;
             </Link>
           </div>
 
           <div>
-            <h3 className="text-white font-serif text-lg mb-4">Quick Links</h3>
+            <h3 className="mb-4 font-serif text-lg text-white">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/people" className="hover:text-white transition-colors">
+                <Link to="/people" className="transition-colors hover:text-white">
                   People & Families
                 </Link>
               </li>
               <li>
-                <Link to="/buildings" className="hover:text-white transition-colors">
+                <Link to="/buildings" className="transition-colors hover:text-white">
                   Buildings & Places
                 </Link>
               </li>
               <li>
-                <Link to="/timeline" className="hover:text-white transition-colors">
+                <Link to="/timeline" className="transition-colors hover:text-white">
                   Historical Timeline
                 </Link>
               </li>
               <li>
-                <Link to="/photos" className="hover:text-white transition-colors">
+                <Link to="/gallery" className="transition-colors hover:text-white">
                   Photo Archive
                 </Link>
               </li>
               <li>
-                <Link to="/maps" className="hover:text-white transition-colors">
+                <Link to="/maps" className="transition-colors hover:text-white">
                   Maps & Geography
                 </Link>
               </li>
               <li>
-                <Link to="/contribute" className="hover:text-white transition-colors">
+                <Link to="/contribute" className="transition-colors hover:text-white">
                   Contribute Your Story
                 </Link>
               </li>
@@ -60,17 +60,17 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-white font-serif text-lg mb-4">Get in Touch</h3>
+            <h3 className="mb-4 font-serif text-lg text-white">Get in Touch</h3>
             <div className="space-y-3 text-sm">
               <div className="flex items-start space-x-3">
-                <MapPin className="w-4 h-4 mt-1 flex-shrink-0 text-sage-400" />
+                <MapPin className="flex-shrink-0 w-4 h-4 mt-1 text-sage-400" />
                 <span>Thoralby, Bishopdale<br />North Yorkshire, England</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="w-4 h-4 flex-shrink-0 text-sage-400" />
+                <Mail className="flex-shrink-0 w-4 h-4 text-sage-400" />
                 <a
                   href="mailto:info@thoralbythroughtime.net"
-                  className="hover:text-white transition-colors"
+                  className="transition-colors hover:text-white"
                 >
                   info@thoralbythroughtime.net
                 </a>
@@ -79,13 +79,13 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-stone-800 pt-8 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+        <div className="flex flex-col items-center justify-between pt-8 space-y-4 border-t border-stone-800 sm:flex-row sm:space-y-0">
           <p className="text-sm text-stone-400">
             &copy; {currentYear} Thoralby Through Time. All rights reserved.
           </p>
-          <p className="text-sm text-stone-400 flex items-center space-x-1">
+          <p className="flex items-center space-x-1 text-sm text-stone-400">
             <span>Made with</span>
-            <Heart className="w-4 h-4 text-sage-500 fill-current" />
+            <Heart className="w-4 h-4 fill-current text-sage-500" />
             <span>for our community</span>
           </p>
         </div>

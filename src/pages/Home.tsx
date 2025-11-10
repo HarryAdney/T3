@@ -35,7 +35,7 @@ const heroImages: string[] = [
 export function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [latestPhotos, setLatestPhotos] = useState<Photograph[]>([]);
-  const [stats, setStats] = useState({ people: 0, buildings: 0, events: 0, photos: 0 });
+  const [stats, setStats] = useState({ people: 0, buildings: 0, events: 0, gallery: 0 });
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -58,7 +58,7 @@ export function Home() {
         people: peopleRes.count || 0,
         buildings: buildingsRes.count || 0,
         events: eventsRes.count || 0,
-        photos: photosRes.count || 0,
+        gallery: photosRes.count || 0,
       });
 
       if (latestPhotosRes.data) {
@@ -98,9 +98,9 @@ export function Home() {
       icon: Image,
       title: 'Photo Archive',
       description: 'Browse our collection of historical photographs and images.',
-      path: '/photos',
+      path: '/gallery',
       color: 'sage',
-      stat: stats.photos,
+      stat: stats.gallery,
     },
     {
       icon: Map,
@@ -157,7 +157,7 @@ export function Home() {
                 photographs, and maps spanning centuries of Yorkshire Dales history.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link to="/photos" className="bg-white btn-primary text-stone-900 hover:bg-parchment-100">
+                <Link to="/gallery" className="bg-white btn-primary text-stone-900 hover:bg-parchment-100">
                   Explore the Archive
                 </Link>
                 <Link to="/contribute" className="text-white btn-secondary bg-sage-600 hover:bg-sage-700">
@@ -237,7 +237,7 @@ export function Home() {
                 </p>
               </div>
               <Link
-                to="/photos"
+                to="/gallery"
                 className="flex items-center font-medium transition-colors text-sage-700 hover:text-sage-800"
               >
                 View all
@@ -249,7 +249,7 @@ export function Home() {
               {latestPhotos.map((photo) => (
                 <Link
                   key={photo.id}
-                  to={`/photos/${photo.id}`}
+                  to={`/gallery/${photo.id}`}
                   className="block group"
                 >
                   <div className="aspect-[4/3] overflow-hidden rounded-2xl mb-4 sepia-overlay">
