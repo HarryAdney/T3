@@ -41,7 +41,7 @@ export function Home() {
       icon: Building2,
       title: 'Buildings & Places',
       description: 'Explore the historic architecture and landmarks of Bishopdale.',
-      path: '/buildings',
+      path: '/archive/buildings-places',
       color: 'parchment',
       stat: stats.buildings,
     },

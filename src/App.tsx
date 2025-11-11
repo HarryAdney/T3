@@ -15,6 +15,7 @@ import { Photographs } from './pages/archive/Photographs';
 import { Documents } from './pages/archive/Documents';
 import { Maps } from './pages/archive/Maps';
 import { PeopleFamilies } from './pages/archive/PeopleFamilies';
+import { BuildingsPlaces } from './pages/archive/BuildingsPlaces';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/archive/documents" element={<Documents />} />
           <Route path="/archive/maps" element={<Maps />} />
           <Route path="/archive/people-families" element={<PeopleFamilies />} />
+          <Route path="/archive/buildings-places" element={<BuildingsPlaces />} />
         </Routes>
         <Footer />
       </div>
