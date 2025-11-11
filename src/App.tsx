@@ -1,51 +1,44 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { Editor } from './pages/Editor';
-import { Admin } from './pages/Admin';
-import { PuckPage } from './pages/PuckPage';
-import { PageManager } from './pages/PageManager';
 import { Home } from './pages/Home';
+import { BishopdaleValley } from './pages/BishopdaleValley';
 import { FourTownships } from './pages/FourTownships';
-import { Timeline } from './pages/Timeline';
-import { Maps } from './pages/Maps';
-import { Gallery } from './pages/Gallery';
-import { Contact } from './pages/Contact';
-import { Contribute } from './pages/Contribute';
 import { People } from './pages/People';
-import { Buildings } from './pages/Buildings';
+import { Timeline } from './pages/Timeline';
+import { Archive } from './pages/Archive';
+import { Bishopdale } from './pages/townships/Bishopdale';
+import { Thoralby } from './pages/townships/Thoralby';
+import { BurtonCumWalden } from './pages/townships/BurtonCumWalden';
+import { Newbiggin } from './pages/townships/Newbiggin';
+import { Photographs } from './pages/archive/Photographs';
+import { Documents } from './pages/archive/Documents';
+import { Maps } from './pages/archive/Maps';
+import { PeopleFamilies } from './pages/archive/PeopleFamilies';
 
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <div className="flex flex-col min-h-screen bg-texture">
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/people" element={<People />} />
-            <Route path="/buildings" element={<Buildings />} />
-            <Route path="/contribute" element={<Contribute />} />
-            <Route path="/bishopdale-valley" element={<PuckPage slug="bishopdale-valley" />} />
-            <Route path="/four-townships" element={<FourTownships />} />
-            <Route path="/thoralby" element={<PuckPage slug="thoralby" />} />
-            <Route path="/newbiggin" element={<PuckPage slug="newbiggin" />} />
-            <Route path="/bishopdale" element={<PuckPage slug="bishopdale" />} />
-            <Route path="/west-burton" element={<PuckPage slug="west-burton" />} />
-            <Route path="/timeline" element={<Timeline />} />
-            <Route path="/maps" element={<Maps />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/pages" element={<PageManager />} />
-            <Route path="/editor/:slug" element={<Editor />} />
-            <Route path="/editor" element={<Editor />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/page/:slug" element={<PuckPage />} />
-          </Routes>
-          <Footer />
-        </div>
-      </AuthProvider>
+      <div className="flex flex-col min-h-screen bg-texture">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/bishopdale-valley" element={<BishopdaleValley />} />
+          <Route path="/four-townships" element={<FourTownships />} />
+          <Route path="/townships/bishopdale" element={<Bishopdale />} />
+          <Route path="/townships/thoralby" element={<Thoralby />} />
+          <Route path="/townships/burton-cum-walden" element={<BurtonCumWalden />} />
+          <Route path="/townships/newbiggin" element={<Newbiggin />} />
+          <Route path="/people" element={<People />} />
+          <Route path="/timeline" element={<Timeline />} />
+          <Route path="/archive" element={<Archive />} />
+          <Route path="/archive/photographs" element={<Photographs />} />
+          <Route path="/archive/documents" element={<Documents />} />
+          <Route path="/archive/maps" element={<Maps />} />
+          <Route path="/archive/people-families" element={<PeopleFamilies />} />
+        </Routes>
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }

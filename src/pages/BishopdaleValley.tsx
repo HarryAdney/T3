@@ -5,18 +5,28 @@ import { Heart, Users, Archive, Target } from 'lucide-react';
 export function BishopdaleValley() {
   return (
     <PageWrapper>
+      <div className="relative h-64 mb-8 overflow-hidden md:h-80 lg:h-96">
+        <div className="absolute inset-0 sepia-overlay">
+          <img
+            src="/images/hero/bishopdale-valley.webp"
+            alt="Bishopdale Valley landscape"
+            className="object-cover w-full h-full"
+          />
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-stone-900/70 to-stone-900/20">
+          <div className="text-center text-white">
+            <h1 className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
+              Bishopdale Valley
+            </h1>
+            <p className="text-lg md:text-xl">
+              A community project dedicated to preserving and sharing the rich history of Bishopdale
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Breadcrumbs items={[{ label: 'Bishopdale Valley', path: '/bishopdale-valley' }]} />
-
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-serif font-semibold text-stone-900 mb-6">
-            About Thoralby Through Time
-          </h1>
-          <p className="text-xl text-stone-600 leading-relaxed">
-            A community project dedicated to preserving and sharing the rich history
-            of Thoralby and the surrounding Bishopdale area in North Yorkshire.
-          </p>
-        </div>
 
         <div className="prose prose-stone max-w-none">
           <div className="card mb-8">

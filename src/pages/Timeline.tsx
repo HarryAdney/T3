@@ -1,147 +1,42 @@
-import { useState, useEffect } from 'react';
 import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
-import { supabase } from '../lib/supabase';
-import { format } from 'date-fns';
-import { Calendar, Filter } from 'lucide-react';
+import { Clock } from 'lucide-react';
 
 export function Timeline() {
-  const [events, setEvents] = useState<any[]>([]);
-  const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchEvents() {
-      const { data, error } = await supabase
-        .from('events')
-        .select('*')
-        .order('event_year', { ascending: true });
-
-      if (data && !error) {
-        setEvents(data);
-        setFilteredEvents(data);
-      }
-      setLoading(false);
-    }
-
-    fetchEvents();
-  }, []);
-
-  useEffect(() => {
-    if (selectedCategory === 'all') {
-      setFilteredEvents(events);
-    } else {
-      setFilteredEvents(events.filter((e) => e.category === selectedCategory));
-    }
-  }, [selectedCategory, events]);
-
-  const categories = Array.from(new Set(events.map((e) => e.category)));
-
-  const categoryColors: Record<string, string> = {
-    social: 'bg-blue-100 text-blue-800',
-    political: 'bg-red-100 text-red-800',
-    economic: 'bg-green-100 text-green-800',
-    cultural: 'bg-purple-100 text-purple-800',
-    natural: 'bg-amber-100 text-amber-800',
-    general: 'bg-stone-100 text-stone-800',
-  };
-
   return (
     <PageWrapper>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="relative h-64 mb-8 overflow-hidden md:h-80 lg:h-96">
+        <div className="absolute inset-0 sepia-overlay">
+          <img
+            src="https://images.pexels.com/photos/1089568/pexels-photo-1089568.jpeg?auto=compress&cs=tinysrgb&w=1200"
+            alt="Antique pocket watch and historical documents"
+            className="object-cover w-full h-full"
+          />
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-stone-900/70 to-stone-900/20">
+          <div className="text-center text-white">
+            <h1 className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
+              Historical Timeline
+            </h1>
+            <p className="text-lg md:text-xl">
+              Journey through centuries of events that defined our community
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <Breadcrumbs items={[{ label: 'Historical Timeline', path: '/timeline' }]} />
 
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-serif font-semibold text-stone-900 mb-4">
-            Historical Timeline
-          </h1>
-          <p className="text-lg text-stone-600">
-            Journey through the significant events that shaped Thoralby and Bishopdale
-            over the centuries.
+        <div className="text-center py-12">
+          <Clock className="w-16 h-16 mx-auto mb-4 text-stone-300" />
+          <h3 className="text-xl font-serif font-semibold text-stone-900 mb-2">
+            Coming Soon
+          </h3>
+          <p className="text-stone-600">
+            This section is currently being developed
           </p>
         </div>
-
-        <div className="bg-white rounded-2xl shadow-soft p-4 mb-8 flex items-center space-x-4">
-          <Filter className="w-5 h-5 text-stone-600" />
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="flex-1 px-4 py-2 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent bg-white"
-          >
-            <option value="all">All Categories</option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {loading ? (
-          <div className="text-center py-12">
-            <div className="inline-block w-8 h-8 border-4 border-sage-600 border-t-transparent rounded-full animate-spin" />
-          </div>
-        ) : filteredEvents.length === 0 ? (
-          <div className="text-center py-12">
-            <Calendar className="w-12 h-12 text-stone-400 mx-auto mb-4" />
-            <p className="text-stone-600">No events found.</p>
-          </div>
-        ) : (
-          <div className="relative">
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-sage-200" />
-
-            <div className="space-y-8">
-              {filteredEvents.map((event) => (
-                <div key={event.id} className="relative pl-20">
-                  <div className="absolute left-0 w-16 h-16 bg-sage-600 rounded-full flex items-center justify-center text-white font-serif font-semibold shadow-soft">
-                    {event.decade}s
-                  </div>
-
-                  <div className="card">
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex-1">
-                        <h3 className="font-serif text-2xl font-semibold text-stone-900 mb-2">
-                          {event.title}
-                        </h3>
-                        <p className="text-sm text-stone-500">
-                          {event.event_date
-                            ? format(new Date(event.event_date), 'MMMM d, yyyy')
-                            : event.event_year}
-                        </p>
-                      </div>
-                      <span
-                        className={`px-3 py-1 rounded-lg text-xs font-medium ${
-                          categoryColors[event.category] || categoryColors.general
-                        }`}
-                      >
-                        {event.category}
-                      </span>
-                    </div>
-
-                    {event.image_url && (
-                      <div className="aspect-video overflow-hidden rounded-xl mb-4 sepia-overlay">
-                        <img
-                          src={event.image_url}
-                          alt={event.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    )}
-
-                    <p className="text-stone-700 leading-relaxed">{event.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {filteredEvents.length > 0 && (
-          <div className="mt-8 text-center text-stone-600">
-            Showing {filteredEvents.length} of {events.length} events
-          </div>
-        )}
       </div>
     </PageWrapper>
   );

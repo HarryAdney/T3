@@ -3,69 +3,29 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Building2, Clock, Image, Map, ArrowRight, BookOpen } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
-import { supabase } from '../lib/supabase';
-// import { sampleImages } from '../config/sampleImages';
-
-interface Photograph {
-  id: string;
-  title: string;
-  description?: string;
-  image_url: string;
-  thumbnail_url?: string;
-  photo_date?: string;
-  photo_year?: number;
-  location?: string;
-  photographer?: string;
-  contributor?: string;
-  tags?: string[];
-  created_at: string;
-  updated_at: string;
-}
 
 const heroImages: string[] = [
-  // Using sample images for demonstration
-  // ...sampleImages.hero,
-    '/images/hero/home-page.webp',
-    '/images/hero/bishopdale-valley.webp',
-    '/images/hero/west-burton-village-green.webp',
-    '/images/hero/bishopdale-beck-1938.webp',
+  '/images/hero/home-page.webp',
+  '/images/hero/bishopdale-valley.webp',
+  '/images/hero/west-burton-village-green.webp',
+  '/images/hero/bishopdale-beck-1938.webp',
 ];
+
+const stats = {
+  people: 150,
+  buildings: 75,
+  events: 200,
+  gallery: 500,
+};
 
 export function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [latestPhotos, setLatestPhotos] = useState<Photograph[]>([]);
-  const [stats, setStats] = useState({ people: 0, buildings: 0, events: 0, gallery: 0 });
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
+    }, 6500);
     return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    async function fetchData() {
-      const [peopleRes, buildingsRes, eventsRes, photosRes, latestPhotosRes] = await Promise.all([
-        supabase.from('people').select('id', { count: 'exact', head: true }),
-        supabase.from('buildings').select('id', { count: 'exact', head: true }),
-        supabase.from('events').select('id', { count: 'exact', head: true }),
-        supabase.from('photographs').select('id', { count: 'exact', head: true }),
-        supabase.from('photographs').select('*').order('created_at', { ascending: false }).limit(3),
-      ]);
-
-      setStats({
-        people: peopleRes.count || 0,
-        buildings: buildingsRes.count || 0,
-        events: eventsRes.count || 0,
-        gallery: photosRes.count || 0,
-      });
-
-      if (latestPhotosRes.data) {
-        setLatestPhotos(latestPhotosRes.data);
-      }
-    }
-
-    fetchData();
   }, []);
 
   const sections = [
@@ -224,51 +184,6 @@ export function Home() {
           ))}
         </div>
 
-        {latestPhotos.length > 0 && (
-          <div className="mb-16">
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <h2 className="mb-2 font-serif text-3xl font-semibold text-stone-900">
-                  Latest Additions
-                </h2>
-                <p className="text-stone-600">
-                  Recently added to our growing archive
-                </p>
-              </div>
-              <Link
-                to="/gallery"
-                className="flex items-center font-medium transition-colors text-sage-700 hover:text-sage-800"
-              >
-                View all
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {latestPhotos.map((photo) => (
-                <Link
-                  key={photo.id}
-                  to={`/gallery/${photo.id}`}
-                  className="block group"
-                >
-                  <div className="aspect-[4/3] overflow-hidden rounded-2xl mb-4 sepia-overlay">
-                    <img
-                      src={photo.image_url}
-                      alt={photo.title}
-                      className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <h3 className="mb-1 font-serif text-lg font-medium transition-colors text-stone-900 group-hover:text-sage-700">
-                    {photo.title}
-                  </h3>
-                  {photo.photo_year && (
-                    <p className="text-sm text-stone-500">{photo.photo_year}</p>
-                  )}
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
 
         <div className="p-8 text-center text-white bg-gradient-to-r from-sage-600 to-sage-700 rounded-2xl md:p-12">
           <h2 className="mb-4 font-serif text-3xl font-semibold md:text-4xl">
