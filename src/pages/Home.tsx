@@ -24,7 +24,7 @@ export function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
+    }, 6500);
     return () => clearInterval(timer);
   }, []);
 
