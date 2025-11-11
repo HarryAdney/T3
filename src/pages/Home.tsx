@@ -143,6 +143,29 @@ export function Home() {
         </div>
       </div>
 
+<div className="bg-gradient-to-r from-sage-50 to-parchment-50 rounded-2xl p-8">
+            <h2 className="text-2xl font-serif font-semibold text-stone-900 mb-4">
+              About Thoralby
+            </h2>
+            <p className="text-stone-700 leading-relaxed mb-4">
+              Thoralby is a small village in Bishopdale, one of the side dales of
+              Wensleydale in the Yorkshire Dales National Park. The village has a
+              rich history dating back to medieval times, with St. Oswald's Church
+              featuring Norman architecture from the 12th century.
+            </p>
+            <p className="text-stone-700 leading-relaxed mb-4">
+              Throughout its history, Thoralby has been primarily an agricultural
+              community, with farming and sheep rearing forming the backbone of local
+              life. The village has also been home to various craftspeople, including
+              stonemasons, blacksmiths, and shopkeepers who served the surrounding area.
+            </p>
+            <p className="text-stone-700 leading-relaxed">
+              Today, Thoralby maintains its rural character while welcoming visitors
+              who come to enjoy the stunning Yorkshire Dales landscape and explore
+              its rich heritage.
+            </p>
+          </div>
+      
       <div className="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <h2 className="mb-4 font-serif text-4xl font-semibold text-stone-900">
