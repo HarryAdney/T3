@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { FileText, Image as ImageIcon, Map, Users, Calendar, Search } from 'lucide-react';
@@ -9,6 +10,7 @@ interface ArchiveCategory {
   icon: typeof FileText;
   count: number;
   description: string;
+  path: string;
 }
 
 const categories: ArchiveCategory[] = [
@@ -18,6 +20,7 @@ const categories: ArchiveCategory[] = [
     icon: ImageIcon,
     count: 127,
     description: 'Historical photographs from 1880s to present day',
+    path: '/archive/photographs',
   },
   {
     id: 'documents',
@@ -25,6 +28,7 @@ const categories: ArchiveCategory[] = [
     icon: FileText,
     count: 89,
     description: 'Parish registers, census records, and official documents',
+    path: '/archive/documents',
   },
   {
     id: 'maps',
@@ -32,6 +36,7 @@ const categories: ArchiveCategory[] = [
     icon: Map,
     count: 34,
     description: 'Historical and modern maps showing landscape evolution',
+    path: '/archive/maps',
   },
   {
     id: 'people',
@@ -39,6 +44,7 @@ const categories: ArchiveCategory[] = [
     icon: Users,
     count: 156,
     description: 'Family histories and biographical information',
+    path: '/archive/people-families',
   },
 ];
 
@@ -128,7 +134,7 @@ export function Archive() {
             {categories.map((category) => {
               const Icon = category.icon;
               return (
-                <div key={category.id} className="transition-shadow cursor-pointer card hover:shadow-lg">
+                <Link key={category.id} to={category.path} className="transition-shadow card hover:shadow-lg">
                   <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100">
                     <Icon className="w-6 h-6 text-sage-700" />
                   </div>
@@ -142,7 +148,7 @@ export function Archive() {
                     <span>{category.count} items</span>
                     <span className="text-stone-400">→</span>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
