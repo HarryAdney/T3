@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { PageWrapper } from '../../components/PageWrapper';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { Map, Calendar, Layers, ZoomIn } from 'lucide-react';
@@ -74,8 +73,6 @@ const mapCategories = [
 ];
 
 export function Maps() {
-  const [selectedMap, setSelectedMap] = useState<MapItem | null>(null);
-
   return (
     <PageWrapper>
       <div className="relative h-64 mb-8 overflow-hidden md:h-80 lg:h-96">
@@ -141,10 +138,7 @@ export function Maps() {
           {maps.map((map) => (
             <div key={map.id} className="overflow-hidden card">
               <div className="grid gap-6 md:grid-cols-2">
-                <div
-                  className="relative overflow-hidden rounded-lg cursor-pointer group"
-                  onClick={() => setSelectedMap(map)}
-                >
+                <div className="relative overflow-hidden rounded-lg cursor-pointer group">
                   <img
                     src={map.imageUrl}
                     alt={map.title}
