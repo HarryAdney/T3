@@ -169,10 +169,7 @@ export function Home() {
               {aboutSection.title}
             </h3>
             <p className="mb-4 text-stone-700 whitespace-pre-line leading-relaxed">{aboutSection.description}</p>
-            <div className="flex items-center font-medium transition-colors text-sage-700 group-hover:text-sage-800">
-              <span className="text-sm">Learn More</span>
-              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-            </div>
+            
           </Link>
         </motion.div>
 
