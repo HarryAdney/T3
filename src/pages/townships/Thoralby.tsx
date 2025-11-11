@@ -35,10 +35,11 @@ export function Thoralby() {
 
         <div className="mb-12">
           <p className="text-lg leading-relaxed text-stone-600">
-            Thoralby is the largest of Bishopdale's four townships and serves as the valley's main settlement.
-            With its church, school, and community facilities, Thoralby has long been the social and administrative
-            heart of the dale.
+            Thoralby is a small village in Bishopdale, one of the side dales of Wensleydale in the Yorkshire Dales National Park. The village has a rich history dating back to medieval times, with St. Oswald's Church featuring Norman architecture from the 12th century.
           </p>
+          <p className="text-lg leading-relaxed text-stone-600">Throughout its history, Thoralby has been primarily an agricultural community, with farming and sheep rearing forming the backbone of local life. The village has also been home to various craftspeople, including stonemasons, blacksmiths, and shopkeepers who served the surrounding area.</p>
+          <p className="text-lg leading-relaxed text-stone-600">Today, Thoralby maintains its rural character while welcoming visitors who come to enjoy the stunning Yorkshire Dales landscape and explore its rich heritage.</p>
+          
         </div>
 
         <div className="grid gap-8 mb-12 md:grid-cols-2">
