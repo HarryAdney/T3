@@ -58,12 +58,12 @@ export function BishopdaleValley() {
                   The Archive
                 </h2>
                 <p className="text-stone-700 leading-relaxed mb-4">
-                  My growing archive includes historical photographs, documents, maps,
+                  This growing archive includes historical photographs, documents, maps,
                   and personal stories dating back centuries. Each item has been
                   carefully catalogued and preserved for future generations.
                 </p>
                 <p className="text-stone-700 leading-relaxed">
-                  The collection covers all aspects of life in Thoralby and Bishopdale:
+                  The collections cover all aspects of life in Thoralby and Bishopdale:
                   from farming and industry to education, religion, and community events.
                   I'm particularly interested in ordinary, everyday life as well as
                   extraordinary moments that shaped our community.
@@ -94,29 +94,6 @@ export function BishopdaleValley() {
                 </p>
               </div>
             </div>
-          </div>
-
-          <div className="bg-gradient-to-r from-sage-50 to-parchment-50 rounded-2xl p-8">
-            <h2 className="text-2xl font-serif font-semibold text-stone-900 mb-4">
-              About Thoralby
-            </h2>
-            <p className="text-stone-700 leading-relaxed mb-4">
-              Thoralby is a small village in Bishopdale, one of the side dales of
-              Wensleydale in the Yorkshire Dales National Park. The village has a
-              rich history dating back to medieval times, with St. Oswald's Church
-              featuring Norman architecture from the 12th century.
-            </p>
-            <p className="text-stone-700 leading-relaxed mb-4">
-              Throughout its history, Thoralby has been primarily an agricultural
-              community, with farming and sheep rearing forming the backbone of local
-              life. The village has also been home to various craftspeople, including
-              stonemasons, blacksmiths, and shopkeepers who served the surrounding area.
-            </p>
-            <p className="text-stone-700 leading-relaxed">
-              Today, Thoralby maintains its rural character while welcoming visitors
-              who come to enjoy the stunning Yorkshire Dales landscape and explore
-              its rich heritage.
-            </p>
           </div>
 
           <div className="mt-12 text-center">
