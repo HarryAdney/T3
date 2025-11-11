@@ -28,6 +28,15 @@ export function Home() {
     return () => clearInterval(timer);
   }, []);
 
+  const aboutSection = {
+    icon: BookOpen,
+    title: 'About This Project',
+    description: 'This website explores the history of Thoralby, the neighbouring villages of Newbiggin and West Burton, and the scattered hill farms in the rest of Bishopdale from prehistory to the late twentieth century.\n\nI was born at Holmeside Farm in Thoralby and raised in the village, where my family has lived for several generations. This website provides a wide range of primary evidence about Thoralby, Newbiggin, Bishopdale and West Burton. Many of the documents have been transcribed to avoid breaching copyright laws. Please notify me if you find any errors or if you have any relevant information or images for the site.\n\nThank you.\n\nPenny Ellis (née Snaith)',
+    path: '/about',
+    color: 'stone',
+    stat: 0,
+  };
+
   const sections = [
     {
       icon: Users,
@@ -56,7 +65,7 @@ export function Home() {
     {
       icon: Image,
       title: 'Photo Archive',
-      description: 'Browse our collection of historical photographs and images.',
+      description: 'Browse my collection of historical photographs and images.',
       path: '/archive/photographs',
       color: 'sage',
       stat: stats.gallery,
@@ -67,14 +76,6 @@ export function Home() {
       description: 'Compare historical and modern maps of Thoralby and surroundings.',
       path: '/archive/maps',
       color: 'parchment',
-      stat: 0,
-    },
-    {
-      icon: BookOpen,
-      title: 'About This Project',
-      description: 'Learn about our mission to preserve local history for future generations.',
-      path: '/about',
-      color: 'stone',
       stat: 0,
     },
   ];
@@ -154,13 +155,34 @@ export function Home() {
           </p>
         </div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0 }}
+          className="mb-6"
+        >
+          <Link to={aboutSection.path} className="flex flex-col card group lg:col-span-3">
+            <div className={`w-12 h-12 rounded-xl bg-${aboutSection.color}-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+              <aboutSection.icon className={`w-6 h-6 text-${aboutSection.color}-700`} />
+            </div>
+            <h3 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
+              {aboutSection.title}
+            </h3>
+            <p className="mb-4 text-stone-700 whitespace-pre-line leading-relaxed">{aboutSection.description}</p>
+            <div className="flex items-center font-medium transition-colors text-sage-700 group-hover:text-sage-800">
+              <span className="text-sm">Learn More</span>
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+            </div>
+          </Link>
+        </motion.div>
+
         <div className="grid grid-cols-1 gap-6 mb-16 md:grid-cols-2 lg:grid-cols-3">
           {sections.map((section, index) => (
             <motion.div
               key={section.path}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: (index + 1) * 0.1 }}
             >
               <Link to={section.path} className="flex flex-col h-full card group">
                 <div className={`w-12 h-12 rounded-xl bg-${section.color}-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
