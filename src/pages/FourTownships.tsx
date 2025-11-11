@@ -149,7 +149,7 @@ export function FourTownships() {
             Exploring the Townships
           </h2>
           <p className="max-w-2xl mx-auto mb-6 text-stone-600">
-            Each township has its own stories to tell. Our archive contains photographs, documents, and memories
+            Each township has its own stories to tell. My archive contains photographs, documents, and memories
             from all four communities. Explore their unique histories and discover the connections that bind them together.
           </p>
         </div>

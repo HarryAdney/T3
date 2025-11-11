@@ -191,7 +191,7 @@ export function Maps() {
               </h3>
               <p className="mb-4 text-stone-700">
                 One of the most fascinating aspects of historical maps is comparing them over time
-                to see how the landscape has changed. We can help identify specific locations and
+                to see how the landscape has changed. I can help identify specific locations and
                 trace their development through different map editions.
               </p>
             </div>
@@ -202,7 +202,7 @@ export function Maps() {
               </h3>
               <p className="mb-4 text-stone-700">
                 Historical maps use different symbols, scales, and conventions than modern maps.
-                We offer guidance on interpreting these maps and understanding what they reveal
+                I offer guidance on interpreting these maps and understanding what they reveal
                 about past land use and settlement patterns.
               </p>
             </div>

@@ -86,7 +86,7 @@ export function Footer() {
           <p className="flex items-center space-x-1 text-sm text-stone-400">
             <span>Made with</span>
             <Heart className="w-4 h-4 fill-current text-sage-500" />
-            <span>for our community</span>
+            <span>for my community</span>
           </p>
         </div>
       </div>

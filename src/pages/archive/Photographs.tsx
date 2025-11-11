@@ -118,7 +118,7 @@ export function Photographs() {
 
         <div className="mb-8">
           <p className="text-lg text-stone-600">
-            Our photographic archive contains over 127 images documenting life in Bishopdale
+            My photographic archive contains over 127 images documenting life in Bishopdale
             from the Victorian era to the present day. These precious photographs capture
             everyday moments and special occasions that tell the story of our community.
           </p>
@@ -207,11 +207,11 @@ export function Photographs() {
             Share Your Photographs
           </h2>
           <p className="max-w-2xl mx-auto mb-6 text-stone-600">
-            Do you have old photographs of Bishopdale? We would love to add them to our collection.
+            Do you have old photographs of Bishopdale? I would love to add them to my collection.
             Digital copies or scans help preserve these precious memories for future generations.
           </p>
           <button className="px-6 py-3 font-medium text-white transition-colors rounded-lg bg-sage-600 hover:bg-sage-700">
-            Contact Us
+            Contact Me
           </button>
         </div>
       </div>

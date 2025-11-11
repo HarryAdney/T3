@@ -104,7 +104,7 @@ export function Archive() {
               Archive
             </h1>
             <p className="text-lg md:text-xl">
-              Explore our collection of photographs, documents, maps, and stories
+              Explore my collection of photographs, documents, maps, and stories
             </p>
           </div>
         </div>
@@ -198,7 +198,7 @@ export function Archive() {
             Contribute to the Archive
           </h2>
           <p className="max-w-2xl mx-auto mb-6 text-stone-600">
-            Do you have photographs, documents, or stories to share? We welcome contributions from anyone
+            Do you have photographs, documents, or stories to share? I welcome contributions from anyone
             with connections to Bishopdale. Every item helps preserve our shared heritage.
           </p>
           <button className="px-6 py-3 font-medium text-white transition-colors rounded-lg bg-sage-600 hover:bg-sage-700">

@@ -19,7 +19,7 @@ export function BishopdaleValley() {
               Bishopdale Valley
             </h1>
             <p className="text-lg md:text-xl">
-              A community project dedicated to preserving and sharing the rich history of Bishopdale
+              A project dedicated to preserving and sharing the rich history of Bishopdale
             </p>
           </div>
         </div>
@@ -36,11 +36,11 @@ export function BishopdaleValley() {
               </div>
               <div>
                 <h2 className="text-2xl font-serif font-semibold text-stone-900 mb-2">
-                  Our Mission
+                  My Mission
                 </h2>
                 <p className="text-stone-700 leading-relaxed">
                   To collect, preserve, and share the stories, photographs, and records
-                  that tell the tale of Thoralby and Bishopdale. We believe that local
+                  that tell the tale of Thoralby and Bishopdale. I believe that local
                   history matters, and that by understanding where we've come from, we
                   can better appreciate where we are and where we're going.
                 </p>
@@ -58,14 +58,14 @@ export function BishopdaleValley() {
                   The Archive
                 </h2>
                 <p className="text-stone-700 leading-relaxed mb-4">
-                  Our growing archive includes historical photographs, documents, maps,
+                  My growing archive includes historical photographs, documents, maps,
                   and personal stories dating back centuries. Each item has been
                   carefully catalogued and preserved for future generations.
                 </p>
                 <p className="text-stone-700 leading-relaxed">
                   The collection covers all aspects of life in Thoralby and Bishopdale:
                   from farming and industry to education, religion, and community events.
-                  We're particularly interested in ordinary, everyday life as well as
+                  I'm particularly interested in ordinary, everyday life as well as
                   extraordinary moments that shaped our community.
                 </p>
               </div>
@@ -83,13 +83,13 @@ export function BishopdaleValley() {
                 </h2>
                 <p className="text-stone-700 leading-relaxed mb-4">
                   This project belongs to the community. Many of the photographs,
-                  stories, and documents in our archive have been generously contributed
+                  stories, and documents in my archive have been generously contributed
                   by local residents and their families.
                 </p>
                 <p className="text-stone-700 leading-relaxed">
                   If you have memories, photographs, or documents related to Thoralby
-                  and Bishopdale that you'd like to share, we'd love to hear from you.
-                  Every contribution, no matter how small, helps us build a more
+                  and Bishopdale that you'd like to share, I'd love to hear from you.
+                  Every contribution, no matter how small, helps me build a more
                   complete picture of our shared history.
                 </p>
               </div>
@@ -122,7 +122,7 @@ export function BishopdaleValley() {
           <div className="mt-12 text-center">
             <div className="inline-flex items-center space-x-2 text-stone-600">
               <Heart className="w-5 h-5 text-sage-600 fill-current" />
-              <span>Made with love for our community</span>
+              <span>Made with love for my community</span>
             </div>
           </div>
         </div>

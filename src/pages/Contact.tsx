@@ -13,7 +13,7 @@ export function Contact() {
             Get In Touch
           </h1>
           <p className="text-lg text-stone-600">
-            Have questions or want to contribute? We'd love to hear from you
+            Have questions or want to contribute? I'd love to hear from you
           </p>
         </div>
 
@@ -49,7 +49,7 @@ export function Contact() {
 
           <div className="card">
             <h2 className="font-serif text-2xl font-semibold text-stone-900 mb-6">
-              Send Us a Message
+              Send Me a Message
             </h2>
             <form className="space-y-4">
               <div>

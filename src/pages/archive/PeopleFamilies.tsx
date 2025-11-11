@@ -151,9 +151,9 @@ export function PeopleFamilies() {
 
         <div className="mb-8">
           <p className="text-lg text-stone-600">
-            Our people and families archive contains information on 156 families and individuals
+            My people and families archive contains information on 156 families and individuals
             who lived in Bishopdale over the centuries. Through parish registers, census records,
-            personal memories, and photographs, we piece together the stories of the people who
+            personal memories, and photographs, I piece together the stories of the people who
             made this community what it is today.
           </p>
         </div>
@@ -273,9 +273,9 @@ export function PeopleFamilies() {
             Research Your Family History
           </h2>
           <p className="max-w-2xl mx-auto mb-6 text-stone-600">
-            Are you descended from a Bishopdale family? We can help you trace your ancestry using
-            our parish registers, census records, and other historical documents. Many visitors
-            have discovered fascinating connections to the area through our research assistance.
+            Are you descended from a Bishopdale family? I can help you trace your ancestry using
+            my parish registers, census records, and other historical documents. Many visitors
+            have discovered fascinating connections to the area through my research assistance.
           </p>
           <button className="px-6 py-3 font-medium text-white transition-colors rounded-lg bg-sage-600 hover:bg-sage-700">
             Start Your Research

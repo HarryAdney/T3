@@ -191,7 +191,7 @@ export function Home() {
           </h2>
           <p className="max-w-2xl mx-auto mb-6 text-lg text-sage-100">
             Do you have photographs, documents, or stories about Thoralby and Bishopdale?
-            We'd love to hear from you and add your contributions to our archive.
+            I'd love to hear from you and add your contributions to my archive.
           </p>
           <Link
             to="/contribute"
