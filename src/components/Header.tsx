@@ -10,7 +10,6 @@ interface NavItem {
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
   const location = useLocation();
 
@@ -59,9 +58,7 @@ export function Header() {
                 return (
                   <div
                     key={item.name}
-                    className="relative"
-                    onMouseEnter={() => setIsDropdownOpen(true)}
-                    onMouseLeave={() => setIsDropdownOpen(false)}
+                    className="relative group"
                   >
                     <button
                       className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-1 ${
@@ -73,23 +70,21 @@ export function Header() {
                       {item.name}
                       <ChevronDown className="w-4 h-4" />
                     </button>
-                    {isDropdownOpen && (
-                      <div className="absolute left-0 w-56 py-2 mt-1 bg-white border shadow-lg top-full rounded-xl border-stone-200">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.path}
-                            to={child.path}
-                            className={`block px-4 py-2 text-sm font-medium transition-colors ${
-                              isActive(child.path)
-                                ? 'bg-sage-100 text-sage-900'
-                                : 'text-stone-700 hover:bg-parchment-100'
-                            }`}
-                          >
-                            {child.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
+                    <div className="absolute left-0 w-56 py-2 mt-1 transition-opacity duration-200 bg-white border shadow-lg opacity-0 pointer-events-none top-full rounded-xl border-stone-200 group-hover:opacity-100 group-hover:pointer-events-auto">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.path}
+                          to={child.path}
+                          className={`block px-4 py-2 text-sm font-medium transition-colors ${
+                            isActive(child.path)
+                              ? 'bg-sage-100 text-sage-900'
+                              : 'text-stone-700 hover:bg-parchment-100'
+                          }`}
+                        >
+                          {child.name}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 );
               }
