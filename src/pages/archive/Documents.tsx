@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { PageWrapper } from '../../components/PageWrapper';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
-import { FileText, Calendar, Search, Filter, BookOpen } from 'lucide-react';
+import { FileText, Calendar, Search, Filter } from 'lucide-react';
 
 interface Document {
   id: string;
@@ -207,37 +207,6 @@ export function Documents() {
             <p className="text-lg text-stone-600">No documents found matching your criteria.</p>
           </div>
         )}
-
-        <div className="p-8 mt-12 rounded-2xl bg-gradient-to-r from-sage-50 to-parchment-50">
-          <div className="grid gap-8 md:grid-cols-2">
-            <div>
-              <BookOpen className="w-10 h-10 mb-4 text-sage-600" />
-              <h3 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-                Research Assistance
-              </h3>
-              <p className="mb-4 text-stone-700">
-                Need help finding information in our documents? Our volunteers can assist with research
-                queries and help you trace your family history in Bishopdale.
-              </p>
-              <button className="px-6 py-3 font-medium text-white transition-colors rounded-lg bg-sage-600 hover:bg-sage-700">
-                Request Research Help
-              </button>
-            </div>
-            <div>
-              <FileText className="w-10 h-10 mb-4 text-parchment-600" />
-              <h3 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-                Document Access
-              </h3>
-              <p className="mb-4 text-stone-700">
-                Many of our documents are available for viewing by appointment. Contact us to arrange
-                a visit to examine original records or request digital copies.
-              </p>
-              <button className="px-6 py-3 font-medium transition-colors border-2 rounded-lg text-stone-700 border-stone-300 hover:bg-stone-50">
-                Arrange Visit
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </PageWrapper>
   );
