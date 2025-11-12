@@ -1,6 +1,7 @@
 import { PageWrapper } from '../../components/PageWrapper';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
-import { Church, School, Users, TreePine } from 'lucide-react';
+import { Church, School, Users, TreePine, Factory } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function Thoralby() {
   return (
@@ -40,7 +41,7 @@ export function Thoralby() {
           
         </div>
 
-        <div className="grid gap-8 mb-12 md:grid-cols-2">
+        <div className="grid gap-8 mb-12 md:grid-cols-2 lg:grid-cols-3">
           <div className="card">
             <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100">
               <Church className="w-6 h-6 text-sage-700" />
@@ -100,6 +101,19 @@ export function Thoralby() {
               than planned development.
             </p>
           </div>
+
+          <Link to="/townships/thoralby/industry" className="card group hover:shadow-lg transition-shadow md:col-span-2 lg:col-span-1">
+            <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100 group-hover:bg-sage-200 transition-colors">
+              <Factory className="w-6 h-6 text-sage-700" />
+            </div>
+            <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
+              Industry
+            </h2>
+            <p className="text-stone-700">
+              Discover the industrial heritage of Thoralby, from lead mining to traditional
+              crafts that supplemented farming income throughout the centuries.
+            </p>
+          </Link>
         </div>
 
         <div className="prose prose-stone max-w-none">

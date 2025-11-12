@@ -1,6 +1,7 @@
 import { PageWrapper } from '../../components/PageWrapper';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
-import { Mountain, Church, Home } from 'lucide-react';
+import { Mountain, Church, Home, Factory } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function Bishopdale() {
   return (
@@ -40,7 +41,7 @@ export function Bishopdale() {
           </p>
         </div>
 
-        <div className="grid gap-8 mb-12 md:grid-cols-3">
+        <div className="grid gap-8 mb-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="card">
             <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100">
               <Mountain className="w-6 h-6 text-sage-700" />
@@ -82,6 +83,19 @@ export function Bishopdale() {
               a common heritage of farming and rural life.
             </p>
           </div>
+
+          <Link to="/townships/bishopdale/industry" className="card group hover:shadow-lg transition-shadow">
+            <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-parchment-200 group-hover:bg-parchment-300 transition-colors">
+              <Factory className="w-6 h-6 text-parchment-700" />
+            </div>
+            <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
+              Industry
+            </h2>
+            <p className="text-stone-700">
+              Explore the industrial heritage of Bishopdale, including lead mining, quarrying,
+              and traditional crafts that shaped the valley's economy and character.
+            </p>
+          </Link>
         </div>
 
         <div className="prose prose-stone max-w-none">

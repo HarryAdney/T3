@@ -1,6 +1,7 @@
 import { PageWrapper } from '../../components/PageWrapper';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
-import { Tractor, Wheat, Home, Users } from 'lucide-react';
+import { Tractor, Wheat, Home, Users, Factory } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function Newbiggin() {
   return (
@@ -97,6 +98,19 @@ export function Newbiggin() {
               in this challenging environment.
             </p>
           </div>
+
+          <Link to="/townships/newbiggin/industry" className="card group hover:shadow-lg transition-shadow md:col-span-2">
+            <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100 group-hover:bg-sage-200 transition-colors">
+              <Factory className="w-6 h-6 text-sage-700" />
+            </div>
+            <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
+              Industry
+            </h2>
+            <p className="text-stone-700">
+              Explore the industries that supplemented farming life in Newbiggin, including
+              traditional crafts, hand-knitting, and other cottage industries.
+            </p>
+          </Link>
         </div>
 
         <div className="prose prose-stone max-w-none">

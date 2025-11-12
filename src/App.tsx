@@ -11,6 +11,10 @@ import { Bishopdale } from './pages/townships/Bishopdale';
 import { Thoralby } from './pages/townships/Thoralby';
 import { BurtonCumWalden } from './pages/townships/BurtonCumWalden';
 import { Newbiggin } from './pages/townships/Newbiggin';
+import { BishopdaleIndustry } from './pages/townships/BishopdaleIndustry';
+import { ThoralbyIndustry } from './pages/townships/ThoralbyIndustry';
+import { BurtonCumWaldenIndustry } from './pages/townships/BurtonCumWaldenIndustry';
+import { NewbigginIndustry } from './pages/townships/NewbigginIndustry';
 import { Photographs } from './pages/archive/Photographs';
 import { Documents } from './pages/archive/Documents';
 import { Maps } from './pages/archive/Maps';
@@ -27,9 +31,13 @@ function App() {
           <Route path="/bishopdale-valley" element={<BishopdaleValley />} />
           <Route path="/four-townships" element={<FourTownships />} />
           <Route path="/townships/bishopdale" element={<Bishopdale />} />
+          <Route path="/townships/bishopdale/industry" element={<BishopdaleIndustry />} />
           <Route path="/townships/thoralby" element={<Thoralby />} />
+          <Route path="/townships/thoralby/industry" element={<ThoralbyIndustry />} />
           <Route path="/townships/burton-cum-walden" element={<BurtonCumWalden />} />
+          <Route path="/townships/burton-cum-walden/industry" element={<BurtonCumWaldenIndustry />} />
           <Route path="/townships/newbiggin" element={<Newbiggin />} />
+          <Route path="/townships/newbiggin/industry" element={<NewbigginIndustry />} />
           <Route path="/people" element={<People />} />
           <Route path="/timeline" element={<Timeline />} />
           <Route path="/archive" element={<Archive />} />
