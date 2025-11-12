@@ -34,11 +34,6 @@ export function Newbiggin() {
         />
 
         <div className="mb-12">
-          <!-- <p className="text-lg leading-relaxed text-stone-600">
-            Newbiggin is the smallest of Bishopdale's four townships, a peaceful hamlet nestled
-            in the heart of the valley. The name derives from Old Norse 'nýbyggin', meaning
-            'new settlement', though the hamlet has existed since medieval times.
-          </p> -->
           <p className="text-lg leading-relaxed text-stone-600">The name of Newbiggin suggests that it was settled somewhat later than Thoralby because it means ‘new building’. The village probably came into existence after the Norman Conquest because it was not mentioned in the Domesday Book. Newbiggin may have been established originally to house foresters responsible for the maintenance of Bishopdale Chase, which was held by the lords of Middleham and reserved for hunting. Similar foresters’ villages were established in the 12th or 13th century at Bainbridge for the Forest of Wensleydale and at Buckden for Langstrothdale Chase.</p>
         </div>
 
