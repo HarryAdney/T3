@@ -280,7 +280,7 @@ export function PeopleFamilies() {
           <button className="px-6 py-3 font-medium text-white transition-colors rounded-lg bg-sage-600 hover:bg-sage-700">
             Start Your Research
           </button>
-        */ </div>
+         </div> */
       </div>
     </PageWrapper>
   );
