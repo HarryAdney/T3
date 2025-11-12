@@ -73,8 +73,8 @@ export function Header() {
                       {item.name}
                       <ChevronDown className="w-4 h-4" />
                     </Link>
-                    <div className="absolute left-0 pt-2 -top-2">
-                      <div className="w-56 py-2 mt-12 transition-opacity duration-200 bg-white border shadow-lg opacity-0 pointer-events-none rounded-xl border-stone-200 group-hover:opacity-100 group-hover:pointer-events-auto">
+                    <div className="absolute left-0 top-full pt-2">
+                      <div className="w-56 py-2 transition-opacity duration-200 bg-white border shadow-lg opacity-0 pointer-events-none rounded-xl border-stone-200 group-hover:opacity-100 group-hover:pointer-events-auto">
                         {item.children.map((child) => (
                           <Link
                             key={child.path}
