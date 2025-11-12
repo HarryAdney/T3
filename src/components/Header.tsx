@@ -26,7 +26,7 @@ export function Header() {
         { name: 'Newbiggin', path: '/townships/newbiggin' },
       ],
     },
-    { name: 'People', path: '/people' },
+    { name: 'People', path: '/archive/people-families' },
     { name: 'Timeline', path: '/timeline' },
     { name: 'Archive', path: '/archive' },
   ];
