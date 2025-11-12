@@ -267,7 +267,7 @@ export function PeopleFamilies() {
           </div>
         )}
 
-        <div className="p-8 text-center rounded-2xl bg-gradient-to-r from-sage-50 to-parchment-50">
+        /* <div className="p-8 text-center rounded-2xl bg-gradient-to-r from-sage-50 to-parchment-50">
           <Users className="w-12 h-12 mx-auto mb-4 text-sage-600" />
           <h2 className="mb-3 font-serif text-2xl font-semibold text-stone-900">
             Research Your Family History
@@ -280,7 +280,7 @@ export function PeopleFamilies() {
           <button className="px-6 py-3 font-medium text-white transition-colors rounded-lg bg-sage-600 hover:bg-sage-700">
             Start Your Research
           </button>
-        </div>
+        */ </div>
       </div>
     </PageWrapper>
   );
