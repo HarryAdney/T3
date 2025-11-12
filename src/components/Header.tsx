@@ -18,6 +18,7 @@ export function Header() {
     { name: 'Bishopdale Valley', path: '/bishopdale-valley' },
     {
       name: 'The Four Townships',
+      path: '/four-townships',
       children: [
         { name: 'Bishopdale', path: '/townships/bishopdale' },
         { name: 'Thoralby', path: '/townships/thoralby' },
@@ -31,9 +32,10 @@ export function Header() {
   ];
 
   const isActive = (path: string) => location.pathname === path;
-  const isDropdownActive = (children?: { name: string; path: string }[]) => {
-    if (!children) return false;
-    return children.some((child) => location.pathname === child.path);
+  const isDropdownActive = (item: NavItem) => {
+    if (item.path && location.pathname === item.path) return true;
+    if (!item.children) return false;
+    return item.children.some((child) => location.pathname === child.path);
   };
 
   return (
@@ -60,16 +62,17 @@ export function Header() {
                     key={item.name}
                     className="relative group"
                   >
-                    <button
+                    <Link
+                      to={item.path!}
                       className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-1 ${
-                        isDropdownActive(item.children)
+                        isDropdownActive(item)
                           ? 'bg-sage-100 text-sage-900'
                           : 'text-stone-700 hover:bg-parchment-100'
                       }`}
                     >
                       {item.name}
                       <ChevronDown className="w-4 h-4" />
-                    </button>
+                    </Link>
                     <div className="absolute left-0 pt-2 -top-2">
                       <div className="w-56 py-2 mt-12 transition-opacity duration-200 bg-white border shadow-lg opacity-0 pointer-events-none rounded-xl border-stone-200 group-hover:opacity-100 group-hover:pointer-events-auto">
                         {item.children.map((child) => (
@@ -121,17 +124,28 @@ export function Header() {
               if (item.children) {
                 return (
                   <div key={item.name} className="mb-1">
-                    <button
-                      onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
-                      className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                        isDropdownActive(item.children)
+                    <Link
+                      to={item.path!}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors mb-1 ${
+                        isDropdownActive(item)
                           ? 'bg-sage-100 text-sage-900'
                           : 'text-stone-700 hover:bg-parchment-100'
                       }`}
                     >
                       {item.name}
+                    </Link>
+                    <button
+                      onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
+                      className={`w-full flex items-center justify-between px-4 py-2 rounded-lg text-xs font-medium transition-colors ${
+                        isMobileDropdownOpen
+                          ? 'bg-parchment-100 text-stone-700'
+                          : 'text-stone-600 hover:bg-parchment-50'
+                      }`}
+                    >
+                      View Townships
                       <ChevronDown
-                        className={`w-4 h-4 transition-transform ${
+                        className={`w-3 h-3 transition-transform ${
                           isMobileDropdownOpen ? 'rotate-180' : ''
                         }`}
                       />

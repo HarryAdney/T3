@@ -1,70 +1,5 @@
 import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
-import { MapPin, Church, Home, TreePine } from 'lucide-react';
-
-interface Township {
-  id: string;
-  name: string;
-  icon: typeof MapPin;
-  description: string;
-  highlights: string[];
-  imageUrl: string;
-}
-
-const townships: Township[] = [
-  {
-    id: 'thoralby',
-    name: 'Thoralby',
-    icon: Church,
-    description: 'The largest village in Bishopdale, with St. Oswald\'s Church featuring Norman architecture from the 12th century.',
-    highlights: [
-      'St. Oswald\'s Church (12th century)',
-      'Historic village green',
-      'Traditional stone cottages',
-      'Active community hub',
-    ],
-    imageUrl: 'https://images.pexels.com/photos/3935702/pexels-photo-3935702.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-  {
-    id: 'newbiggin',
-    name: 'Newbiggin',
-    icon: Home,
-    description: 'A small hamlet with a rich agricultural heritage, nestled in the heart of Bishopdale.',
-    highlights: [
-      'Traditional farming community',
-      'Historic farmsteads',
-      'Scenic valley views',
-      'Ancient field patterns',
-    ],
-    imageUrl: 'https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-  {
-    id: 'west-burton',
-    name: 'West Burton',
-    icon: TreePine,
-    description: 'Known for its distinctive village green with a market cross and nearby waterfalls.',
-    highlights: [
-      'Large village green with market cross',
-      'Cauldron Falls',
-      'Traditional Dales architecture',
-      'Annual feast celebrations',
-    ],
-    imageUrl: 'https://images.pexels.com/photos/5255252/pexels-photo-5255252.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-  {
-    id: 'walden',
-    name: 'Walden',
-    icon: MapPin,
-    description: 'Remote settlement in Walden Dale, featuring moorland and upland pastures.',
-    highlights: [
-      'Secluded valley location',
-      'Moorland landscapes',
-      'Traditional sheep farming',
-      'Historic packhorse routes',
-    ],
-    imageUrl: 'https://images.pexels.com/photos/1906385/pexels-photo-1906385.jpeg?auto=compress&cs=tinysrgb&w=800',
-  },
-];
 
 export function FourTownships() {
   return (
@@ -83,7 +18,7 @@ export function FourTownships() {
               The Four Townships
             </h1>
             <p className="text-lg md:text-xl">
-              Exploring Thoralby, Newbiggin, West Burton, and Walden
+              Thoralby, Bishopdale, Burton-cum-Walden, and Newbiggin
             </p>
           </div>
         </div>
@@ -93,65 +28,47 @@ export function FourTownships() {
         <Breadcrumbs items={[{ label: 'The Four Townships', path: '/four-townships' }]} />
 
         <div className="mb-12">
-          <p className="text-lg text-stone-600">
-            Bishopdale is comprised of four distinct townships, each with its own unique character and history.
-            Together, they form a tapestry of rural Yorkshire life that has endured for centuries.
-          </p>
-        </div>
+          <div className="mb-8">
+            <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
+              Thoralby Township
+            </h2>
+            <p className="text-lg leading-relaxed text-stone-600">
+              The present-day township comprises 2,857 acres. The houses outside the main village are to the east, Spickles Farm and Riddings and to the west Gayle Ing, Barker, Cote Bottom, Blind Syke, Swinacote, Howsyke, Crooksby and Littleburn.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          {townships.map((township) => {
-            const Icon = township.icon;
-            return (
-              <div key={township.id} className="card">
-                <div className="mb-4 overflow-hidden rounded-lg">
-                  <img
-                    src={township.imageUrl}
-                    alt={township.name}
-                    className="object-cover w-full h-48 transition-transform duration-300 hover:scale-105"
-                  />
-                </div>
+          <div className="mb-8">
+            <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
+              Bishopdale Township
+            </h2>
+            <p className="text-lg leading-relaxed text-stone-600">
+              The present-day township comprises 4,728 acres. There has been no village in the township since Croxby became depopulated in the Middle Ages, since when the township boundaries have changed, placing the remains of Croxby in Thoralby township. The scattered farms and houses that make up Bishopdale are Dale Head, Howgill, Kidstones, Longridge, Newhouse, The Rookery (Coach House), Scar Top, Smelter, Myres Garth, Ribba Hall, Underscarr, The Old School House, Newhouse Gill and Dalefoot.
+            </p>
+          </div>
 
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-sage-100">
-                    <Icon className="w-5 h-5 text-sage-700" />
-                  </div>
-                  <h2 className="font-serif text-2xl font-semibold text-stone-900">
-                    {township.name}
-                  </h2>
-                </div>
+          <div className="mb-8">
+            <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
+              Burton-cum-Walden Township
+            </h2>
+            <p className="text-lg leading-relaxed text-stone-600">
+              The present-day township comprises 7,659 acres. It occupies the lower ends of the valleys of Bishopdale and Walden and includes the village of West Burton, including the Black Bull, Flanders Hall, How Raine, Sorrelsykes, Morpeth Gate, Edgley, Adams Bottoms, Brown Lea, and Eshington. The valley of Walden includes Riddings, Cote, White Row, High and Low Dove Scarr, Chapel Green, Nell Bank, Bridge End, Ashes, Grange Farm, Uncles Farm, Kentucky House, Walden Head, Rowton Gill, Hill Top, Haw, Hargill, Cowston Gill, Cross and Forelands. Nellholme, Hestholme and Hestholme East, formerly a detached part of Thoralby township, are now part of Burton-cum-Walden township.
+            </p>
+          </div>
 
-                <p className="mb-4 text-stone-700">
-                  {township.description}
-                </p>
+          <div className="mb-8">
+            <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
+              Newbiggin Township
+            </h2>
+            <p className="text-lg leading-relaxed text-stone-600">
+              The present-day township comprises 1,696 acres. The houses outside the main village are The Street Head Inn, Cross Lanes Farm, The Bunkhouse (formerly Cross Lanes School), East Lane House, West Lane House, and Misty Field.
+            </p>
+          </div>
 
-                <div className="pt-4 border-t border-stone-200">
-                  <h3 className="mb-3 text-sm font-semibold tracking-wide uppercase text-stone-500">
-                    Key Features
-                  </h3>
-                  <ul className="space-y-2">
-                    {township.highlights.map((highlight, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm text-stone-600">
-                        <span className="mt-1.5 block w-1.5 h-1.5 rounded-full bg-sage-600 flex-shrink-0" />
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="p-8 mt-12 text-center rounded-2xl bg-gradient-to-r from-sage-50 to-parchment-50">
-          <MapPin className="w-12 h-12 mx-auto mb-4 text-sage-600" />
-          <h2 className="mb-3 font-serif text-2xl font-semibold text-stone-900">
-            Exploring the Townships
-          </h2>
-          <p className="max-w-2xl mx-auto mb-6 text-stone-600">
-            Each township has its own stories to tell. My archive contains photographs, documents, and memories
-            from all four communities. Explore their unique histories and discover the connections that bind them together.
-          </p>
+          <div>
+            <p className="text-lg leading-relaxed text-stone-600">
+              All four townships are in the Wapentake of Hang West, formerly in the North Riding of Yorkshire and are now in the county of North Yorkshire. See diagram below.
+            </p>
+          </div>
         </div>
       </div>
     </PageWrapper>
