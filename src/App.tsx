@@ -20,6 +20,10 @@ import { Documents } from './pages/archive/Documents';
 import { Maps } from './pages/archive/Maps';
 import { PeopleFamilies } from './pages/archive/PeopleFamilies';
 import { BuildingsPlaces } from './pages/archive/BuildingsPlaces';
+import { AdminLogin } from './pages/admin/Login';
+import { AdminDashboard } from './pages/admin/Dashboard';
+import { TownshipsList } from './pages/admin/TownshipsList';
+import { TownshipEditor } from './pages/admin/TownshipEditor';
 
 function App() {
   return (
@@ -46,6 +50,10 @@ function App() {
           <Route path="/archive/maps" element={<Maps />} />
           <Route path="/archive/people-families" element={<PeopleFamilies />} />
           <Route path="/archive/buildings-places" element={<BuildingsPlaces />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/townships" element={<TownshipsList />} />
+          <Route path="/admin/townships/:id" element={<TownshipEditor />} />
         </Routes>
         <Footer />
       </div>
