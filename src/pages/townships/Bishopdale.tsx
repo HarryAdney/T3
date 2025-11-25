@@ -6,8 +6,13 @@ import { Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 
 interface TownshipContent {
+  subtitle: string;
   description: any;
+  geography_content: any;
+  history_content: any;
+  communities_content: any;
   industry_content: any;
+  today_content: any;
 }
 
 export function Bishopdale() {
@@ -22,7 +27,7 @@ export function Bishopdale() {
     try {
       const { data } = await supabase
         .from('townships')
-        .select('description, industry_content')
+        .select('subtitle, description, geography_content, history_content, communities_content, industry_content, today_content')
         .eq('slug', 'bishopdale')
         .maybeSingle();
 
@@ -36,19 +41,79 @@ export function Bishopdale() {
     }
   };
 
-  const extractTextFromJson = (jsonContent: any): string => {
-    if (!jsonContent?.content) return '';
-    return jsonContent.content
+  const extractTextFromJson = (jsonContent: any, defaultText: string = ''): string => {
+    if (!jsonContent?.content) return defaultText;
+    const text = jsonContent.content
       .map((block: any) => block.content?.[0]?.text || '')
       .join(' ');
+    return text.replace(/<\/?p>/g, '').trim() || defaultText;
+  };
+
+  const getSubtitle = () => {
+    return content?.subtitle || 'The scenic valley that connects our four townships';
+  };
+
+  const getDescription = () => {
+    return extractTextFromJson(
+      content?.description,
+      'Bishopdale is one of the lesser-known side dales of Wensleydale in the Yorkshire Dales National Park. The valley takes its name from the Bishops of York who held extensive lands here during medieval times.'
+    );
+  };
+
+  const getGeographyText = () => {
+    return extractTextFromJson(
+      content?.geography_content,
+      'The valley stretches from Aysgarth in the east to Kidstones Pass in the west, with Bishopdale Beck running through its heart. Surrounded by limestone fells and traditional field patterns, the landscape is quintessentially Yorkshire Dales.'
+    );
+  };
+
+  const getHistoryText = () => {
+    return extractTextFromJson(
+      content?.history_content,
+      'The dale has been inhabited since medieval times, with evidence of Norse settlement in place names. During the 18th and 19th centuries, lead mining and agriculture were the primary occupations for valley residents.'
+    );
+  };
+
+  const getCommunitiesText = () => {
+    return extractTextFromJson(
+      content?.communities_content,
+      'Four main settlements form the heart of Bishopdale: Thoralby, Newbiggin, West Burton, and Walden. Each maintains its distinct character while sharing a common heritage of farming and rural life.'
+    );
   };
 
   const getIndustryText = () => {
-    if (!content?.industry_content) {
-      return 'Explore the industrial heritage of Bishopdale, including lead mining, quarrying, and traditional crafts that shaped the valley\'s economy and character.';
+    return extractTextFromJson(
+      content?.industry_content,
+      'Explore the industrial heritage of Bishopdale, including lead mining, quarrying, and traditional crafts that shaped the valley\'s economy and character.'
+    );
+  };
+
+  const getTodayContent = () => {
+    if (!content?.today_content?.content) {
+      return (
+        <>
+          <p className="mb-4 text-stone-700">
+            Today, Bishopdale remains a working agricultural valley, with sheep farming
+            continuing as the dominant land use. The valley's quiet beauty attracts walkers
+            and visitors seeking an authentic Dales experience away from the busier tourist routes.
+          </p>
+          <p className="text-stone-700">
+            The valley is home to a close-knit community that maintains strong connections
+            to the land and its history. Traditional stone walls, barns, and field patterns
+            remain largely intact, offering a window into centuries of rural life.
+          </p>
+        </>
+      );
     }
-    const text = extractTextFromJson(content.industry_content);
-    return text.replace(/<\/?p>/g, '').trim();
+    return content.today_content.content.map((block: any, idx: number) => {
+      const text = block.content?.[0]?.text || '';
+      const cleanText = text.replace(/<\/?p>/g, '').trim();
+      return cleanText ? (
+        <p key={idx} className={idx < content.today_content.content.length - 1 ? "mb-4 text-stone-700" : "text-stone-700"}>
+          {cleanText}
+        </p>
+      ) : null;
+    });
   };
 
   return (
@@ -66,9 +131,11 @@ export function Bishopdale() {
             <h1 className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
               Bishopdale
             </h1>
-            <p className="text-lg md:text-xl">
-              The scenic valley that connects our four townships
-            </p>
+            {!loading && (
+              <p className="text-lg md:text-xl">
+                {getSubtitle()}
+              </p>
+            )}
           </div>
         </div>
       </div>
@@ -82,10 +149,13 @@ export function Bishopdale() {
         />
 
         <div className="mb-12">
-          <p className="text-lg leading-relaxed text-stone-600">
-            Bishopdale is one of the lesser-known side dales of Wensleydale in the Yorkshire Dales National Park.
-            The valley takes its name from the Bishops of York who held extensive lands here during medieval times.
-          </p>
+          {loading ? (
+            <p className="text-lg leading-relaxed text-stone-600">Loading...</p>
+          ) : (
+            <p className="text-lg leading-relaxed text-stone-600">
+              {getDescription()}
+            </p>
+          )}
         </div>
 
         <div className="grid gap-8 mb-12 md:grid-cols-2 lg:grid-cols-4">
@@ -96,11 +166,13 @@ export function Bishopdale() {
             <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
               Geography
             </h2>
-            <p className="text-stone-700">
-              The valley stretches from Aysgarth in the east to Kidstones Pass in the west,
-              with Bishopdale Beck running through its heart. Surrounded by limestone fells
-              and traditional field patterns, the landscape is quintessentially Yorkshire Dales.
-            </p>
+            {loading ? (
+              <p className="text-stone-700">Loading...</p>
+            ) : (
+              <p className="text-stone-700">
+                {getGeographyText()}
+              </p>
+            )}
           </div>
 
           <div className="card">
@@ -110,11 +182,13 @@ export function Bishopdale() {
             <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
               History
             </h2>
-            <p className="text-stone-700">
-              The dale has been inhabited since medieval times, with evidence of Norse settlement
-              in place names. During the 18th and 19th centuries, lead mining and agriculture
-              were the primary occupations for valley residents.
-            </p>
+            {loading ? (
+              <p className="text-stone-700">Loading...</p>
+            ) : (
+              <p className="text-stone-700">
+                {getHistoryText()}
+              </p>
+            )}
           </div>
 
           <div className="card">
@@ -124,11 +198,13 @@ export function Bishopdale() {
             <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
               Communities
             </h2>
-            <p className="text-stone-700">
-              Four main settlements form the heart of Bishopdale: Thoralby, Newbiggin,
-              West Burton, and Walden. Each maintains its distinct character while sharing
-              a common heritage of farming and rural life.
-            </p>
+            {loading ? (
+              <p className="text-stone-700">Loading...</p>
+            ) : (
+              <p className="text-stone-700">
+                {getCommunitiesText()}
+              </p>
+            )}
           </div>
 
           <Link to="/townships/bishopdale/industry" className="card group hover:shadow-lg transition-shadow">
@@ -153,16 +229,11 @@ export function Bishopdale() {
             <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
               Bishopdale Today
             </h2>
-            <p className="mb-4 text-stone-700">
-              Today, Bishopdale remains a working agricultural valley, with sheep farming
-              continuing as the dominant land use. The valley's quiet beauty attracts walkers
-              and visitors seeking an authentic Dales experience away from the busier tourist routes.
-            </p>
-            <p className="text-stone-700">
-              The valley is home to a close-knit community that maintains strong connections
-              to the land and its history. Traditional stone walls, barns, and field patterns
-              remain largely intact, offering a window into centuries of rural life.
-            </p>
+            {loading ? (
+              <p className="text-stone-700">Loading...</p>
+            ) : (
+              getTodayContent()
+            )}
           </div>
         </div>
       </div>
