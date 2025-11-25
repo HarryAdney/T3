@@ -15,6 +15,20 @@ interface TownshipData {
   communities_content: string;
   industry_content: string;
   today_content: string;
+  card1_title: string;
+  card1_icon: string;
+  card1_content: string;
+  card2_title: string;
+  card2_icon: string;
+  card2_content: string;
+  card3_title: string;
+  card3_icon: string;
+  card3_content: string;
+  card4_title: string;
+  card4_icon: string;
+  card4_content: string;
+  history_section_title: string;
+  history_section_content: string;
   published: boolean;
 }
 
@@ -33,6 +47,20 @@ export function TownshipEditor() {
     communities_content: '',
     industry_content: '',
     today_content: '',
+    card1_title: '',
+    card1_icon: '',
+    card1_content: '',
+    card2_title: '',
+    card2_icon: '',
+    card2_content: '',
+    card3_title: '',
+    card3_icon: '',
+    card3_content: '',
+    card4_title: '',
+    card4_icon: '',
+    card4_content: '',
+    history_section_title: '',
+    history_section_content: '',
     published: true,
   });
   const [loading, setLoading] = useState(!isNew);
@@ -91,6 +119,20 @@ export function TownshipEditor() {
           communities_content: convertJsonToHtml(data.communities_content),
           industry_content: convertJsonToHtml(data.industry_content),
           today_content: convertJsonToHtml(data.today_content),
+          card1_title: data.card1_title || '',
+          card1_icon: data.card1_icon || '',
+          card1_content: convertJsonToHtml(data.card1_content),
+          card2_title: data.card2_title || '',
+          card2_icon: data.card2_icon || '',
+          card2_content: convertJsonToHtml(data.card2_content),
+          card3_title: data.card3_title || '',
+          card3_icon: data.card3_icon || '',
+          card3_content: convertJsonToHtml(data.card3_content),
+          card4_title: data.card4_title || '',
+          card4_icon: data.card4_icon || '',
+          card4_content: convertJsonToHtml(data.card4_content),
+          history_section_title: data.history_section_title || '',
+          history_section_content: convertJsonToHtml(data.history_section_content),
           published: data.published,
         });
       }
@@ -148,6 +190,20 @@ export function TownshipEditor() {
         communities_content: convertHtmlToJson(formData.communities_content),
         industry_content: convertHtmlToJson(formData.industry_content),
         today_content: convertHtmlToJson(formData.today_content),
+        card1_title: formData.card1_title || null,
+        card1_icon: formData.card1_icon || null,
+        card1_content: formData.card1_content ? convertHtmlToJson(formData.card1_content) : null,
+        card2_title: formData.card2_title || null,
+        card2_icon: formData.card2_icon || null,
+        card2_content: formData.card2_content ? convertHtmlToJson(formData.card2_content) : null,
+        card3_title: formData.card3_title || null,
+        card3_icon: formData.card3_icon || null,
+        card3_content: formData.card3_content ? convertHtmlToJson(formData.card3_content) : null,
+        card4_title: formData.card4_title || null,
+        card4_icon: formData.card4_icon || null,
+        card4_content: formData.card4_content ? convertHtmlToJson(formData.card4_content) : null,
+        history_section_title: formData.history_section_title || null,
+        history_section_content: formData.history_section_content ? convertHtmlToJson(formData.history_section_content) : null,
         published: formData.published,
         updated_at: new Date().toISOString(),
       };
@@ -341,6 +397,171 @@ export function TownshipEditor() {
               onChange={(value) => setFormData({ ...formData, today_content: value })}
               placeholder="Enter current township information..."
             />
+          </div>
+
+          <div className="p-6 border-t-2 border-sage-200 bg-sage-50 rounded-xl">
+            <h2 className="mb-2 font-serif text-xl font-semibold text-stone-900">
+              Alternative Card System (for Thoralby-style layouts)
+            </h2>
+            <p className="mb-6 text-sm text-stone-600">
+              Use these fields for townships with custom card layouts. Leave blank to use the standard Geography/History/Communities cards above.
+            </p>
+
+            <div className="space-y-6">
+              <div className="p-4 border rounded-lg bg-white border-stone-200">
+                <h3 className="mb-4 font-semibold text-stone-900">Card 1</h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-stone-700">Title</label>
+                    <input
+                      type="text"
+                      value={formData.card1_title}
+                      onChange={(e) => setFormData({ ...formData, card1_title: e.target.value })}
+                      className="w-full px-4 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-sage-500"
+                      placeholder="e.g., St. Oswald's Church"
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-stone-700">Icon (e.g., Church, School, Users, TreePine, Factory)</label>
+                    <input
+                      type="text"
+                      value={formData.card1_icon}
+                      onChange={(e) => setFormData({ ...formData, card1_icon: e.target.value })}
+                      className="w-full px-4 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-sage-500"
+                      placeholder="Church"
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-stone-700">Content</label>
+                    <RichTextEditor
+                      value={formData.card1_content}
+                      onChange={(value) => setFormData({ ...formData, card1_content: value })}
+                      placeholder="Card content..."
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 border rounded-lg bg-white border-stone-200">
+                <h3 className="mb-4 font-semibold text-stone-900">Card 2</h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-stone-700">Title</label>
+                    <input
+                      type="text"
+                      value={formData.card2_title}
+                      onChange={(e) => setFormData({ ...formData, card2_title: e.target.value })}
+                      className="w-full px-4 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-sage-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-stone-700">Icon</label>
+                    <input
+                      type="text"
+                      value={formData.card2_icon}
+                      onChange={(e) => setFormData({ ...formData, card2_icon: e.target.value })}
+                      className="w-full px-4 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-sage-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-stone-700">Content</label>
+                    <RichTextEditor
+                      value={formData.card2_content}
+                      onChange={(value) => setFormData({ ...formData, card2_content: value })}
+                      placeholder="Card content..."
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 border rounded-lg bg-white border-stone-200">
+                <h3 className="mb-4 font-semibold text-stone-900">Card 3</h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-stone-700">Title</label>
+                    <input
+                      type="text"
+                      value={formData.card3_title}
+                      onChange={(e) => setFormData({ ...formData, card3_title: e.target.value })}
+                      className="w-full px-4 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-sage-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-stone-700">Icon</label>
+                    <input
+                      type="text"
+                      value={formData.card3_icon}
+                      onChange={(e) => setFormData({ ...formData, card3_icon: e.target.value })}
+                      className="w-full px-4 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-sage-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-stone-700">Content</label>
+                    <RichTextEditor
+                      value={formData.card3_content}
+                      onChange={(value) => setFormData({ ...formData, card3_content: value })}
+                      placeholder="Card content..."
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 border rounded-lg bg-white border-stone-200">
+                <h3 className="mb-4 font-semibold text-stone-900">Card 4</h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-stone-700">Title</label>
+                    <input
+                      type="text"
+                      value={formData.card4_title}
+                      onChange={(e) => setFormData({ ...formData, card4_title: e.target.value })}
+                      className="w-full px-4 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-sage-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-stone-700">Icon</label>
+                    <input
+                      type="text"
+                      value={formData.card4_icon}
+                      onChange={(e) => setFormData({ ...formData, card4_icon: e.target.value })}
+                      className="w-full px-4 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-sage-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-stone-700">Content</label>
+                    <RichTextEditor
+                      value={formData.card4_content}
+                      onChange={(value) => setFormData({ ...formData, card4_content: value })}
+                      placeholder="Card content..."
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 border rounded-lg bg-white border-stone-200">
+                <h3 className="mb-4 font-semibold text-stone-900">Bottom History Section</h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-stone-700">Section Title</label>
+                    <input
+                      type="text"
+                      value={formData.history_section_title}
+                      onChange={(e) => setFormData({ ...formData, history_section_title: e.target.value })}
+                      className="w-full px-4 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-sage-500"
+                      placeholder="e.g., Thoralby Through the Ages"
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-stone-700">Content</label>
+                    <RichTextEditor
+                      value={formData.history_section_content}
+                      onChange={(value) => setFormData({ ...formData, history_section_content: value })}
+                      placeholder="Enter historical content..."
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="flex items-center space-x-4">

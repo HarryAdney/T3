@@ -1,9 +1,110 @@
+import { useEffect, useState } from 'react';
 import { PageWrapper } from '../../components/PageWrapper';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { Church, School, Users, TreePine, Factory } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../../lib/supabase';
+
+interface TownshipContent {
+  subtitle: string;
+  description: any;
+  card1_title: string;
+  card1_icon: string;
+  card1_content: any;
+  card2_title: string;
+  card2_icon: string;
+  card2_content: any;
+  card3_title: string;
+  card3_icon: string;
+  card3_content: any;
+  card4_title: string;
+  card4_icon: string;
+  card4_content: any;
+  industry_content: any;
+  history_section_title: string;
+  history_section_content: any;
+}
+
+const iconMap: { [key: string]: any } = {
+  Church,
+  School,
+  Users,
+  TreePine,
+  Factory,
+};
 
 export function Thoralby() {
+  const [content, setContent] = useState<TownshipContent | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadContent();
+  }, []);
+
+  const loadContent = async () => {
+    try {
+      const { data } = await supabase
+        .from('townships')
+        .select('subtitle, description, card1_title, card1_icon, card1_content, card2_title, card2_icon, card2_content, card3_title, card3_icon, card3_content, card4_title, card4_icon, card4_content, industry_content, history_section_title, history_section_content')
+        .eq('slug', 'thoralby')
+        .maybeSingle();
+
+      if (data) {
+        setContent(data);
+      }
+    } catch (error) {
+      console.error('Error loading content:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const extractTextFromJson = (jsonContent: any, defaultText: string = ''): string => {
+    if (!jsonContent?.content) return defaultText;
+    const text = jsonContent.content
+      .map((block: any) => block.content?.[0]?.text || '')
+      .join(' ');
+    return text.replace(/<\/?p>/g, '').trim() || defaultText;
+  };
+
+  const getIcon = (iconName: string) => {
+    return iconMap[iconName] || Church;
+  };
+
+  const renderHistoryContent = () => {
+    if (!content?.history_section_content?.content) {
+      return (
+        <>
+          <p className="mb-4 text-stone-700">
+            The village name derives from Old Norse, reflecting the area's Viking heritage.
+            'Thoralby' likely means 'Thor's farmstead', indicating settlement dating back
+            to the 9th or 10th century.
+          </p>
+          <p className="mb-4 text-stone-700">
+            Throughout the medieval period, Thoralby grew as an agricultural settlement,
+            with farming remaining the primary occupation. The 18th and 19th centuries
+            brought lead mining to the area, supplementing farm income for many families.
+          </p>
+          <p className="text-stone-700">
+            Today, Thoralby continues as a working village with an active community.
+            While farming remains important, the village has diversified, with residents
+            engaged in various occupations while maintaining strong connections to the
+            dale's heritage and traditions.
+          </p>
+        </>
+      );
+    }
+    return content.history_section_content.content.map((block: any, idx: number) => {
+      const text = block.content?.[0]?.text || '';
+      const cleanText = text.replace(/<\/?p>/g, '').trim();
+      return cleanText ? (
+        <p key={idx} className={idx < content.history_section_content.content.length - 1 ? "mb-4 text-stone-700" : "text-stone-700"}>
+          {cleanText}
+        </p>
+      ) : null;
+    });
+  };
+
   return (
     <PageWrapper>
       <div className="relative h-64 mb-8 overflow-hidden md:h-80 lg:h-96">
@@ -19,9 +120,11 @@ export function Thoralby() {
             <h1 className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
               Thoralby
             </h1>
-            <p className="text-lg md:text-xl">
-              The principal village of Bishopdale
-            </p>
+            {!loading && (
+              <p className="text-lg md:text-xl">
+                {content?.subtitle || 'The principal village of Bishopdale'}
+              </p>
+            )}
           </div>
         </div>
       </div>
@@ -35,108 +138,119 @@ export function Thoralby() {
         />
 
         <div className="mb-12">
-          <p className="text-lg leading-relaxed text-stone-600">
-            Thoralby is a small village in Bishopdale, one of the side dales of Wensleydale in the Yorkshire Dales National Park. The village has a rich history dating back to medieval times, with St. Oswald's Church featuring Norman architecture from the 12th century.
-          </p>
-          
+          {loading ? (
+            <p className="text-lg leading-relaxed text-stone-600">Loading...</p>
+          ) : (
+            <p className="text-lg leading-relaxed text-stone-600">
+              {extractTextFromJson(
+                content?.description,
+                'Thoralby is a small village in Bishopdale, one of the side dales of Wensleydale in the Yorkshire Dales National Park. The village has a rich history dating back to medieval times, with St. Oswald\'s Church featuring Norman architecture from the 12th century.'
+              )}
+            </p>
+          )}
         </div>
 
         <div className="grid gap-8 mb-12 md:grid-cols-2 lg:grid-cols-3">
-          <div className="card">
-            <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100">
-              <Church className="w-6 h-6 text-sage-700" />
-            </div>
-            <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              St. Oswald's Church
-            </h2>
-            <p className="text-stone-700">
-              The parish church dates back to the 12th century, featuring Norman architecture.
-              The church has served the community for over 800 years and contains fascinating
-              historical records and memorials to local families. Its distinctive tower is a
-              landmark visible throughout the valley.
-            </p>
-          </div>
+          {loading ? (
+            <p className="text-stone-600">Loading...</p>
+          ) : (
+            <>
+              {content?.card1_title && (
+                <div className="card">
+                  <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100">
+                    {(() => {
+                      const Icon = getIcon(content.card1_icon);
+                      return <Icon className="w-6 h-6 text-sage-700" />;
+                    })()}
+                  </div>
+                  <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
+                    {content.card1_title}
+                  </h2>
+                  <p className="text-stone-700">
+                    {extractTextFromJson(content.card1_content)}
+                  </p>
+                </div>
+              )}
 
-          <div className="card">
-            <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-parchment-200">
-              <School className="w-6 h-6 text-parchment-700" />
-            </div>
-            <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              Village School
-            </h2>
-            <p className="text-stone-700">
-              Thoralby's school has educated generations of local children. Though small,
-              it has been central to community life, serving families from across the dale.
-              The school building and its history reflect the importance of education in
-              this rural community.
-            </p>
-          </div>
+              {content?.card2_title && (
+                <div className="card">
+                  <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-parchment-200">
+                    {(() => {
+                      const Icon = getIcon(content.card2_icon);
+                      return <Icon className="w-6 h-6 text-parchment-700" />;
+                    })()}
+                  </div>
+                  <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
+                    {content.card2_title}
+                  </h2>
+                  <p className="text-stone-700">
+                    {extractTextFromJson(content.card2_content)}
+                  </p>
+                </div>
+              )}
 
-          <div className="card">
-            <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100">
-              <Users className="w-6 h-6 text-sage-700" />
-            </div>
-            <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              Village Green
-            </h2>
-            <p className="text-stone-700">
-              The historic village green has been a gathering place for centuries. Surrounded
-              by traditional stone cottages and farm buildings, it remains the focal point of
-              community events and celebrations. The green hosts the annual feast and other
-              traditional gatherings.
-            </p>
-          </div>
+              {content?.card3_title && (
+                <div className="card">
+                  <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100">
+                    {(() => {
+                      const Icon = getIcon(content.card3_icon);
+                      return <Icon className="w-6 h-6 text-sage-700" />;
+                    })()}
+                  </div>
+                  <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
+                    {content.card3_title}
+                  </h2>
+                  <p className="text-stone-700">
+                    {extractTextFromJson(content.card3_content)}
+                  </p>
+                </div>
+              )}
 
-          <div className="card">
-            <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-parchment-200">
-              <TreePine className="w-6 h-6 text-parchment-700" />
-            </div>
-            <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              Traditional Character
-            </h2>
-            <p className="text-stone-700">
-              Thoralby maintains its traditional Dales character with stone-built houses,
-              narrow lanes, and working farms. Many buildings date from the 17th and 18th
-              centuries, and the village layout reflects centuries of organic growth rather
-              than planned development.
-            </p>
-          </div>
+              {content?.card4_title && (
+                <div className="card">
+                  <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-parchment-200">
+                    {(() => {
+                      const Icon = getIcon(content.card4_icon);
+                      return <Icon className="w-6 h-6 text-parchment-700" />;
+                    })()}
+                  </div>
+                  <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
+                    {content.card4_title}
+                  </h2>
+                  <p className="text-stone-700">
+                    {extractTextFromJson(content.card4_content)}
+                  </p>
+                </div>
+              )}
 
-          <Link to="/townships/thoralby/industry" className="card group hover:shadow-lg transition-shadow md:col-span-2 lg:col-span-1">
-            <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100 group-hover:bg-sage-200 transition-colors">
-              <Factory className="w-6 h-6 text-sage-700" />
-            </div>
-            <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              Industry
-            </h2>
-            <p className="text-stone-700">
-              Discover the industrial heritage of Thoralby, from lead mining to traditional
-              crafts that supplemented farming income throughout the centuries.
-            </p>
-          </Link>
+              <Link to="/townships/thoralby/industry" className="card group hover:shadow-lg transition-shadow md:col-span-2 lg:col-span-1">
+                <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100 group-hover:bg-sage-200 transition-colors">
+                  <Factory className="w-6 h-6 text-sage-700" />
+                </div>
+                <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
+                  Industry
+                </h2>
+                <p className="text-stone-700">
+                  {extractTextFromJson(
+                    content?.industry_content,
+                    'Discover the industrial heritage of Thoralby, from lead mining to traditional crafts that supplemented farming income throughout the centuries.'
+                  )}
+                </p>
+              </Link>
+            </>
+          )}
         </div>
 
         <div className="prose prose-stone max-w-none">
           <div className="p-8 rounded-2xl bg-gradient-to-r from-sage-50 to-parchment-50">
             <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
-              Thoralby Through the Ages
+              {loading ? 'Loading...' : (content?.history_section_title || 'Thoralby Through the Ages')}
             </h2>
-            <p className="mb-4 text-stone-700">
-              The village name derives from Old Norse, reflecting the area's Viking heritage.
-              'Thoralby' likely means 'Thor's farmstead', indicating settlement dating back
-              to the 9th or 10th century.
-            </p>
-            <p className="mb-4 text-stone-700">
-              Throughout the medieval period, Thoralby grew as an agricultural settlement,
-              with farming remaining the primary occupation. The 18th and 19th centuries
-              brought lead mining to the area, supplementing farm income for many families.
-            </p>
-            <p className="text-stone-700">
-              Today, Thoralby continues as a working village with an active community.
-              While farming remains important, the village has diversified, with residents
-              engaged in various occupations while maintaining strong connections to the
-              dale's heritage and traditions.
-            </p>
+            {loading ? (
+              <p className="text-stone-700">Loading...</p>
+            ) : (
+              renderHistoryContent()
+            )}
           </div>
         </div>
       </div>
