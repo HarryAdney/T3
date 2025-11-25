@@ -43,13 +43,30 @@ export function TownshipEditor() {
     }
   };
 
+  const convertJsonToHtml = (jsonContent: any): string => {
+    if (!jsonContent?.content) return '';
+
+    let html = '';
+    for (const block of jsonContent.content) {
+      if (block.type === 'paragraph') {
+        const text = block.content?.[0]?.text || '';
+        html += `<p>${text}</p>`;
+      } else if (block.type === 'heading') {
+        const level = block.attrs?.level || 2;
+        const text = block.content?.[0]?.text || '';
+        html += `<h${level}>${text}</h${level}>`;
+      }
+    }
+    return html;
+  };
+
   const loadTownship = async (townshipId: string) => {
     try {
       const { data, error } = await supabase
         .from('townships')
         .select('*')
         .eq('id', townshipId)
-        .single();
+        .maybeSingle();
 
       if (error) throw error;
 
@@ -57,8 +74,8 @@ export function TownshipEditor() {
         setFormData({
           name: data.name,
           slug: data.slug,
-          description: data.description?.content?.[0]?.content?.[0]?.text || '',
-          industry_content: data.industry_content?.content?.[0]?.content?.[0]?.text || '',
+          description: convertJsonToHtml(data.description),
+          industry_content: convertJsonToHtml(data.industry_content),
           published: data.published,
         });
       }
@@ -70,6 +87,36 @@ export function TownshipEditor() {
     }
   };
 
+  const convertHtmlToJson = (html: string) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const content: any[] = [];
+
+    doc.body.childNodes.forEach((node) => {
+      if (node.nodeName === 'P') {
+        content.push({
+          type: 'paragraph',
+          content: [{ type: 'text', text: node.textContent || '' }]
+        });
+      } else if (node.nodeName.match(/^H[1-6]$/)) {
+        const level = parseInt(node.nodeName[1]);
+        content.push({
+          type: 'heading',
+          attrs: { level },
+          content: [{ type: 'text', text: node.textContent || '' }]
+        });
+      }
+    });
+
+    return {
+      type: 'doc',
+      content: content.length > 0 ? content : [{
+        type: 'paragraph',
+        content: [{ type: 'text', text: html }]
+      }]
+    };
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setSaving(true);
@@ -79,20 +126,8 @@ export function TownshipEditor() {
       const townshipData = {
         name: formData.name,
         slug: formData.slug,
-        description: {
-          type: 'doc',
-          content: [{
-            type: 'paragraph',
-            content: [{ type: 'text', text: formData.description }]
-          }]
-        },
-        industry_content: {
-          type: 'doc',
-          content: [{
-            type: 'paragraph',
-            content: [{ type: 'text', text: formData.industry_content }]
-          }]
-        },
+        description: convertHtmlToJson(formData.description),
+        industry_content: convertHtmlToJson(formData.industry_content),
         published: formData.published,
         updated_at: new Date().toISOString(),
       };
