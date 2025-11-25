@@ -1,9 +1,56 @@
+import { useEffect, useState } from 'react';
 import { PageWrapper } from '../../components/PageWrapper';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { Mountain, Church, Home, Factory } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../../lib/supabase';
+
+interface TownshipContent {
+  description: any;
+  industry_content: any;
+}
 
 export function Bishopdale() {
+  const [content, setContent] = useState<TownshipContent | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadContent();
+  }, []);
+
+  const loadContent = async () => {
+    try {
+      const { data } = await supabase
+        .from('townships')
+        .select('description, industry_content')
+        .eq('slug', 'bishopdale')
+        .maybeSingle();
+
+      if (data) {
+        setContent(data);
+      }
+    } catch (error) {
+      console.error('Error loading content:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const extractTextFromJson = (jsonContent: any): string => {
+    if (!jsonContent?.content) return '';
+    return jsonContent.content
+      .map((block: any) => block.content?.[0]?.text || '')
+      .join(' ');
+  };
+
+  const getIndustryText = () => {
+    if (!content?.industry_content) {
+      return 'Explore the industrial heritage of Bishopdale, including lead mining, quarrying, and traditional crafts that shaped the valley\'s economy and character.';
+    }
+    const text = extractTextFromJson(content.industry_content);
+    return text.replace(/<\/?p>/g, '').trim();
+  };
+
   return (
     <PageWrapper>
       <div className="relative h-64 mb-8 overflow-hidden md:h-80 lg:h-96">
@@ -91,10 +138,13 @@ export function Bishopdale() {
             <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
               Industry
             </h2>
-            <p className="text-stone-700">
-              Explore the industrial heritage of Bishopdale, including lead mining, quarrying,
-              and traditional crafts that shaped the valley's economy and character.
-            </p>
+            {loading ? (
+              <p className="text-stone-700">Loading...</p>
+            ) : (
+              <p className="text-stone-700">
+                {getIndustryText()}
+              </p>
+            )}
           </Link>
         </div>
 
