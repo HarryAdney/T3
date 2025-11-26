@@ -1,0 +1,9 @@
+Edit Bishopdale, in Chrome browser: https://thoralby-through-time.bolt.host/admin/townships/7ba6664b-8ed6-452d-8593-14456b337ae8
+
+Edit Bishopdale, in Brave browser: https://thoralby-through-time.bolt.host/admin/townships/7ba6664b-8ed6-452d-8593-14456b337ae8
+
+Created a new township, from https://thoralby-through-time.bolt.host/admin/townships, and it appears in the list on that page, but there's no page created at https://thoralby-through-time.bolt.host/townships/township-test.
+
+
+The township edit page for Bishopdale (https://thoralby-through-time.bolt.host/admin/townships/7ba6664b-8ed6-452d-8593-14456b337ae8) does not reflect the actual page contents at https://thoralby-through-time.bolt.host/townships/bishopdale. The edit pages should always contain the current content until it is edited and then saved.
+
