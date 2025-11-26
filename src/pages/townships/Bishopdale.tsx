@@ -8,10 +8,15 @@ import { supabase } from '../../lib/supabase';
 interface TownshipContent {
   subtitle: string;
   description: any;
+  geography_title: string;
   geography_content: any;
+  history_title: string;
   history_content: any;
+  communities_title: string;
   communities_content: any;
+  industry_title: string;
   industry_content: any;
+  today_title: string;
   today_content: any;
 }
 
@@ -27,7 +32,7 @@ export function Bishopdale() {
     try {
       const { data } = await supabase
         .from('townships')
-        .select('subtitle, description, geography_content, history_content, communities_content, industry_content, today_content')
+        .select('subtitle, description, geography_title, geography_content, history_title, history_content, communities_title, communities_content, industry_title, industry_content, today_title, today_content')
         .eq('slug', 'bishopdale')
         .maybeSingle();
 
@@ -164,7 +169,7 @@ export function Bishopdale() {
               <Mountain className="w-6 h-6 text-sage-700" />
             </div>
             <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              Geography
+              {loading ? 'Geography' : (content?.geography_title || 'Geography')}
             </h2>
             {loading ? (
               <p className="text-stone-700">Loading...</p>
@@ -180,7 +185,7 @@ export function Bishopdale() {
               <Church className="w-6 h-6 text-parchment-700" />
             </div>
             <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              History
+              {loading ? 'History' : (content?.history_title || 'History')}
             </h2>
             {loading ? (
               <p className="text-stone-700">Loading...</p>
@@ -196,7 +201,7 @@ export function Bishopdale() {
               <Home className="w-6 h-6 text-sage-700" />
             </div>
             <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              Communities
+              {loading ? 'Communities' : (content?.communities_title || 'Communities')}
             </h2>
             {loading ? (
               <p className="text-stone-700">Loading...</p>
@@ -212,7 +217,7 @@ export function Bishopdale() {
               <Factory className="w-6 h-6 text-parchment-700" />
             </div>
             <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              Industry
+              {loading ? 'Industry' : (content?.industry_title || 'Industry')}
             </h2>
             {loading ? (
               <p className="text-stone-700">Loading...</p>
@@ -227,7 +232,7 @@ export function Bishopdale() {
         <div className="prose prose-stone max-w-none">
           <div className="p-8 rounded-2xl bg-gradient-to-r from-sage-50 to-parchment-50">
             <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
-              Bishopdale Today
+              {loading ? 'Bishopdale Today' : (content?.today_title || 'Bishopdale Today')}
             </h2>
             {loading ? (
               <p className="text-stone-700">Loading...</p>

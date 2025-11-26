@@ -10,10 +10,15 @@ interface TownshipData {
   slug: string;
   subtitle: string;
   description: string;
+  geography_title: string;
   geography_content: string;
+  history_title: string;
   history_content: string;
+  communities_title: string;
   communities_content: string;
+  industry_title: string;
   industry_content: string;
+  today_title: string;
   today_content: string;
   card1_title: string;
   card1_icon: string;
@@ -42,10 +47,15 @@ export function TownshipEditor() {
     slug: '',
     subtitle: '',
     description: '',
+    geography_title: '',
     geography_content: '',
+    history_title: '',
     history_content: '',
+    communities_title: '',
     communities_content: '',
+    industry_title: '',
     industry_content: '',
+    today_title: '',
     today_content: '',
     card1_title: '',
     card1_icon: '',
@@ -114,10 +124,15 @@ export function TownshipEditor() {
           slug: data.slug,
           subtitle: data.subtitle || '',
           description: convertJsonToHtml(data.description),
+          geography_title: data.geography_title || '',
           geography_content: convertJsonToHtml(data.geography_content),
+          history_title: data.history_title || '',
           history_content: convertJsonToHtml(data.history_content),
+          communities_title: data.communities_title || '',
           communities_content: convertJsonToHtml(data.communities_content),
+          industry_title: data.industry_title || '',
           industry_content: convertJsonToHtml(data.industry_content),
+          today_title: data.today_title || '',
           today_content: convertJsonToHtml(data.today_content),
           card1_title: data.card1_title || '',
           card1_icon: data.card1_icon || '',
@@ -185,10 +200,15 @@ export function TownshipEditor() {
         slug: formData.slug,
         subtitle: formData.subtitle,
         description: convertHtmlToJson(formData.description),
+        geography_title: formData.geography_title || null,
         geography_content: convertHtmlToJson(formData.geography_content),
+        history_title: formData.history_title || null,
         history_content: convertHtmlToJson(formData.history_content),
+        communities_title: formData.communities_title || null,
         communities_content: convertHtmlToJson(formData.communities_content),
+        industry_title: formData.industry_title || null,
         industry_content: convertHtmlToJson(formData.industry_content),
+        today_title: formData.today_title || null,
         today_content: convertHtmlToJson(formData.today_content),
         card1_title: formData.card1_title || null,
         card1_icon: formData.card1_icon || null,
@@ -345,6 +365,16 @@ export function TownshipEditor() {
             <h2 className="mb-4 font-serif text-xl font-semibold text-stone-900">
               Geography Card
             </h2>
+            <div className="mb-4">
+              <label className="block mb-2 text-sm font-medium text-stone-700">Card Title</label>
+              <input
+                type="text"
+                value={formData.geography_title}
+                onChange={(e) => setFormData({ ...formData, geography_title: e.target.value })}
+                className="w-full px-4 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-sage-500"
+                placeholder="e.g., Geography"
+              />
+            </div>
             <RichTextEditor
               value={formData.geography_content}
               onChange={(value) => setFormData({ ...formData, geography_content: value })}
@@ -356,6 +386,16 @@ export function TownshipEditor() {
             <h2 className="mb-4 font-serif text-xl font-semibold text-stone-900">
               History Card
             </h2>
+            <div className="mb-4">
+              <label className="block mb-2 text-sm font-medium text-stone-700">Card Title</label>
+              <input
+                type="text"
+                value={formData.history_title}
+                onChange={(e) => setFormData({ ...formData, history_title: e.target.value })}
+                className="w-full px-4 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-sage-500"
+                placeholder="e.g., History"
+              />
+            </div>
             <RichTextEditor
               value={formData.history_content}
               onChange={(value) => setFormData({ ...formData, history_content: value })}
@@ -367,6 +407,16 @@ export function TownshipEditor() {
             <h2 className="mb-4 font-serif text-xl font-semibold text-stone-900">
               Communities Card
             </h2>
+            <div className="mb-4">
+              <label className="block mb-2 text-sm font-medium text-stone-700">Card Title</label>
+              <input
+                type="text"
+                value={formData.communities_title}
+                onChange={(e) => setFormData({ ...formData, communities_title: e.target.value })}
+                className="w-full px-4 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-sage-500"
+                placeholder="e.g., Communities"
+              />
+            </div>
             <RichTextEditor
               value={formData.communities_content}
               onChange={(value) => setFormData({ ...formData, communities_content: value })}
@@ -378,6 +428,16 @@ export function TownshipEditor() {
             <h2 className="mb-4 font-serif text-xl font-semibold text-stone-900">
               Industry Card
             </h2>
+            <div className="mb-4">
+              <label className="block mb-2 text-sm font-medium text-stone-700">Card Title</label>
+              <input
+                type="text"
+                value={formData.industry_title}
+                onChange={(e) => setFormData({ ...formData, industry_title: e.target.value })}
+                className="w-full px-4 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-sage-500"
+                placeholder="e.g., Industry"
+              />
+            </div>
             <RichTextEditor
               value={formData.industry_content}
               onChange={(value) => setFormData({ ...formData, industry_content: value })}
@@ -392,6 +452,16 @@ export function TownshipEditor() {
             <p className="mb-4 text-sm text-stone-600">
               Content for the "Bishopdale Today" (or similar) section at the bottom
             </p>
+            <div className="mb-4">
+              <label className="block mb-2 text-sm font-medium text-stone-700">Section Title</label>
+              <input
+                type="text"
+                value={formData.today_title}
+                onChange={(e) => setFormData({ ...formData, today_title: e.target.value })}
+                className="w-full px-4 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-sage-500"
+                placeholder="e.g., Bishopdale Today"
+              />
+            </div>
             <RichTextEditor
               value={formData.today_content}
               onChange={(value) => setFormData({ ...formData, today_content: value })}
