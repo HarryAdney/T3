@@ -7,7 +7,7 @@ export function FourTownships() {
       <div className="relative h-64 mb-8 overflow-hidden md:h-80 lg:h-96">
         <div className="absolute inset-0 sepia-overlay">
           <img
-            src="https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=1200"
+            src=".hero-four-townships.webp?auto=compress&cs=tinysrgb&w=1200"
             alt="Yorkshire Dales villages"
             className="object-cover w-full h-full"
           />
