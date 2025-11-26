@@ -7,8 +7,8 @@ export function FourTownships() {
       <div className="relative h-64 mb-8 overflow-hidden md:h-80 lg:h-96">
         <div className="absolute inset-0 sepia-overlay">
           <img
-            src=".hero-four-townships.webp?auto=compress&cs=tinysrgb&w=1200"
-            alt="Yorkshire Dales villages"
+            src="/images/hero/hero-four-townships.webp?auto=compress&cs=tinysrgb&w=1200"
+            alt="Old OS map of the four townships of Bishopdale"
             className="object-cover w-full h-full"
           />
         </div>
