@@ -116,10 +116,10 @@ export function OfficialRecords() {
             Looking for Specific Records?
           </h2>
           <p className="max-w-2xl mx-auto mb-6 text-stone-600">
-            We're continuously digitizing historical documents. If you're searching for specific records or have questions about accessing archives, please get in touch.
+            I'm continuously digitizing historical documents. If you're searching for specific records or have questions about accessing archives, please get in touch.
           </p>
           <button className="px-6 py-3 font-medium text-white transition-colors rounded-lg bg-sage-600 hover:bg-sage-700">
-            Contact Us
+            Contact Me
           </button>
         </div>
       </div>
