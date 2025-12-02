@@ -1,5 +1,5 @@
-import { PageWrapper } from '../../components/PageWrapper';
-import { Breadcrumbs } from '../../components/Breadcrumbs';
+import { PageWrapper } from '../../../components/PageWrapper';
+import { Breadcrumbs } from '../../../components/Breadcrumbs';
 import { Pickaxe, Mountain, Hammer, Users } from 'lucide-react';
 
 export function BishopdaleIndustry() {

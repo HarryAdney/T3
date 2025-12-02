@@ -14,7 +14,9 @@ This directory contains all locally stored images for the Thoralby Through Time 
 ## Usage
 
 Images in this directory can be referenced directly in your code:
+
 ```typescript
+
 // For React components
 const imageUrl = '/images/hero/village-view.jpg';
 

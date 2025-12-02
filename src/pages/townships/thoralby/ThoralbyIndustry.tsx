@@ -1,5 +1,5 @@
-import { PageWrapper } from '../../components/PageWrapper';
-import { Breadcrumbs } from '../../components/Breadcrumbs';
+import { PageWrapper } from '../../../components/PageWrapper';
+import { Breadcrumbs } from '../../../components/Breadcrumbs';
 import { Pickaxe, Hammer, Scissors, Store } from 'lucide-react';
 
 export function ThoralbyIndustry() {

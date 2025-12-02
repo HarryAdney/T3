@@ -1,5 +1,5 @@
-import { PageWrapper } from '../../components/PageWrapper';
-import { Breadcrumbs } from '../../components/Breadcrumbs';
+import { PageWrapper } from '../../../components/PageWrapper';
+import { Breadcrumbs } from '../../../components/Breadcrumbs';
 import { Tractor, Wheat, Home, Users, Factory } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -99,8 +99,8 @@ export function Newbiggin() {
             </p>
           </div>
 
-          <Link to="/townships/newbiggin/industry" className="card group hover:shadow-lg transition-shadow md:col-span-2">
-            <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100 group-hover:bg-sage-200 transition-colors">
+          <Link to="/townships/newbiggin/industry" className="transition-shadow card group hover:shadow-lg md:col-span-2">
+            <div className="flex items-center justify-center w-12 h-12 mb-4 transition-colors rounded-lg bg-sage-100 group-hover:bg-sage-200">
               <Factory className="w-6 h-6 text-sage-700" />
             </div>
             <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">

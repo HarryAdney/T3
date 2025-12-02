@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { PageWrapper } from '../../components/PageWrapper';
-import { Breadcrumbs } from '../../components/Breadcrumbs';
+import { PageWrapper } from '../../../components/PageWrapper';
+import { Breadcrumbs } from '../../../components/Breadcrumbs';
 import { Mountain, Church, Home, Factory } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../../lib/supabase';
+import { supabase } from '../../../lib/supabase';
 
 interface TownshipContent {
   subtitle: string;

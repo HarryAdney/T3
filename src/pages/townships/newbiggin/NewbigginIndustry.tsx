@@ -1,5 +1,5 @@
-import { PageWrapper } from '../../components/PageWrapper';
-import { Breadcrumbs } from '../../components/Breadcrumbs';
+import { PageWrapper } from '../../../components/PageWrapper';
+import { Breadcrumbs } from '../../../components/Breadcrumbs';
 import { Scissors, Home, Users, Wheat } from 'lucide-react';
 
 export function NewbigginIndustry() {
