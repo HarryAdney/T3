@@ -82,9 +82,13 @@ export function BishopdaleValley() {
             Other settlements from that period on the hillsides above Bishopdale can be found on Stake Moss, in Gayle Ing Gill and alongside the track from Kidstones to Stalling Busk. At that time, the climate was wetter than today, which is probably why the settlements were on well-drained limestone high above the boggy valley bottoms.
           </p>
 
-<picture>
-<img src="../../images/maps/aerial-view-of-gayle-ing-hut-circle.webp"></img>
-</picture>
+<figure>
+  <picture>
+    <img src="../../images/maps/aerial-view-of-gayle-ing-hut-circle.webp" alt="aerial view of Gayle Ing hut circles" />
+  </picture>
+  <figcaption>Aerial view of Gayle Ing hut circles.</figcaption>
+</figure>
+
 
         </div>
       </div>
