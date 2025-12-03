@@ -13,7 +13,7 @@ export const client = createClient({
   perspective: 'published'
 });
 
-const builder = imageUrlBuilder(client);
+const builder = createImageUrlBuilder(client);
 
 export function urlFor(source) {
   return builder.image(source);
