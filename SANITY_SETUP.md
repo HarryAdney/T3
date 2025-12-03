@@ -1,9 +1,11 @@
 # Sanity.io Setup Guide for Thoralby Through Time
 
 ## Overview
+
 Your Thoralby Through Time website is now built and ready! This guide will help you set up Sanity Studio so you can start editing content visually without touching any code.
 
 ## What You Have Now
+
 ✅ **Fully functional React website** with all pages
 ✅ **Sanity.io integration** configured and ready
 ✅ **Beautiful, responsive design** matching the original site
@@ -12,12 +14,15 @@ Your Thoralby Through Time website is now built and ready! This guide will help 
 ## Next Steps: Setting Up Sanity Studio
 
 ### Step 1: Install Sanity CLI
+
 Open your terminal and run:
+
 ```bash
 npm install -g @sanity/cli
 ```
 
 ### Step 2: Create Sanity Studio Project
+
 ```bash
 # Create a new directory for your Sanity Studio
 mkdir sanity-studio
@@ -28,6 +33,7 @@ sanity init
 ```
 
 When prompted:
+
 - **Login**: Use your Sanity.io account
 - **Project**: Select your existing project (**xv5k9ssi**)
 - **Dataset**: Use `production`
@@ -39,6 +45,7 @@ When prompted:
 Create a `schemas` folder and add these files:
 
 #### `schemas/person.js`
+
 ```javascript
 export default {
   name: 'person',
@@ -79,6 +86,7 @@ export default {
 ```
 
 #### `schemas/place.js`
+
 ```javascript
 export default {
   name: 'place',
@@ -124,6 +132,7 @@ export default {
 ```
 
 #### `schemas/photo.js`
+
 ```javascript
 export default {
   name: 'photo',
@@ -166,6 +175,7 @@ export default {
 ```
 
 #### `schemas/timelineEntry.js`
+
 ```javascript
 export default {
   name: 'timelineEntry',
@@ -212,6 +222,7 @@ export default {
 ```
 
 #### `schemas/event.js`
+
 ```javascript
 export default {
   name: 'event',
@@ -251,6 +262,7 @@ export default {
 ```
 
 #### `schemas/index.js`
+
 ```javascript
 import person from './person'
 import place from './place'
@@ -262,6 +274,7 @@ export const schemaTypes = [person, place, photo, event, timelineEntry]
 ```
 
 ### Step 4: Update sanity.config.js
+
 ```javascript
 import {defineConfig} from 'sanity'
 import {deskTool} from 'sanity/desk'
@@ -271,12 +284,12 @@ import {schemaTypes} from './schemas'
 export default defineConfig({
   name: 'default',
   title: 'Thoralby Through Time',
-  
+
   projectId: 'xv5k9ssi',
   dataset: 'production',
-  
+
   plugins: [deskTool(), visionTool()],
-  
+
   schema: {
     types: schemaTypes,
   },
@@ -295,11 +308,13 @@ REACT_APP_SANITY_TOKEN=your_token_here
 ```
 
 Then restart the frontend:
+
 ```bash
 sudo supervisorctl restart frontend
 ```
 
 ### Step 6: Start Sanity Studio
+
 ```bash
 cd sanity-studio
 sanity start
@@ -308,7 +323,9 @@ sanity start
 Your Sanity Studio will open at `http://localhost:3333`
 
 ### Step 7: Deploy Sanity Studio (Optional)
+
 To make it accessible online:
+
 ```bash
 sanity deploy
 ```
@@ -316,6 +333,7 @@ sanity deploy
 ## How to Add Content
 
 ### Adding People
+
 1. Go to Sanity Studio
 2. Click "Person" in the sidebar
 3. Click "Create new"
@@ -327,6 +345,7 @@ sanity deploy
 5. Click "Publish"
 
 ### Adding Photos
+
 1. Click "Photo" in sidebar
 2. Create new entry
 3. Upload image
@@ -335,6 +354,7 @@ sanity deploy
 6. Publish
 
 ### Adding Timeline Entries
+
 1. Click "Timeline Entry"
 2. Add date, title, description
 3. Link to related people/events
@@ -343,18 +363,22 @@ sanity deploy
 ## Troubleshooting
 
 ### Content not showing on website?
+
 - Make sure you clicked "Publish" in Sanity Studio (not just save)
 - Check browser console for errors
 - Verify API token is correct in `.env.local`
 
 ### Can't connect to Sanity?
+
 - Verify project ID is correct: `xv5k9ssi`
 - Check that dataset is `production`
 - Ensure API token has read permissions
 
 ## CORS Configuration
+
 If you see CORS errors:
-1. Go to https://www.sanity.io/manage
+
+1. Go to <https://www.sanity.io/manage>
 2. Select your project
 3. Go to Settings → API
 4. Add CORS origin: `http://localhost:3000`
@@ -371,6 +395,7 @@ The website will automatically fetch and display your content from Sanity in rea
 
 ---
 
-**Need Help?** 
-- Sanity Documentation: https://www.sanity.io/docs
-- Your Project Dashboard: https://www.sanity.io/manage/personal/project/xv5k9ssi
+**Need Help?**
+
+- Sanity Documentation: <https://www.sanity.io/docs>
+- Your Project Dashboard: <https://www.sanity.io/manage/personal/project/xv5k9ssi>
