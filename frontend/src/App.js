@@ -1,51 +1,37 @@
-import { useEffect } from "react";
-import "@/App.css";
+import React from "react";
+import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
-  return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import People from "./pages/People";
+import Places from "./pages/Places";
+import Timeline from "./pages/Timeline";
+import Archive from "./pages/Archive";
+import About from "./pages/About";
+import Contribute from "./pages/Contribute";
+import BishopdaleValley from "./pages/BishopdaleValley";
+import Township from "./pages/Township";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/people" element={<People />} />
+            <Route path="/places" element={<Places />} />
+            <Route path="/timeline" element={<Timeline />} />
+            <Route path="/archive" element={<Archive />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contribute" element={<Contribute />} />
+            <Route path="/bishopdale-valley" element={<BishopdaleValley />} />
+            <Route path="/townships/:name" element={<Township />} />
+          </Routes>
+        </main>
+        <Footer />
       </BrowserRouter>
     </div>
   );
