@@ -7,8 +7,8 @@ export default defineConfig({
   name: 'default',
   title: 'Thoralby Through Time',
   
-  projectId: 'xv5k9ssi',
-  dataset: 'production',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'xv5k9ssi',
+  dataset: process.env.SANITY_STUDIO_DATASET || 'production',
   
   plugins: [structureTool(), visionTool()],
   
