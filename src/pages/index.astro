@@ -1,16 +1,102 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Thoralby Through Time | Historical Archive of Bishopdale">
+	<main>
+    <!-- Hero Section -->
+    <div class="relative bg-stone-900 h-[600px] flex items-center justify-center overflow-hidden">
+      <div class="absolute inset-0">
+        <img 
+          src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+          alt="Yorkshire Dales Landscape" 
+          class="w-full h-full object-cover opacity-50"
+        />
+      </div>
+      <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white mb-6 tracking-tight">
+          Thoralby Through Time
+        </h1>
+        <p class="text-xl text-stone-200 mb-10 max-w-2xl mx-auto">
+          Discover the rich history, stories, and people of Bishopdale's ancient township.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="/archive" 
+            class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-stone-900 bg-amber-100 hover:bg-amber-200 transition-colors"
+          >
+            Explore the Archive
+          </a>
+          <a 
+            href="/contribute" 
+            class="inline-flex items-center justify-center px-8 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-white/10 transition-colors"
+          >
+            Share Your Story
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Collections Preview -->
+    <section class="py-16 bg-stone-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-serif font-bold text-stone-900 mb-4">Explore Our Collections</h2>
+          <p class="text-lg text-stone-600 max-w-2xl mx-auto">
+            Dive into our extensive archive of photographs, documents, and oral histories.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="group relative overflow-hidden rounded-lg shadow-lg aspect-[4/3]">
+            <img 
+              src="https://images.unsplash.com/photo-1516216628859-9bccecab13ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+              alt="Old Photographs" 
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
+              <div>
+                <h3 class="text-xl font-bold text-white mb-2">Photographs</h3>
+                <p class="text-stone-300 text-sm">Glimpses into the past life of the village.</p>
+              </div>
+            </div>
+            <a href="/gallery" class="absolute inset-0"><span class="sr-only">View Photographs</span></a>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="group relative overflow-hidden rounded-lg shadow-lg aspect-[4/3]">
+            <img 
+              src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+              alt="Historical Documents" 
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
+              <div>
+                <h3 class="text-xl font-bold text-white mb-2">Documents</h3>
+                <p class="text-stone-300 text-sm">Census records, maps, and deeds.</p>
+              </div>
+            </div>
+            <a href="/archive" class="absolute inset-0"><span class="sr-only">View Documents</span></a>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="group relative overflow-hidden rounded-lg shadow-lg aspect-[4/3]">
+            <img 
+              src="https://images.unsplash.com/photo-1531518326826-d5c1a25931a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+              alt="Oral Histories" 
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
+              <div>
+                <h3 class="text-xl font-bold text-white mb-2">Oral Histories</h3>
+                <p class="text-stone-300 text-sm">Voices of the community sharing their memories.</p>
+              </div>
+            </div>
+            <a href="/timeline" class="absolute inset-0"><span class="sr-only">Listen to Stories</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+	</main>
+</Layout>

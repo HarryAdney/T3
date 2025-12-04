@@ -1,0 +1,33 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-stone-900 text-stone-300 py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-white text-lg font-bold mb-4">Thoralby Through Time</h3>
+        <p class="text-sm">
+          Preserving the history and heritage of Bishopdale, North Yorkshire.
+        </p>
+      </div>
+      <div>
+        <h3 class="text-white text-lg font-bold mb-4">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/about" class="hover:text-white transition-colors">About Us</a></li>
+          <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
+          <li><a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white text-lg font-bold mb-4">Connect</h3>
+        <p class="text-sm">
+          Follow us on social media for updates and new discoveries.
+        </p>
+      </div>
+    </div>
+    <div class="border-t border-stone-800 mt-8 pt-8 text-sm text-center">
+      &copy; {currentYear} Thoralby Through Time. All rights reserved.
+    </div>
+  </div>
+</footer>
