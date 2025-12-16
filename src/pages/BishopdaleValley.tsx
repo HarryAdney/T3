@@ -1,120 +1,95 @@
 import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
-import { Heart, Users, Archive, Target } from 'lucide-react';
 
 export function BishopdaleValley() {
   return (
     <PageWrapper>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="relative h-64 mb-8 overflow-hidden md:h-80 lg:h-96">
+        <div className="absolute inset-0 sepia-overlay">
+          <img
+            src="/images/hero/bishopdale-valley.webp"
+            alt="Bishopdale Valley landscape"
+            className="object-cover w-full h-full"
+          />
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-stone-900/70 to-stone-900/20">
+          <div className="text-center text-white">
+            <h1 className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
+              Bishopdale Valley
+            </h1>
+            <p className="text-lg md:text-xl">
+              A tributary valley on the south side of Wensleydale
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <Breadcrumbs items={[{ label: 'Bishopdale Valley', path: '/bishopdale-valley' }]} />
 
         <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-serif font-semibold text-stone-900 mb-6">
-            About Thoralby Through Time
-          </h1>
-          <p className="text-xl text-stone-600 leading-relaxed">
-            A community project dedicated to preserving and sharing the rich history
-            of Thoralby and the surrounding Bishopdale area in North Yorkshire.
+
+          <p className="text-lg leading-relaxed text-stone-600">
+            [This section is under construction].</p>
+            <p>&nbsp;</p>
+          <p className="mb-4 text-lg leading-relaxed text-stone-600">
+            Bishopdale, a tributary valley on the south side of Wensleydale, is about eight miles long and is orientated in a south-west to north-east direction from the head of the valley to its mouth. It was glaciated during the Ice Ages and once held a glacial lake called Bishopdale Carr, which dried up in the seventeenth century. Its 'U' shaped profile is typical of valleys that have undergone prolonged glaciation. The valley is drained by Bishopdale Beck, which flows into the River Ure about a mile east of Aysgarth.
+          </p>
+
+          <p className="text-lg leading-relaxed text-stone-600">
+            The name 'Bishopdale' has nothing to do with bishops or the church in general. It was named after Biscopp, a local lord from the Anglian period of occupation.
+          </p>
+          <p className="text-lg leading-relaxed text-stone-600">
+
           </p>
         </div>
-
-        <div className="prose prose-stone max-w-none">
-          <div className="card mb-8">
-            <div className="flex items-start space-x-4 mb-4">
-              <div className="w-12 h-12 bg-sage-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                <Target className="w-6 h-6 text-sage-700" />
-              </div>
-              <div>
-                <h2 className="text-2xl font-serif font-semibold text-stone-900 mb-2">
-                  Our Mission
-                </h2>
-                <p className="text-stone-700 leading-relaxed">
-                  To collect, preserve, and share the stories, photographs, and records
-                  that tell the tale of Thoralby and Bishopdale. We believe that local
-                  history matters, and that by understanding where we've come from, we
-                  can better appreciate where we are and where we're going.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="card mb-8">
-            <div className="flex items-start space-x-4 mb-4">
-              <div className="w-12 h-12 bg-parchment-200 rounded-xl flex items-center justify-center flex-shrink-0">
-                <Archive className="w-6 h-6 text-parchment-700" />
-              </div>
-              <div>
-                <h2 className="text-2xl font-serif font-semibold text-stone-900 mb-2">
-                  The Archive
-                </h2>
-                <p className="text-stone-700 leading-relaxed mb-4">
-                  Our growing archive includes historical photographs, documents, maps,
-                  and personal stories dating back centuries. Each item has been
-                  carefully catalogued and preserved for future generations.
-                </p>
-                <p className="text-stone-700 leading-relaxed">
-                  The collection covers all aspects of life in Thoralby and Bishopdale:
-                  from farming and industry to education, religion, and community events.
-                  We're particularly interested in ordinary, everyday life as well as
-                  extraordinary moments that shaped our community.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="card mb-8">
-            <div className="flex items-start space-x-4 mb-4">
-              <div className="w-12 h-12 bg-sage-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                <Users className="w-6 h-6 text-sage-700" />
-              </div>
-              <div>
-                <h2 className="text-2xl font-serif font-semibold text-stone-900 mb-2">
-                  Community Involvement
-                </h2>
-                <p className="text-stone-700 leading-relaxed mb-4">
-                  This project belongs to the community. Many of the photographs,
-                  stories, and documents in our archive have been generously contributed
-                  by local residents and their families.
-                </p>
-                <p className="text-stone-700 leading-relaxed">
-                  If you have memories, photographs, or documents related to Thoralby
-                  and Bishopdale that you'd like to share, we'd love to hear from you.
-                  Every contribution, no matter how small, helps us build a more
-                  complete picture of our shared history.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-gradient-to-r from-sage-50 to-parchment-50 rounded-2xl p-8">
-            <h2 className="text-2xl font-serif font-semibold text-stone-900 mb-4">
-              About Thoralby
-            </h2>
-            <p className="text-stone-700 leading-relaxed mb-4">
-              Thoralby is a small village in Bishopdale, one of the side dales of
-              Wensleydale in the Yorkshire Dales National Park. The village has a
-              rich history dating back to medieval times, with St. Oswald's Church
-              featuring Norman architecture from the 12th century.
+        <div className="mb-12">
+<p className="mb-4 font-serif text-xl font-bold md:text-xl lg:text-2xl">
+              The Origins of Bishopdale
             </p>
-            <p className="text-stone-700 leading-relaxed mb-4">
-              Throughout its history, Thoralby has been primarily an agricultural
-              community, with farming and sheep rearing forming the backbone of local
-              life. The village has also been home to various craftspeople, including
-              stonemasons, blacksmiths, and shopkeepers who served the surrounding area.
-            </p>
-            <p className="text-stone-700 leading-relaxed">
-              Today, Thoralby maintains its rural character while welcoming visitors
-              who come to enjoy the stunning Yorkshire Dales landscape and explore
-              its rich heritage.
-            </p>
-          </div>
+          <p className="text-lg leading-relaxed text-stone-600">
+            Bishopdale, on the south side of Wensleydale in North Yorkshire, was a glaciated valley during the last Ice Age and contained a glacial lake when the Ice Age ended. Sedimentary deposits from that lake left rich alluvial soil in the valley bottom in contrast to the thin alkaline soils on the surrounding hillsides.</p>
+            <p>&nbsp;</p>
+          <p className="mb-4 text-lg leading-relaxed text-stone-600">
+            The first human inhabitants arrived in this area between 8,000 and 10,000 years ago. At first, they were hunter-gatherers who lived nomadic lives and took shelter where they could. Over time, they began to settle the land, domesticate animals and cultivate grain and vegetables. They also built a henge monument in lower Bishopdale known as Castle Dykes, the remains of which can be seen between Aysgarth and Gayle Ing.
+          </p>
 
-          <div className="mt-12 text-center">
-            <div className="inline-flex items-center space-x-2 text-stone-600">
-              <Heart className="w-5 h-5 text-sage-600 fill-current" />
-              <span>Made with love for our community</span>
-            </div>
-          </div>
+<picture>
+<img src="../../images/maps/aerial-view-castle-dykes.webp"></img>
+</picture>
+          <p className="mb-4 text-lg leading-relaxed text-stone-600">
+            No direct evidence of Neolithic farming communities has survived in Bishopdale, but Castle Dykes is believed to have been a Neolithic henge, probably built for religious or communal purposes, that dates from around 2000 to 1800 B.C. It would have required a lot of manpower over a considerable period of time to construct Castle Dykes and it is hard to conceive of it having been possible without the presence of several settled farming communities living nearby.
+          </p>
+
+          <p className="mb-4 text-lg leading-relaxed text-stone-600">
+            High above West Burton, one mile to the south east on bleak and windswept Burton Moor, are relics of an extensive Iron Age settlement. The 18 circular huts and nine enclosures which were built of rough – hewn stone are in an unusual honeycomb arrangement. When established, perhaps 2,500 years ago, this settlement was one of up to 15 prehistoric villages in and around Wensleydale. Many of these have since been almost totally destroyed and none, though formally classified as protected historical monuments, has yet been surveyed in detail by archaeologists. Local tradition names these settlements as Egton and Fenton.
+          </p>
+          <p className="mb-4 text-lg leading-relaxed text-stone-600">
+            The Burton Moor settlement housed the first people ever to live in the West Burton area. Nearby springs provided water for people and cattle, as well as for fields which were crudely cultivated. At 1,500 feet there were few trees, so the inhabitants could more easily protect themselves from wild animals roaming the forests below. Sentries would probably have been posted nearby, on the Height of Hazely or other parts of Penhill, to warn of human marauders.
+          </p>
+          <p className="mb-4 text-lg leading-relaxed text-stone-600">
+            The fate of the ancient Britons who lived in this settlement is unknown. Nor is it known when people started settling on the current site of West Burton, or Burton – in – Bishopdale as it was called until the late 17th century. It is possible that the Romans, who built camps and towns at York (Eburacum) and Aldbrough (Isurium Brigantium) on their conquering march north, forayed in the Burton area since there were forts at Wensley and Bainbridge and a villa at Middleham. It is also possible that Burton was brought into existence during the Celtic kingdom of Deira (York) in the sixth to the eighth centuries or by the Saxon kingdom of Northumbria, which incorporated Deira, in the eighth and ninth centuries.
+          </p>
+          <p className="mb-4 text-lg leading-relaxed text-stone-600">
+            It is much more likely, however, that the present village dates back to the Danish invasion and settlement of the ninth and tenth centuries. Some evidence for this is that the names of nearby villages such as Aysgarth, Thoralby, Melmerby and Carperby are of Danish origin. Moreover, around the village there is clear evidence of terraces and strip lynchets where cereals would have been cultivated centuries ago. These land patterns strongly resemble those of other, better-surveyed parts of Danelaw. Many of the existing boundaries of West Burton houses, especially on the southern side of the main street, follow the old, slightly curved toft (homestead plus arable land) boundaries. The second wave of Viking invaders, which included more Norwegians, then settled extensively in the area. Many local terms are old Norse words such as beck (small river), foss (waterfall), gill (narrow valley with stream), garth (fenced area), rigg (ridge), fell (high moorland), slack (depression in hillside), and biggin (building), see the <a href="">Origins of Burton</a>.
+
+
+          </p>
+          <p className="mb-4 text-lg leading-relaxed text-stone-600">
+            The earliest known settlements in Bishopdale were collections of hut circles and livestock enclosures, traces of which can be found on the hills on either side of the dale. The best preserved lies on Burton Moor on the west flank of Pen Hill. It dates from sometime between 1800 and 200 B.C. The small circles on this aerial photograph were huts and the larger circles were livestock enclosures. There is also evidence of a field system.
+          </p>
+          <p className="mb-4 text-lg leading-relaxed text-stone-600">
+            Other settlements from that period on the hillsides above Bishopdale can be found on Stake Moss, in Gayle Ing Gill and alongside the track from Kidstones to Stalling Busk. At that time, the climate was wetter than today, which is probably why the settlements were on well-drained limestone high above the boggy valley bottoms.
+          </p>
+
+<figure>
+  <picture>
+    <img src="../../images/maps/aerial-view-of-gayle-ing-hut-circle.webp" alt="aerial view of Gayle Ing hut circles" />
+  </picture>
+  <figcaption>Aerial view of Gayle Ing hut circles.</figcaption>
+</figure>
+
+
         </div>
       </div>
     </PageWrapper>
