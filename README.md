@@ -1,4 +1,4 @@
-# Thoralby Through Time -- 1
+# Thoralby Through Time
 
 A clean, static React website dedicated to preserving and sharing the rich history of Thoralby and the surrounding Bishopdale area in North Yorkshire, England.
 
