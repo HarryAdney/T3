@@ -21,6 +21,7 @@ import { Maps } from './pages/archive/Maps';
 import { PeopleFamilies } from './pages/archive/PeopleFamilies';
 import { BuildingsPlaces } from './pages/archive/BuildingsPlaces';
 import { AdminLogin } from './pages/admin/Login';
+import { ResetPassword } from './pages/admin/ResetPassword';
 import { AdminDashboard } from './pages/admin/Dashboard';
 import { TownshipsList } from './pages/admin/TownshipsList';
 import { TownshipEditor } from './pages/admin/TownshipEditor';
@@ -51,6 +52,7 @@ function App() {
           <Route path="/archive/people-families" element={<PeopleFamilies />} />
           <Route path="/archive/buildings-places" element={<BuildingsPlaces />} />
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/reset-password" element={<ResetPassword />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/townships" element={<TownshipsList />} />
           <Route path="/admin/townships/:id" element={<TownshipEditor />} />
