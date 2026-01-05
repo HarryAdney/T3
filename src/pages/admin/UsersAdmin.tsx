@@ -94,19 +94,36 @@ export function UsersAdmin() {
     setSending(true);
 
     try {
-      // Create invite link
-      const inviteToken = crypto.randomUUID();
-      const inviteUrl = `${window.location.origin}/admin/invite/${inviteToken}`;
+      const { data, error } = await supabase.auth.admin.inviteUserByEmail(inviteEmail, {
+        redirectTo: `${window.location.origin}/admin/reset-password`,
+        data: {
+          role: inviteRole,
+        },
+      });
 
-      // Store invite (in production, you'd send an email here)
-      console.log('Invite URL:', inviteUrl);
-      alert(`Invite sent to ${inviteEmail}. In production, this would send an email.\n\nInvite URL: ${inviteUrl}`);
+      if (error) throw error;
 
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .insert([
+          {
+            id: data.user.id,
+            email: inviteEmail,
+            role: inviteRole,
+          },
+        ]);
+
+      if (profileError) {
+        console.error('Profile creation error:', profileError);
+      }
+
+      alert(`Invite sent to ${inviteEmail}! They will receive an email to set their password.`);
       setShowInviteModal(false);
       setInviteEmail('');
+      loadUsers();
     } catch (error) {
       console.error('Error sending invite:', error);
-      alert('Failed to send invite');
+      alert('Failed to send invite. Make sure you have admin privileges and the email is valid.');
     } finally {
       setSending(false);
     }
