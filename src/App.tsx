@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { Home } from './pages/Home';
 import { BishopdaleValley } from './pages/BishopdaleValley';
 import { FourTownships } from './pages/FourTownships';
@@ -25,6 +26,12 @@ import { ResetPassword } from './pages/admin/ResetPassword';
 import { AdminDashboard } from './pages/admin/Dashboard';
 import { TownshipsList } from './pages/admin/TownshipsList';
 import { TownshipEditor } from './pages/admin/TownshipEditor';
+import { PagesEditor } from './pages/admin/PagesEditor';
+import { EventsEditor } from './pages/admin/EventsEditor';
+import { PeopleEditor } from './pages/admin/PeopleEditor';
+import { PhotographsEditor } from './pages/admin/PhotographsEditor';
+import { MediaLibrary } from './pages/admin/MediaLibrary';
+import { UsersAdmin } from './pages/admin/UsersAdmin';
 
 function App() {
   return (
@@ -55,7 +62,20 @@ function App() {
           <Route path="/admin/reset-password" element={<ResetPassword />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/townships" element={<TownshipsList />} />
-          <Route path="/admin/townships/:id" element={<TownshipEditor />} />
+          <Route path="/admin/townships/:id" element={<ProtectedRoute><TownshipEditor /></ProtectedRoute>} />
+          <Route path="/admin/pages" element={<ProtectedRoute><PagesEditor /></ProtectedRoute>} />
+          <Route path="/admin/pages/:id" element={<ProtectedRoute><PagesEditor /></ProtectedRoute>} />
+          <Route path="/admin/events" element={<ProtectedRoute><EventsEditor /></ProtectedRoute>} />
+          <Route path="/admin/events/new" element={<ProtectedRoute><EventsEditor /></ProtectedRoute>} />
+          <Route path="/admin/events/:id" element={<ProtectedRoute><EventsEditor /></ProtectedRoute>} />
+          <Route path="/admin/people" element={<ProtectedRoute><PeopleEditor /></ProtectedRoute>} />
+          <Route path="/admin/people/new" element={<ProtectedRoute><PeopleEditor /></ProtectedRoute>} />
+          <Route path="/admin/people/:id" element={<ProtectedRoute><PeopleEditor /></ProtectedRoute>} />
+          <Route path="/admin/photographs" element={<ProtectedRoute><PhotographsEditor /></ProtectedRoute>} />
+          <Route path="/admin/photographs/new" element={<ProtectedRoute><PhotographsEditor /></ProtectedRoute>} />
+          <Route path="/admin/photographs/:id" element={<ProtectedRoute><PhotographsEditor /></ProtectedRoute>} />
+          <Route path="/admin/media" element={<ProtectedRoute requiredRole="admin"><MediaLibrary /></ProtectedRoute>} />
+          <Route path="/admin/users" element={<ProtectedRoute requiredRole="admin"><UsersAdmin /></ProtectedRoute>} />
         </Routes>
         <Footer />
       </div>
