@@ -32,6 +32,7 @@ import { PeopleEditor } from './pages/admin/PeopleEditor';
 import { PhotographsEditor } from './pages/admin/PhotographsEditor';
 import { MediaLibrary } from './pages/admin/MediaLibrary';
 import { UsersAdmin } from './pages/admin/UsersAdmin';
+import { DynamicTownship } from './pages/townships/DynamicTownship';
 
 function App() {
   return (
@@ -60,7 +61,7 @@ function App() {
           <Route path="/archive/buildings-places" element={<BuildingsPlaces />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/reset-password" element={<ResetPassword />} />
-          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
           <Route path="/admin/townships" element={<TownshipsList />} />
           <Route path="/admin/townships/:id" element={<ProtectedRoute><TownshipEditor /></ProtectedRoute>} />
           <Route path="/admin/pages" element={<ProtectedRoute><PagesEditor /></ProtectedRoute>} />
@@ -76,6 +77,9 @@ function App() {
           <Route path="/admin/photographs/:id" element={<ProtectedRoute><PhotographsEditor /></ProtectedRoute>} />
           <Route path="/admin/media" element={<ProtectedRoute requiredRole="admin"><MediaLibrary /></ProtectedRoute>} />
           <Route path="/admin/users" element={<ProtectedRoute requiredRole="admin"><UsersAdmin /></ProtectedRoute>} />
+          {/* Dynamic township route - catches any new townships created via admin */}
+          <Route path="/townships/:slug" element={<DynamicTownship />} />
+          <Route path="/townships/:slug/industry" element={<DynamicTownship />} />
         </Routes>
         <Footer />
       </div>

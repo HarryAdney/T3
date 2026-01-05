@@ -31,9 +31,8 @@ export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) 
           return;
         }
 
-        // Get user metadata for role
-        const { data: { user: userData } } = await supabase.auth.getUser();
-        setUser(userData as User);
+        // User is already available with metadata
+        setUser(user as User);
       } catch (error) {
         console.error('Auth check error:', error);
         setUser(null);
@@ -96,8 +95,7 @@ export function useAuth() {
         const { data: { user: authUser } } = await supabase.auth.getUser();
 
         if (authUser) {
-          const { data: { user: userData } } = await supabase.auth.getUser();
-          setUser(userData as User);
+          setUser(authUser as User);
         } else {
           setUser(null);
         }
@@ -112,9 +110,9 @@ export function useAuth() {
     getUser();
 
     // Subscribe to auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
       if (session?.user) {
-        getUser();
+        setUser(session.user as User);
       } else {
         setUser(null);
       }

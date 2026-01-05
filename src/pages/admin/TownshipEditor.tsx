@@ -98,7 +98,11 @@ export function TownshipEditor() {
     for (const block of jsonContent.content) {
       if (block.type === 'paragraph') {
         const text = block.content?.[0]?.text || '';
-        html += `<p>${text}</p>`;
+        // Remove any existing HTML tags to prevent double-encoding
+        const cleanText = text.replace(/<\/?p>/g, '').trim();
+        if (cleanText) {
+          html += `<p>${cleanText}</p>`;
+        }
       } else if (block.type === 'heading') {
         const level = block.attrs?.level || 2;
         const text = block.content?.[0]?.text || '';
@@ -160,31 +164,57 @@ export function TownshipEditor() {
   };
 
   const convertHtmlToJson = (html: string) => {
+    if (!html || html.trim() === '') {
+      return {
+        type: 'doc',
+        content: [{
+          type: 'paragraph',
+          content: [{ type: 'text', text: '' }]
+        }]
+      };
+    }
+
     const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
+    const doc = parser.parseFromString(`<div>${html}</div>`, 'text/html');
     const content: any[] = [];
 
-    doc.body.childNodes.forEach((node) => {
+    const processNode = (node: Node) => {
       if (node.nodeName === 'P') {
-        content.push({
-          type: 'paragraph',
-          content: [{ type: 'text', text: node.textContent || '' }]
-        });
+        const text = node.textContent?.trim() || '';
+        if (text) {
+          content.push({
+            type: 'paragraph',
+            content: [{ type: 'text', text }]
+          });
+        }
       } else if (node.nodeName.match(/^H[1-6]$/)) {
         const level = parseInt(node.nodeName[1]);
-        content.push({
-          type: 'heading',
-          attrs: { level },
-          content: [{ type: 'text', text: node.textContent || '' }]
-        });
+        const text = node.textContent?.trim() || '';
+        if (text) {
+          content.push({
+            type: 'heading',
+            attrs: { level },
+            content: [{ type: 'text', text }]
+          });
+        }
+      } else if (node.nodeType === Node.TEXT_NODE) {
+        const text = node.textContent?.trim() || '';
+        if (text) {
+          content.push({
+            type: 'paragraph',
+            content: [{ type: 'text', text }]
+          });
+        }
       }
-    });
+    };
+
+    doc.body.firstChild?.childNodes.forEach(processNode);
 
     return {
       type: 'doc',
       content: content.length > 0 ? content : [{
         type: 'paragraph',
-        content: [{ type: 'text', text: html }]
+        content: [{ type: 'text', text: html.replace(/<[^>]*>/g, '').trim() }]
       }]
     };
   };
