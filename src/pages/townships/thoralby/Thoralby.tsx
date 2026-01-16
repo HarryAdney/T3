@@ -4,8 +4,10 @@ import { Breadcrumbs } from '../../../components/Breadcrumbs';
 import { Church, School, Users, TreePine, Factory } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../../lib/supabase';
+import { InlineEditor } from '../../../components/InlineEditor';
 
 interface TownshipContent {
+  id: string;
   subtitle: string;
   description: any;
   card1_title: string;
@@ -45,7 +47,7 @@ export function Thoralby() {
     try {
       const { data } = await supabase
         .from('townships')
-        .select('subtitle, description, card1_title, card1_icon, card1_content, card2_title, card2_icon, card2_content, card3_title, card3_icon, card3_content, card4_title, card4_icon, card4_content, industry_content, history_section_title, history_section_content')
+        .select('id, subtitle, description, card1_title, card1_icon, card1_content, card2_title, card2_icon, card2_content, card3_title, card3_icon, card3_content, card4_title, card4_icon, card4_content, industry_content, history_section_title, history_section_content')
         .eq('slug', 'thoralby')
         .maybeSingle();
 
@@ -59,50 +61,70 @@ export function Thoralby() {
     }
   };
 
-  const extractTextFromJson = (jsonContent: any, defaultText: string = ''): string => {
-    if (!jsonContent?.content) return defaultText;
-    const text = jsonContent.content
-      .map((block: any) => block.content?.[0]?.text || '')
-      .join(' ');
-    return text.replace(/<\/?p>/g, '').trim() || defaultText;
+  const jsonToHtml = (jsonContent: any, defaultText: string = ''): string => {
+    if (!jsonContent?.content) return `<p>${defaultText}</p>`;
+    const html = jsonContent.content
+      .map((block: any) => {
+        const text = block.content?.[0]?.text || '';
+        return text ? `<p>${text}</p>` : '';
+      })
+      .join('');
+    return html || `<p>${defaultText}</p>`;
+  };
+
+  const htmlToJson = (html: string): any => {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    const paragraphs = tempDiv.querySelectorAll('p');
+
+    return {
+      type: 'doc',
+      content: Array.from(paragraphs).map(p => ({
+        type: 'paragraph',
+        content: [{ type: 'text', text: p.textContent || '' }]
+      }))
+    };
+  };
+
+  const handleSaveField = async (field: string, htmlContent: string) => {
+    if (!content?.id) return;
+
+    const jsonContent = htmlToJson(htmlContent);
+    const { error } = await supabase
+      .from('townships')
+      .update({ [field]: jsonContent })
+      .eq('id', content.id);
+
+    if (error) {
+      console.error('Error saving:', error);
+      throw error;
+    }
+
+    await loadContent();
+  };
+
+  const handleSaveSubtitle = async (htmlContent: string) => {
+    if (!content?.id) return;
+
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
+    const text = tempDiv.textContent || '';
+
+    const { error } = await supabase
+      .from('townships')
+      .update({ subtitle: text })
+      .eq('id', content.id);
+
+    if (error) {
+      console.error('Error saving subtitle:', error);
+      throw error;
+    }
+
+    await loadContent();
   };
 
   const getIcon = (iconName: string) => {
     return iconMap[iconName] || Church;
-  };
-
-  const renderHistoryContent = () => {
-    if (!content?.history_section_content?.content) {
-      return (
-        <>
-          <p className="mb-4 text-stone-700">
-            The village name derives from Old Norse, reflecting the area's Viking heritage.
-            'Thoralby' likely means 'Thor's farmstead', indicating settlement dating back
-            to the 9th or 10th century.
-          </p>
-          <p className="mb-4 text-stone-700">
-            Throughout the medieval period, Thoralby grew as an agricultural settlement,
-            with farming remaining the primary occupation. The 18th and 19th centuries
-            brought lead mining to the area, supplementing farm income for many families.
-          </p>
-          <p className="text-stone-700">
-            Today, Thoralby continues as a working village with an active community.
-            While farming remains important, the village has diversified, with residents
-            engaged in various occupations while maintaining strong connections to the
-            dale's heritage and traditions.
-          </p>
-        </>
-      );
-    }
-    return content.history_section_content.content.map((block: any, idx: number) => {
-      const text = block.content?.[0]?.text || '';
-      const cleanText = text.replace(/<\/?p>/g, '').trim();
-      return cleanText ? (
-        <p key={idx} className={idx < content.history_section_content.content.length - 1 ? "mb-4 text-stone-700" : "text-stone-700"}>
-          {cleanText}
-        </p>
-      ) : null;
-    });
   };
 
   return (
@@ -121,9 +143,12 @@ export function Thoralby() {
               Thoralby
             </h1>
             {!loading && (
-              <p className="text-lg md:text-xl">
-                {content?.subtitle || 'The principal village of Bishopdale'}
-              </p>
+              <InlineEditor
+                content={`<p>${content?.subtitle || 'The principal village of Bishopdale'}</p>`}
+                onSave={handleSaveSubtitle}
+                className="text-lg md:text-xl"
+                placeholder="Click to edit subtitle"
+              />
             )}
           </div>
         </div>
@@ -141,12 +166,15 @@ export function Thoralby() {
           {loading ? (
             <p className="text-lg leading-relaxed text-stone-600">Loading...</p>
           ) : (
-            <p className="text-lg leading-relaxed text-stone-600">
-              {extractTextFromJson(
+            <InlineEditor
+              content={jsonToHtml(
                 content?.description,
                 'Thoralby is a small village in Bishopdale, one of the side dales of Wensleydale in the Yorkshire Dales National Park. The village has a rich history dating back to medieval times, with St. Oswald\'s Church featuring Norman architecture from the 12th century.'
               )}
-            </p>
+              onSave={(html) => handleSaveField('description', html)}
+              className="text-lg leading-relaxed text-stone-600"
+              placeholder="Click to edit description"
+            />
           )}
         </div>
 
@@ -166,9 +194,12 @@ export function Thoralby() {
                   <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
                     {content.card1_title}
                   </h2>
-                  <p className="text-stone-700">
-                    {extractTextFromJson(content.card1_content)}
-                  </p>
+                  <InlineEditor
+                    content={jsonToHtml(content.card1_content)}
+                    onSave={(html) => handleSaveField('card1_content', html)}
+                    className="text-stone-700"
+                    placeholder="Click to edit"
+                  />
                 </div>
               )}
 
@@ -183,9 +214,12 @@ export function Thoralby() {
                   <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
                     {content.card2_title}
                   </h2>
-                  <p className="text-stone-700">
-                    {extractTextFromJson(content.card2_content)}
-                  </p>
+                  <InlineEditor
+                    content={jsonToHtml(content.card2_content)}
+                    onSave={(html) => handleSaveField('card2_content', html)}
+                    className="text-stone-700"
+                    placeholder="Click to edit"
+                  />
                 </div>
               )}
 
@@ -200,9 +234,12 @@ export function Thoralby() {
                   <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
                     {content.card3_title}
                   </h2>
-                  <p className="text-stone-700">
-                    {extractTextFromJson(content.card3_content)}
-                  </p>
+                  <InlineEditor
+                    content={jsonToHtml(content.card3_content)}
+                    onSave={(html) => handleSaveField('card3_content', html)}
+                    className="text-stone-700"
+                    placeholder="Click to edit"
+                  />
                 </div>
               )}
 
@@ -217,9 +254,12 @@ export function Thoralby() {
                   <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
                     {content.card4_title}
                   </h2>
-                  <p className="text-stone-700">
-                    {extractTextFromJson(content.card4_content)}
-                  </p>
+                  <InlineEditor
+                    content={jsonToHtml(content.card4_content)}
+                    onSave={(html) => handleSaveField('card4_content', html)}
+                    className="text-stone-700"
+                    placeholder="Click to edit"
+                  />
                 </div>
               )}
 
@@ -230,12 +270,10 @@ export function Thoralby() {
                 <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
                   Industry
                 </h2>
-                <p className="text-stone-700">
-                  {extractTextFromJson(
-                    content?.industry_content,
-                    'Discover the industrial heritage of Thoralby, from lead mining to traditional crafts that supplemented farming income throughout the centuries.'
-                  )}
-                </p>
+                <p className="text-stone-700" dangerouslySetInnerHTML={{ __html: jsonToHtml(
+                  content?.industry_content,
+                  'Discover the industrial heritage of Thoralby, from lead mining to traditional crafts that supplemented farming income throughout the centuries.'
+                ) }} />
               </Link>
             </>
           )}
@@ -249,7 +287,15 @@ export function Thoralby() {
             {loading ? (
               <p className="text-stone-700">Loading...</p>
             ) : (
-              renderHistoryContent()
+              <InlineEditor
+                content={jsonToHtml(
+                  content?.history_section_content,
+                  'The village name derives from Old Norse, reflecting the area\'s Viking heritage. \'Thoralby\' likely means \'Thor\'s farmstead\', indicating settlement dating back to the 9th or 10th century.'
+                )}
+                onSave={(html) => handleSaveField('history_section_content', html)}
+                className="text-stone-700"
+                placeholder="Click to edit history"
+              />
             )}
           </div>
         </div>

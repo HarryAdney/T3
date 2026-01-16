@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
+import { EditModeProvider } from './contexts/EditModeContext';
 import { Home } from './pages/Home';
 import { BishopdaleValley } from './pages/BishopdaleValley';
 import { FourTownships } from './pages/FourTownships';
@@ -37,8 +38,9 @@ import { DynamicTownship } from './pages/townships/DynamicTownship';
 function App() {
   return (
     <BrowserRouter>
-      <div className="flex flex-col min-h-screen bg-texture">
-        <Header />
+      <EditModeProvider>
+        <div className="flex flex-col min-h-screen bg-texture">
+          <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/bishopdale-valley" element={<BishopdaleValley />} />
@@ -81,8 +83,9 @@ function App() {
           <Route path="/townships/:slug" element={<DynamicTownship />} />
           <Route path="/townships/:slug/industry" element={<DynamicTownship />} />
         </Routes>
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      </EditModeProvider>
     </BrowserRouter>
   );
 }

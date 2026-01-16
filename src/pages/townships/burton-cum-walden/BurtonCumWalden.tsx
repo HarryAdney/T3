@@ -1,9 +1,105 @@
+import { useEffect, useState } from 'react';
 import { PageWrapper } from '../../../components/PageWrapper';
 import { Breadcrumbs } from '../../../components/Breadcrumbs';
 import { Landmark, Waves, Calendar, Home, Factory } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../../../lib/supabase';
+import { InlineEditor } from '../../../components/InlineEditor';
+
+interface TownshipContent {
+  id: string;
+  subtitle: string;
+  description: any;
+}
 
 export function BurtonCumWalden() {
+  const [content, setContent] = useState<TownshipContent | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadContent();
+  }, []);
+
+  const loadContent = async () => {
+    try {
+      const { data } = await supabase
+        .from('townships')
+        .select('id, subtitle, description')
+        .eq('slug', 'burton-cum-walden')
+        .maybeSingle();
+
+      if (data) {
+        setContent(data);
+      }
+    } catch (error) {
+      console.error('Error loading content:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const jsonToHtml = (jsonContent: any, defaultText: string = ''): string => {
+    if (!jsonContent?.content) return `<p>${defaultText}</p>`;
+    const html = jsonContent.content
+      .map((block: any) => {
+        const text = block.content?.[0]?.text || '';
+        return text ? `<p>${text}</p>` : '';
+      })
+      .join('');
+    return html || `<p>${defaultText}</p>`;
+  };
+
+  const htmlToJson = (html: string): any => {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    const paragraphs = tempDiv.querySelectorAll('p');
+
+    return {
+      type: 'doc',
+      content: Array.from(paragraphs).map(p => ({
+        type: 'paragraph',
+        content: [{ type: 'text', text: p.textContent || '' }]
+      }))
+    };
+  };
+
+  const handleSaveField = async (field: string, htmlContent: string) => {
+    if (!content?.id) return;
+
+    const jsonContent = htmlToJson(htmlContent);
+    const { error } = await supabase
+      .from('townships')
+      .update({ [field]: jsonContent })
+      .eq('id', content.id);
+
+    if (error) {
+      console.error('Error saving:', error);
+      throw error;
+    }
+
+    await loadContent();
+  };
+
+  const handleSaveSubtitle = async (htmlContent: string) => {
+    if (!content?.id) return;
+
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
+    const text = tempDiv.textContent || '';
+
+    const { error } = await supabase
+      .from('townships')
+      .update({ subtitle: text })
+      .eq('id', content.id);
+
+    if (error) {
+      console.error('Error saving subtitle:', error);
+      throw error;
+    }
+
+    await loadContent();
+  };
+
   return (
     <PageWrapper>
       <div className="relative h-64 mb-8 overflow-hidden md:h-80 lg:h-96">
@@ -19,9 +115,14 @@ export function BurtonCumWalden() {
             <h1 className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
               Burton-cum-Walden
             </h1>
-            <p className="text-lg md:text-xl">
-              Two historic settlements united as one township
-            </p>
+            {!loading && (
+              <InlineEditor
+                content={`<p>${content?.subtitle || 'Two historic settlements united as one township'}</p>`}
+                onSave={handleSaveSubtitle}
+                className="text-lg md:text-xl"
+                placeholder="Click to edit subtitle"
+              />
+            )}
           </div>
         </div>
       </div>
@@ -35,11 +136,19 @@ export function BurtonCumWalden() {
         />
 
         <div className="mb-12">
-          <p className="text-lg leading-relaxed text-stone-600">
-            Burton-cum-Walden is a civil parish combining the village of West Burton with the more
-            remote settlement of Walden. The name 'cum' means 'with' in Latin, reflecting the
-            administrative joining of these two distinct communities.
-          </p>
+          {loading ? (
+            <p className="text-lg leading-relaxed text-stone-600">Loading...</p>
+          ) : (
+            <InlineEditor
+              content={jsonToHtml(
+                content?.description,
+                'Burton-cum-Walden is a civil parish combining the village of West Burton with the more remote settlement of Walden. The name \'cum\' means \'with\' in Latin, reflecting the administrative joining of these two distinct communities.'
+              )}
+              onSave={(html) => handleSaveField('description', html)}
+              className="text-lg leading-relaxed text-stone-600"
+              placeholder="Click to edit description"
+            />
+          )}
         </div>
 
         <div className="mb-12">
