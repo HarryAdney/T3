@@ -5,6 +5,7 @@ import { Landmark, Waves, Calendar, Home, Factory } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../../lib/supabase';
 import { InlineEditor } from '../../../components/InlineEditor';
+import { useEditMode } from '../../../contexts/EditModeContext';
 
 interface TownshipContent {
   id: string;
@@ -15,6 +16,7 @@ interface TownshipContent {
 export function BurtonCumWalden() {
   const [content, setContent] = useState<TownshipContent | null>(null);
   const [loading, setLoading] = useState(true);
+  const { isEditMode } = useEditMode();
 
   useEffect(() => {
     loadContent();
@@ -216,18 +218,33 @@ export function BurtonCumWalden() {
               </p>
             </div>
 
-            <Link to="/townships/burton-cum-walden/industry" className="transition-shadow card group hover:shadow-lg md:col-span-2">
-              <div className="flex items-center justify-center w-12 h-12 mb-4 transition-colors rounded-lg bg-sage-100 group-hover:bg-sage-200">
-                <Factory className="w-6 h-6 text-sage-700" />
+            {isEditMode ? (
+              <div className="card md:col-span-2">
+                <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100">
+                  <Factory className="w-6 h-6 text-sage-700" />
+                </div>
+                <h3 className="mb-3 font-serif text-xl font-semibold text-stone-900">
+                  Industry
+                </h3>
+                <p className="text-stone-700">
+                  Learn about the industrial activities that shaped Burton-cum-Walden, including
+                  lead mining in the fells and traditional trades that supported the community.
+                </p>
               </div>
-              <h3 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-                Industry
-              </h3>
-              <p className="text-stone-700">
-                Learn about the industrial activities that shaped Burton-cum-Walden, including
-                lead mining in the fells and traditional trades that supported the community.
-              </p>
-            </Link>
+            ) : (
+              <Link to="/townships/burton-cum-walden/industry" className="transition-shadow card group hover:shadow-lg md:col-span-2">
+                <div className="flex items-center justify-center w-12 h-12 mb-4 transition-colors rounded-lg bg-sage-100 group-hover:bg-sage-200">
+                  <Factory className="w-6 h-6 text-sage-700" />
+                </div>
+                <h3 className="mb-3 font-serif text-xl font-semibold text-stone-900">
+                  Industry
+                </h3>
+                <p className="text-stone-700">
+                  Learn about the industrial activities that shaped Burton-cum-Walden, including
+                  lead mining in the fells and traditional trades that supported the community.
+                </p>
+              </Link>
+            )}
           </div>
         </div>
 
