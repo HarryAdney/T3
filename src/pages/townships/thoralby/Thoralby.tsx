@@ -9,6 +9,7 @@ import { useEditMode } from '../../../contexts/EditModeContext';
 
 interface TownshipContent {
   id: string;
+  title: string;
   subtitle: string;
   description: any;
   card1_title: string;
@@ -23,6 +24,7 @@ interface TownshipContent {
   card4_title: string;
   card4_icon: string;
   card4_content: any;
+  industry_title: string;
   industry_content: any;
   history_section_title: string;
   history_section_content: any;
@@ -49,7 +51,15 @@ export function Thoralby() {
     try {
       const { data } = await supabase
         .from('townships')
-        .select('id, subtitle, description, card1_title, card1_icon, card1_content, card2_title, card2_icon, card2_content, card3_title, card3_icon, card3_content, card4_title, card4_icon, card4_content, industry_content, history_section_title, history_section_content')
+        .select(`
+          id, title, subtitle, description,
+          card1_title, card1_icon, card1_content,
+          card2_title, card2_icon, card2_content,
+          card3_title, card3_icon, card3_content,
+          card4_title, card4_icon, card4_content,
+          industry_title, industry_content,
+          history_section_title, history_section_content
+        `)
         .eq('slug', 'thoralby')
         .maybeSingle();
 
@@ -105,6 +115,26 @@ export function Thoralby() {
     await loadContent();
   };
 
+  const handleSaveTextOnly = async (field: string, htmlContent: string) => {
+    if (!content?.id) return;
+
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
+    const text = tempDiv.textContent || '';
+
+    const { error } = await supabase
+      .from('townships')
+      .update({ [field]: text })
+      .eq('id', content.id);
+
+    if (error) {
+      console.error('Error saving:', error);
+      throw error;
+    }
+
+    await loadContent();
+  };
+
   const handleSaveSubtitle = async (htmlContent: string) => {
     if (!content?.id) return;
 
@@ -141,9 +171,14 @@ export function Thoralby() {
         </div>
         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-stone-900/70 to-stone-900/20">
           <div className="text-center text-white">
-            <h1 className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
-              Thoralby
-            </h1>
+            {!loading && (
+              <InlineEditor
+                content={`<h1>${content?.title || 'Thoralby'}</h1>`}
+                onSave={(html) => handleSaveTextOnly('title', html)}
+                className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl"
+                placeholder="Click to edit title"
+              />
+            )}
             {!loading && (
               <InlineEditor
                 content={`<p>${content?.subtitle || 'The principal village of Bishopdale'}</p>`}
@@ -193,9 +228,12 @@ export function Thoralby() {
                       return <Icon className="w-6 h-6 text-sage-700" />;
                     })()}
                   </div>
-                  <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-                    {content.card1_title}
-                  </h2>
+                  <InlineEditor
+                    content={`<h2>${content.card1_title}</h2>`}
+                    onSave={(html) => handleSaveTextOnly('card1_title', html)}
+                    className="mb-3 font-serif text-xl font-semibold text-stone-900"
+                    placeholder="Click to edit card title"
+                  />
                   <InlineEditor
                     content={jsonToHtml(content.card1_content)}
                     onSave={(html) => handleSaveField('card1_content', html)}
@@ -213,9 +251,12 @@ export function Thoralby() {
                       return <Icon className="w-6 h-6 text-parchment-700" />;
                     })()}
                   </div>
-                  <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-                    {content.card2_title}
-                  </h2>
+                  <InlineEditor
+                    content={`<h2>${content.card2_title}</h2>`}
+                    onSave={(html) => handleSaveTextOnly('card2_title', html)}
+                    className="mb-3 font-serif text-xl font-semibold text-stone-900"
+                    placeholder="Click to edit card title"
+                  />
                   <InlineEditor
                     content={jsonToHtml(content.card2_content)}
                     onSave={(html) => handleSaveField('card2_content', html)}
@@ -233,9 +274,12 @@ export function Thoralby() {
                       return <Icon className="w-6 h-6 text-sage-700" />;
                     })()}
                   </div>
-                  <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-                    {content.card3_title}
-                  </h2>
+                  <InlineEditor
+                    content={`<h2>${content.card3_title}</h2>`}
+                    onSave={(html) => handleSaveTextOnly('card3_title', html)}
+                    className="mb-3 font-serif text-xl font-semibold text-stone-900"
+                    placeholder="Click to edit card title"
+                  />
                   <InlineEditor
                     content={jsonToHtml(content.card3_content)}
                     onSave={(html) => handleSaveField('card3_content', html)}
@@ -253,9 +297,12 @@ export function Thoralby() {
                       return <Icon className="w-6 h-6 text-parchment-700" />;
                     })()}
                   </div>
-                  <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-                    {content.card4_title}
-                  </h2>
+                  <InlineEditor
+                    content={`<h2>${content.card4_title}</h2>`}
+                    onSave={(html) => handleSaveTextOnly('card4_title', html)}
+                    className="mb-3 font-serif text-xl font-semibold text-stone-900"
+                    placeholder="Click to edit card title"
+                  />
                   <InlineEditor
                     content={jsonToHtml(content.card4_content)}
                     onSave={(html) => handleSaveField('card4_content', html)}
@@ -270,9 +317,12 @@ export function Thoralby() {
                   <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100">
                     <Factory className="w-6 h-6 text-sage-700" />
                   </div>
-                  <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-                    Industry
-                  </h2>
+                  <InlineEditor
+                    content={`<h2>${content?.industry_title || 'Industry'}</h2>`}
+                    onSave={(html) => handleSaveTextOnly('industry_title', html)}
+                    className="mb-3 font-serif text-xl font-semibold text-stone-900"
+                    placeholder="Click to edit card title"
+                  />
                   <InlineEditor
                     content={jsonToHtml(
                       content?.industry_content,
@@ -289,7 +339,7 @@ export function Thoralby() {
                     <Factory className="w-6 h-6 text-sage-700" />
                   </div>
                   <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-                    Industry
+                    {content?.industry_title || 'Industry'}
                   </h2>
                   <p className="text-stone-700" dangerouslySetInnerHTML={{ __html: jsonToHtml(
                     content?.industry_content,
@@ -303,9 +353,14 @@ export function Thoralby() {
 
         <div className="prose prose-stone max-w-none">
           <div className="p-8 rounded-2xl bg-gradient-to-r from-sage-50 to-parchment-50">
-            <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
-              {loading ? 'Loading...' : (content?.history_section_title || 'Thoralby Through the Ages')}
-            </h2>
+            {!loading && (
+              <InlineEditor
+                content={`<h2>${content?.history_section_title || 'Thoralby Through the Ages'}</h2>`}
+                onSave={(html) => handleSaveTextOnly('history_section_title', html)}
+                className="mb-4 font-serif text-2xl font-semibold text-stone-900"
+                placeholder="Click to edit section title"
+              />
+            )}
             {loading ? (
               <p className="text-stone-700">Loading...</p>
             ) : (

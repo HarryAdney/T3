@@ -9,6 +9,7 @@ import { useEditMode } from '../../../contexts/EditModeContext';
 
 interface TownshipContent {
   id: string;
+  title: string;
   subtitle: string;
   description: any;
   geography_title: string;
@@ -36,7 +37,7 @@ export function Bishopdale() {
     try {
       const { data } = await supabase
         .from('townships')
-        .select('id, subtitle, description, geography_title, geography_content, history_title, history_content, communities_title, communities_content, industry_title, industry_content, today_title, today_content')
+        .select('id, title, subtitle, description, geography_title, geography_content, history_title, history_content, communities_title, communities_content, industry_title, industry_content, today_title, today_content')
         .eq('slug', 'bishopdale')
         .maybeSingle();
 
@@ -82,6 +83,26 @@ export function Bishopdale() {
     const { error } = await supabase
       .from('townships')
       .update({ [field]: jsonContent })
+      .eq('id', content.id);
+
+    if (error) {
+      console.error('Error saving:', error);
+      throw error;
+    }
+
+    await loadContent();
+  };
+
+  const handleSaveTextOnly = async (field: string, htmlContent: string) => {
+    if (!content?.id) return;
+
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
+    const text = tempDiv.textContent || '';
+
+    const { error } = await supabase
+      .from('townships')
+      .update({ [field]: text })
       .eq('id', content.id);
 
     if (error) {
@@ -170,9 +191,14 @@ export function Bishopdale() {
         </div>
         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-stone-900/70 to-stone-900/20">
           <div className="text-center text-white">
-            <h1 className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
-              Bishopdale
-            </h1>
+            {!loading && (
+              <InlineEditor
+                content={`<h1>${content?.title || 'Bishopdale'}</h1>`}
+                onSave={(html) => handleSaveTextOnly('title', html)}
+                className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl"
+                placeholder="Click to edit title"
+              />
+            )}
             {!loading && (
               <InlineEditor
                 content={`<p>${getSubtitle()}</p>`}
@@ -211,9 +237,14 @@ export function Bishopdale() {
             <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100">
               <Mountain className="w-6 h-6 text-sage-700" />
             </div>
-            <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              {loading ? 'Geography' : (content?.geography_title || 'Geography')}
-            </h2>
+            {!loading && (
+              <InlineEditor
+                content={`<h2>${content?.geography_title || 'Geography'}</h2>`}
+                onSave={(html) => handleSaveTextOnly('geography_title', html)}
+                className="mb-3 font-serif text-xl font-semibold text-stone-900"
+                placeholder="Click to edit card title"
+              />
+            )}
             {loading ? (
               <p className="text-stone-700">Loading...</p>
             ) : (
@@ -230,9 +261,14 @@ export function Bishopdale() {
             <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-parchment-200">
               <Church className="w-6 h-6 text-parchment-700" />
             </div>
-            <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              {loading ? 'History' : (content?.history_title || 'History')}
-            </h2>
+            {!loading && (
+              <InlineEditor
+                content={`<h2>${content?.history_title || 'History'}</h2>`}
+                onSave={(html) => handleSaveTextOnly('history_title', html)}
+                className="mb-3 font-serif text-xl font-semibold text-stone-900"
+                placeholder="Click to edit card title"
+              />
+            )}
             {loading ? (
               <p className="text-stone-700">Loading...</p>
             ) : (
@@ -249,9 +285,14 @@ export function Bishopdale() {
             <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100">
               <Home className="w-6 h-6 text-sage-700" />
             </div>
-            <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              {loading ? 'Communities' : (content?.communities_title || 'Communities')}
-            </h2>
+            {!loading && (
+              <InlineEditor
+                content={`<h2>${content?.communities_title || 'Communities'}</h2>`}
+                onSave={(html) => handleSaveTextOnly('communities_title', html)}
+                className="mb-3 font-serif text-xl font-semibold text-stone-900"
+                placeholder="Click to edit card title"
+              />
+            )}
             {loading ? (
               <p className="text-stone-700">Loading...</p>
             ) : (
@@ -269,9 +310,14 @@ export function Bishopdale() {
               <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-parchment-200">
                 <Factory className="w-6 h-6 text-parchment-700" />
               </div>
-              <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-                {loading ? 'Industry' : (content?.industry_title || 'Industry')}
-              </h2>
+              {!loading && (
+                <InlineEditor
+                  content={`<h2>${content?.industry_title || 'Industry'}</h2>`}
+                  onSave={(html) => handleSaveTextOnly('industry_title', html)}
+                  className="mb-3 font-serif text-xl font-semibold text-stone-900"
+                  placeholder="Click to edit card title"
+                />
+              )}
               {loading ? (
                 <p className="text-stone-700">Loading...</p>
               ) : (
@@ -302,9 +348,14 @@ export function Bishopdale() {
 
         <div className="prose prose-stone max-w-none">
           <div className="p-8 rounded-2xl bg-gradient-to-r from-sage-50 to-parchment-50">
-            <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
-              {loading ? 'Bishopdale Today' : (content?.today_title || 'Bishopdale Today')}
-            </h2>
+            {!loading && (
+              <InlineEditor
+                content={`<h2>${content?.today_title || 'Bishopdale Today'}</h2>`}
+                onSave={(html) => handleSaveTextOnly('today_title', html)}
+                className="mb-4 font-serif text-2xl font-semibold text-stone-900"
+                placeholder="Click to edit section title"
+              />
+            )}
             {loading ? (
               <p className="text-stone-700">Loading...</p>
             ) : (
