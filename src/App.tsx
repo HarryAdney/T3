@@ -28,6 +28,7 @@ import { AdminDashboard } from './pages/admin/Dashboard';
 import { TownshipsList } from './pages/admin/TownshipsList';
 import { TownshipEditor } from './pages/admin/TownshipEditor';
 import { PagesEditor } from './pages/admin/PagesEditor';
+import { PagesManager } from './pages/admin/PagesManager';
 import { EventsEditor } from './pages/admin/EventsEditor';
 import { PeopleEditor } from './pages/admin/PeopleEditor';
 import { PhotographsEditor } from './pages/admin/PhotographsEditor';
@@ -66,8 +67,7 @@ function App() {
           <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
           <Route path="/admin/townships" element={<TownshipsList />} />
           <Route path="/admin/townships/:id" element={<ProtectedRoute><TownshipEditor /></ProtectedRoute>} />
-          <Route path="/admin/pages" element={<ProtectedRoute><PagesEditor /></ProtectedRoute>} />
-          <Route path="/admin/pages/:id" element={<ProtectedRoute><PagesEditor /></ProtectedRoute>} />
+          <Route path="/admin/pages" element={<ProtectedRoute><PagesManager /></ProtectedRoute>} />
           <Route path="/admin/events" element={<ProtectedRoute><EventsEditor /></ProtectedRoute>} />
           <Route path="/admin/events/new" element={<ProtectedRoute><EventsEditor /></ProtectedRoute>} />
           <Route path="/admin/events/:id" element={<ProtectedRoute><EventsEditor /></ProtectedRoute>} />

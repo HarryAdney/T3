@@ -1,25 +1,64 @@
 import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
+import { usePageContent } from '../hooks/usePageContent';
+import { InlineEditor } from '../components/InlineEditor';
+import { useEditMode } from '../contexts/EditModeContext';
 
 export function FourTownships() {
+  const { page, loading, error, updateContent } = usePageContent('four-townships');
+  const { isEditMode } = useEditMode();
+
+  if (loading) {
+    return (
+      <PageWrapper>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-t-4 rounded-full border-stone-200 border-t-sage-600 animate-spin"></div>
+            <p className="mt-4 text-stone-600">Loading...</p>
+          </div>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  if (error || !page) {
+    return (
+      <PageWrapper>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <p className="text-red-600">Error loading page: {error || 'Page not found'}</p>
+          </div>
+        </div>
+      </PageWrapper>
+    );
+  }
+
   return (
     <PageWrapper>
       <div className="relative h-64 mb-8 overflow-hidden md:h-80 lg:h-96">
         <div className="absolute inset-0 sepia-overlay">
           <img
-            src="/images/hero/hero-four-townships.webp?auto=compress&cs=tinysrgb&w=1200"
+            src={page.content.heroImage || '/images/hero/hero-four-townships.webp'}
             alt="Old OS map of the four townships of Bishopdale"
             className="object-cover w-full h-full"
           />
         </div>
         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-stone-900/70 to-stone-900/20">
           <div className="text-center text-white">
-            <h1 className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
-              The Four Townships
-            </h1>
-            <p className="text-lg md:text-xl">
-              Thoralby, Bishopdale, Burton-cum-Walden, and Newbiggin
-            </p>
+            <InlineEditor
+              value={page.content.heroTitle || 'The Four Townships'}
+              onSave={async (value) => {
+                await updateContent({ ...page.content, heroTitle: value });
+              }}
+              className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl"
+            />
+            <InlineEditor
+              value={page.content.heroSubtitle || ''}
+              onSave={async (value) => {
+                await updateContent({ ...page.content, heroSubtitle: value });
+              }}
+              className="text-lg md:text-xl"
+            />
           </div>
         </div>
       </div>
@@ -28,46 +67,39 @@ export function FourTownships() {
         <Breadcrumbs items={[{ label: 'The Four Townships', path: '/four-townships' }]} />
 
         <div className="mb-12">
-          <div className="mb-8">
-            <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
-              Thoralby Township
-            </h2>
-            <p className="text-lg leading-relaxed text-stone-600">
-              The present-day township comprises 2,857 acres. The houses outside the main village are to the east, Spickles Farm and Riddings and to the west Gayle Ing, Barker, Cote Bottom, Blind Syke, Swinacote, Howsyke, Crooksby and Littleburn.
-            </p>
-          </div>
-
-          <div className="mb-8">
-            <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
-              Bishopdale Township
-            </h2>
-            <p className="text-lg leading-relaxed text-stone-600">
-              The present-day township comprises 4,728 acres. There has been no village in the township since Croxby became depopulated in the Middle Ages, since when the township boundaries have changed, placing the remains of Croxby in Thoralby township. The scattered farms and houses that make up Bishopdale are Dale Head, Howgill, Kidstones, Longridge, Newhouse, The Rookery (Coach House), Scar Top, Smelter, Myres Garth, Ribba Hall, Underscarr, The Old School House, Newhouse Gill and Dalefoot.
-            </p>
-          </div>
-
-          <div className="mb-8">
-            <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
-              Burton-cum-Walden Township
-            </h2>
-            <p className="text-lg leading-relaxed text-stone-600">
-              The present-day township comprises 7,659 acres. It occupies the lower ends of the valleys of Bishopdale and Walden and includes the village of West Burton, including the Black Bull, Flanders Hall, How Raine, Sorrelsykes, Morpeth Gate, Edgley, Adams Bottoms, Brown Lea, and Eshington. The valley of Walden includes Riddings, Cote, White Row, High and Low Dove Scarr, Chapel Green, Nell Bank, Bridge End, Ashes, Grange Farm, Uncles Farm, Kentucky House, Walden Head, Rowton Gill, Hill Top, Haw, Hargill, Cowston Gill, Cross and Forelands. Nellholme, Hestholme and Hestholme East, formerly a detached part of Thoralby township, are now part of Burton-cum-Walden township.
-            </p>
-          </div>
-
-          <div className="mb-8">
-            <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
-              Newbiggin Township
-            </h2>
-            <p className="text-lg leading-relaxed text-stone-600">
-              The present-day township comprises 1,696 acres. The houses outside the main village are The Street Head Inn, Cross Lanes Farm, The Bunkhouse (formerly Cross Lanes School), East Lane House, West Lane House, and Misty Field.
-            </p>
-          </div>
+          {(page.content.townships || []).map((township: any, index: number) => (
+            <div key={index} className="mb-8">
+              <InlineEditor
+                value={township.name || ''}
+                onSave={async (value) => {
+                  const updatedTownships = [...page.content.townships];
+                  updatedTownships[index] = { ...township, name: value };
+                  await updateContent({ ...page.content, townships: updatedTownships });
+                }}
+                className="mb-4 font-serif text-2xl font-semibold text-stone-900"
+              />
+              <InlineEditor
+                value={township.content || ''}
+                onSave={async (value) => {
+                  const updatedTownships = [...page.content.townships];
+                  updatedTownships[index] = { ...township, content: value };
+                  await updateContent({ ...page.content, townships: updatedTownships });
+                }}
+                multiline
+                className="text-lg leading-relaxed text-stone-600"
+              />
+            </div>
+          ))}
 
           <div>
-            <p className="text-lg leading-relaxed text-stone-600">
-              All four townships are in the Wapentake of Hang West, formerly in the North Riding of Yorkshire and are now in the county of North Yorkshire. See diagram below.
-            </p>
+            <InlineEditor
+              value={page.content.footer || ''}
+              onSave={async (value) => {
+                await updateContent({ ...page.content, footer: value });
+              }}
+              multiline
+              className="text-lg leading-relaxed text-stone-600"
+            />
           </div>
         </div>
       </div>
