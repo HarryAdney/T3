@@ -46,14 +46,14 @@ export function FourTownships() {
         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-stone-900/70 to-stone-900/20">
           <div className="text-center text-white">
             <InlineEditor
-              value={page.content.heroTitle || 'The Four Townships'}
+              content={page.content.heroTitle || 'The Four Townships'}
               onSave={async (value) => {
                 await updateContent({ ...page.content, heroTitle: value });
               }}
               className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl"
             />
             <InlineEditor
-              value={page.content.heroSubtitle || ''}
+              content={page.content.heroSubtitle || ''}
               onSave={async (value) => {
                 await updateContent({ ...page.content, heroSubtitle: value });
               }}
@@ -70,7 +70,7 @@ export function FourTownships() {
           {(page.content.townships || []).map((township: any, index: number) => (
             <div key={index} className="mb-8">
               <InlineEditor
-                value={township.name || ''}
+                content={township.name || ''}
                 onSave={async (value) => {
                   const updatedTownships = [...page.content.townships];
                   updatedTownships[index] = { ...township, name: value };
@@ -79,13 +79,12 @@ export function FourTownships() {
                 className="mb-4 font-serif text-2xl font-semibold text-stone-900"
               />
               <InlineEditor
-                value={township.content || ''}
+                content={township.content || ''}
                 onSave={async (value) => {
                   const updatedTownships = [...page.content.townships];
                   updatedTownships[index] = { ...township, content: value };
                   await updateContent({ ...page.content, townships: updatedTownships });
                 }}
-                multiline
                 className="text-lg leading-relaxed text-stone-600"
               />
             </div>
@@ -93,11 +92,10 @@ export function FourTownships() {
 
           <div>
             <InlineEditor
-              value={page.content.footer || ''}
+              content={page.content.footer || ''}
               onSave={async (value) => {
                 await updateContent({ ...page.content, footer: value });
               }}
-              multiline
               className="text-lg leading-relaxed text-stone-600"
             />
           </div>

@@ -5,6 +5,17 @@
 @tailwind utilities;
 
 @layer base {
+  /* Preload critical fonts */
+  @font-face {
+    font-family: 'Inter';
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'Lora';
+    font-display: swap;
+  }
+
   body {
     @apply font-sans text-stone-900 bg-parchment-50;
   }

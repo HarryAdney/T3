@@ -46,14 +46,14 @@ export function BishopdaleValley() {
         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-stone-900/70 to-stone-900/20">
           <div className="text-center text-white">
             <InlineEditor
-              value={page.content.heroTitle || 'Bishopdale Valley'}
+              content={page.content.heroTitle || 'Bishopdale Valley'}
               onSave={async (value) => {
                 await updateContent({ ...page.content, heroTitle: value });
               }}
               className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl"
             />
             <InlineEditor
-              value={page.content.heroSubtitle || ''}
+              content={page.content.heroSubtitle || ''}
               onSave={async (value) => {
                 await updateContent({ ...page.content, heroSubtitle: value });
               }}
@@ -72,7 +72,7 @@ export function BishopdaleValley() {
               return (
                 <InlineEditor
                   key={index}
-                  value={section.content || ''}
+                  content={section.content || ''}
                   onSave={async (value) => {
                     const updatedSections = [...page.content.sections];
                     updatedSections[index] = { ...section, content: value };
@@ -105,13 +105,12 @@ export function BishopdaleValley() {
             return (
               <InlineEditor
                 key={index}
-                value={section.content || ''}
+                content={section.content || ''}
                 onSave={async (value) => {
                   const updatedSections = [...page.content.sections];
                   updatedSections[index] = { ...section, content: value };
                   await updateContent({ ...page.content, sections: updatedSections });
                 }}
-                multiline
                 className="mb-4 text-lg leading-relaxed text-stone-600"
               />
             );

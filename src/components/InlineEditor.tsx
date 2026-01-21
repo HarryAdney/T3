@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { useEditMode } from '../contexts/EditModeContext';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+
+// Lazy load ReactQuill to reduce initial bundle size
+const ReactQuill = lazy(() => import('react-quill'));
 
 interface InlineEditorProps {
   content: string;
@@ -17,6 +18,13 @@ export function InlineEditor({ content, onSave, className = '', placeholder = 'C
   const [isSaving, setIsSaving] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
+
+  // Load Quill CSS only when needed
+  useEffect(() => {
+    if (isEditing) {
+      import('react-quill/dist/quill.snow.css');
+    }
+  }, [isEditing]);
 
   // Update editedContent when content prop changes
   useEffect(() => {
@@ -69,20 +77,22 @@ export function InlineEditor({ content, onSave, className = '', placeholder = 'C
     return (
       <div className="relative">
         <div className="border-2 border-blue-500 rounded-lg">
-          <ReactQuill
-            value={editedContent}
-            onChange={setEditedContent}
-            theme="snow"
-            modules={{
-              toolbar: [
-                [{ header: [1, 2, 3, false] }],
-                ['bold', 'italic', 'underline', 'strike'],
-                [{ list: 'ordered' }, { list: 'bullet' }],
-                ['link'],
-                ['clean'],
-              ],
-            }}
-          />
+          <Suspense fallback={<div className="p-4 text-center">Loading editor...</div>}>
+            <ReactQuill
+              value={editedContent}
+              onChange={setEditedContent}
+              theme="snow"
+              modules={{
+                toolbar: [
+                  [{ header: [1, 2, 3, false] }],
+                  ['bold', 'italic', 'underline', 'strike'],
+                  [{ list: 'ordered' }, { list: 'bullet' }],
+                  ['link'],
+                  ['clean'],
+                ],
+              }}
+            />
+          </Suspense>
         </div>
         {saveError && (
           <div className="p-2 mt-2 text-sm text-red-700 bg-red-100 border border-red-300 rounded">

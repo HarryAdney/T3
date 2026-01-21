@@ -62,7 +62,7 @@ export function Home() {
     icon: BookOpen,
     title: page.content.aboutSection?.title || 'About This Project',
     description: page.content.aboutSection?.description || '',
-    path: '/about',
+    // path: '/about',
     color: 'stone',
     stat: 0,
   };
@@ -104,18 +104,17 @@ export function Home() {
               className="max-w-3xl"
             >
               <InlineEditor
-                value={page.content.heroTitle || ''}
+                content={page.content.heroTitle || 'Thoralby Through Time'}
                 onSave={async (value) => {
                   await updateContent({ ...page.content, heroTitle: value });
                 }}
                 className="mb-6 font-serif text-5xl font-bold leading-tight text-white md:text-6xl lg:text-7xl"
               />
               <InlineEditor
-                value={page.content.heroSubtitle || ''}
+                content={page.content.heroSubtitle || 'Discover the rich heritage of Thoralby and Bishopdale through stories, photographs, and maps spanning centuries of Yorkshire Dales history.'}
                 onSave={async (value) => {
                   await updateContent({ ...page.content, heroSubtitle: value });
                 }}
-                multiline
                 className="mb-8 text-xl leading-relaxed md:text-2xl text-parchment-100"
               />
               <div className="flex flex-wrap gap-4">
@@ -134,6 +133,7 @@ export function Home() {
           {heroImages.map((_, index) => (
             <button
               key={index}
+              type="button"
               onClick={() => setCurrentImageIndex(index)}
               className={`w-2 h-2 rounded-full transition-all ${
                 index === currentImageIndex
@@ -149,18 +149,17 @@ export function Home() {
       <div className="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <InlineEditor
-            value="Explore Our Collections"
+            content={page.content.collectionsTitle || 'Explore Our Collections'}
             onSave={async (value) => {
               await updateContent({ ...page.content, collectionsTitle: value });
             }}
             className="mb-4 font-serif text-4xl font-semibold text-stone-900"
           />
           <InlineEditor
-            value="Dive into different aspects of Thoralby's history through our curated collections of people, places, events, and photographs."
+            content={page.content.collectionsDescription || 'Dive into different aspects of Thoralby\'s history through our curated collections of people, places, events, and photographs.'}
             onSave={async (value) => {
               await updateContent({ ...page.content, collectionsDescription: value });
             }}
-            multiline
             className="max-w-2xl mx-auto text-lg text-stone-600"
           />
         </div>
@@ -216,7 +215,7 @@ export function Home() {
 
         <div className="p-8 text-center text-white bg-gradient-to-r from-sage-600 to-sage-700 rounded-2xl md:p-12">
           <InlineEditor
-            value={page.content.ctaSection?.title || 'Help Us Preserve Our Heritage'}
+            content={page.content.ctaSection?.title || 'Help Us Preserve Our Heritage'}
             onSave={async (value) => {
               await updateContent({
                 ...page.content,
@@ -226,14 +225,13 @@ export function Home() {
             className="mb-4 font-serif text-3xl font-semibold md:text-4xl"
           />
           <InlineEditor
-            value={page.content.ctaSection?.description || ''}
+            content={page.content.ctaSection?.description || 'Do you have photographs, documents, or stories about Thoralby and Bishopdale? We\'d love to hear from you and add your contributions to our archive.'}
             onSave={async (value) => {
               await updateContent({
                 ...page.content,
                 ctaSection: { ...page.content.ctaSection, description: value }
               });
             }}
-            multiline
             className="max-w-2xl mx-auto mb-6 text-lg text-sage-100"
           />
           <Link
