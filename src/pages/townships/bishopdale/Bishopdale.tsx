@@ -4,8 +4,12 @@ import { Breadcrumbs } from '../../../components/Breadcrumbs';
 import { Mountain, Church, Home, Factory } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../../lib/supabase';
+import { InlineEditor } from '../../../components/InlineEditor';
+import { useEditMode } from '../../../contexts/EditModeContext';
 
 interface TownshipContent {
+  id: string;
+  title: string;
   subtitle: string;
   description: any;
   geography_title: string;
@@ -23,6 +27,7 @@ interface TownshipContent {
 export function Bishopdale() {
   const [content, setContent] = useState<TownshipContent | null>(null);
   const [loading, setLoading] = useState(true);
+  const { isEditMode } = useEditMode();
 
   useEffect(() => {
     loadContent();
@@ -32,7 +37,7 @@ export function Bishopdale() {
     try {
       const { data } = await supabase
         .from('townships')
-        .select('subtitle, description, geography_title, geography_content, history_title, history_content, communities_title, communities_content, industry_title, industry_content, today_title, today_content')
+        .select('id, title, subtitle, description, geography_title, geography_content, history_title, history_content, communities_title, communities_content, industry_title, industry_content, today_title, today_content')
         .eq('slug', 'bishopdale')
         .maybeSingle();
 
@@ -46,12 +51,86 @@ export function Bishopdale() {
     }
   };
 
-  const extractTextFromJson = (jsonContent: any, defaultText: string = ''): string => {
-    if (!jsonContent?.content) return defaultText;
-    const text = jsonContent.content
-      .map((block: any) => block.content?.[0]?.text || '')
-      .join(' ');
-    return text.replace(/<\/?p>/g, '').trim() || defaultText;
+  const jsonToHtml = (jsonContent: any, defaultText: string = ''): string => {
+    if (!jsonContent?.content) return `<p>${defaultText}</p>`;
+    const html = jsonContent.content
+      .map((block: any) => {
+        const text = block.content?.[0]?.text || '';
+        return text ? `<p>${text}</p>` : '';
+      })
+      .join('');
+    return html || `<p>${defaultText}</p>`;
+  };
+
+  const htmlToJson = (html: string): any => {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    const paragraphs = tempDiv.querySelectorAll('p');
+
+    return {
+      type: 'doc',
+      content: Array.from(paragraphs).map(p => ({
+        type: 'paragraph',
+        content: [{ type: 'text', text: p.textContent || '' }]
+      }))
+    };
+  };
+
+  const handleSaveField = async (field: string, htmlContent: string) => {
+    if (!content?.id) return;
+
+    const jsonContent = htmlToJson(htmlContent);
+    const { error } = await supabase
+      .from('townships')
+      .update({ [field]: jsonContent })
+      .eq('id', content.id);
+
+    if (error) {
+      console.error('Error saving:', error);
+      throw error;
+    }
+
+    await loadContent();
+  };
+
+  const handleSaveTextOnly = async (field: string, htmlContent: string) => {
+    if (!content?.id) return;
+
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
+    const text = tempDiv.textContent || '';
+
+    const { error } = await supabase
+      .from('townships')
+      .update({ [field]: text })
+      .eq('id', content.id);
+
+    if (error) {
+      console.error('Error saving:', error);
+      throw error;
+    }
+
+    await loadContent();
+  };
+
+  const handleSaveSubtitle = async (htmlContent: string) => {
+    if (!content?.id) return;
+
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
+    const text = tempDiv.textContent || '';
+
+    const { error } = await supabase
+      .from('townships')
+      .update({ subtitle: text })
+      .eq('id', content.id);
+
+    if (error) {
+      console.error('Error saving subtitle:', error);
+      throw error;
+    }
+
+    await loadContent();
   };
 
   const getSubtitle = () => {
@@ -59,66 +138,45 @@ export function Bishopdale() {
   };
 
   const getDescription = () => {
-    return extractTextFromJson(
+    return jsonToHtml(
       content?.description,
       'Bishopdale is one of the lesser-known side dales of Wensleydale in the Yorkshire Dales National Park. The valley takes its name from the Bishops of York who held extensive lands here during medieval times.'
     );
   };
 
   const getGeographyText = () => {
-    return extractTextFromJson(
+    return jsonToHtml(
       content?.geography_content,
       'The valley stretches from Aysgarth in the east to Kidstones Pass in the west, with Bishopdale Beck running through its heart. Surrounded by limestone fells and traditional field patterns, the landscape is quintessentially Yorkshire Dales.'
     );
   };
 
   const getHistoryText = () => {
-    return extractTextFromJson(
+    return jsonToHtml(
       content?.history_content,
       'The dale has been inhabited since medieval times, with evidence of Norse settlement in place names. During the 18th and 19th centuries, lead mining and agriculture were the primary occupations for valley residents.'
     );
   };
 
   const getCommunitiesText = () => {
-    return extractTextFromJson(
+    return jsonToHtml(
       content?.communities_content,
       'Four main settlements form the heart of Bishopdale: Thoralby, Newbiggin, West Burton, and Walden. Each maintains its distinct character while sharing a common heritage of farming and rural life.'
     );
   };
 
   const getIndustryText = () => {
-    return extractTextFromJson(
+    return jsonToHtml(
       content?.industry_content,
       'Explore the industrial heritage of Bishopdale, including lead mining, quarrying, and traditional crafts that shaped the valley\'s economy and character.'
     );
   };
 
   const getTodayContent = () => {
-    if (!content?.today_content?.content) {
-      return (
-        <>
-          <p className="mb-4 text-stone-700">
-            Today, Bishopdale remains a working agricultural valley, with sheep farming
-            continuing as the dominant land use. The valley's quiet beauty attracts walkers
-            and visitors seeking an authentic Dales experience away from the busier tourist routes.
-          </p>
-          <p className="text-stone-700">
-            The valley is home to a close-knit community that maintains strong connections
-            to the land and its history. Traditional stone walls, barns, and field patterns
-            remain largely intact, offering a window into centuries of rural life.
-          </p>
-        </>
-      );
-    }
-    return content.today_content.content.map((block: any, idx: number) => {
-      const text = block.content?.[0]?.text || '';
-      const cleanText = text.replace(/<\/?p>/g, '').trim();
-      return cleanText ? (
-        <p key={idx} className={idx < content.today_content.content.length - 1 ? "mb-4 text-stone-700" : "text-stone-700"}>
-          {cleanText}
-        </p>
-      ) : null;
-    });
+    return jsonToHtml(
+      content?.today_content,
+      'Today, Bishopdale remains a working agricultural valley, with sheep farming continuing as the dominant land use. The valley\'s quiet beauty attracts walkers and visitors seeking an authentic Dales experience away from the busier tourist routes.'
+    );
   };
 
   return (
@@ -133,13 +191,21 @@ export function Bishopdale() {
         </div>
         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-stone-900/70 to-stone-900/20">
           <div className="text-center text-white">
-            <h1 className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
-              Bishopdale
-            </h1>
             {!loading && (
-              <p className="text-lg md:text-xl">
-                {getSubtitle()}
-              </p>
+              <InlineEditor
+                content={`<h1>${content?.title || 'Bishopdale'}</h1>`}
+                onSave={(html) => handleSaveTextOnly('title', html)}
+                className="mb-4 font-serif text-4xl font-bold md:text-5xl lg:text-6xl"
+                placeholder="Click to edit title"
+              />
+            )}
+            {!loading && (
+              <InlineEditor
+                content={`<p>${getSubtitle()}</p>`}
+                onSave={handleSaveSubtitle}
+                className="text-lg md:text-xl"
+                placeholder="Click to edit subtitle"
+              />
             )}
           </div>
         </div>
@@ -157,9 +223,12 @@ export function Bishopdale() {
           {loading ? (
             <p className="text-lg leading-relaxed text-stone-600">Loading...</p>
           ) : (
-            <p className="text-lg leading-relaxed text-stone-600">
-              {getDescription()}
-            </p>
+            <InlineEditor
+              content={getDescription()}
+              onSave={(html) => handleSaveField('description', html)}
+              className="text-lg leading-relaxed text-stone-600"
+              placeholder="Click to edit description"
+            />
           )}
         </div>
 
@@ -168,15 +237,23 @@ export function Bishopdale() {
             <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100">
               <Mountain className="w-6 h-6 text-sage-700" />
             </div>
-            <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              {loading ? 'Geography' : (content?.geography_title || 'Geography')}
-            </h2>
+            {!loading && (
+              <InlineEditor
+                content={`<h2>${content?.geography_title || 'Geography'}</h2>`}
+                onSave={(html) => handleSaveTextOnly('geography_title', html)}
+                className="mb-3 font-serif text-xl font-semibold text-stone-900"
+                placeholder="Click to edit card title"
+              />
+            )}
             {loading ? (
               <p className="text-stone-700">Loading...</p>
             ) : (
-              <p className="text-stone-700">
-                {getGeographyText()}
-              </p>
+              <InlineEditor
+                content={getGeographyText()}
+                onSave={(html) => handleSaveField('geography_content', html)}
+                className="text-stone-700"
+                placeholder="Click to edit geography"
+              />
             )}
           </div>
 
@@ -184,15 +261,23 @@ export function Bishopdale() {
             <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-parchment-200">
               <Church className="w-6 h-6 text-parchment-700" />
             </div>
-            <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              {loading ? 'History' : (content?.history_title || 'History')}
-            </h2>
+            {!loading && (
+              <InlineEditor
+                content={`<h2>${content?.history_title || 'History'}</h2>`}
+                onSave={(html) => handleSaveTextOnly('history_title', html)}
+                className="mb-3 font-serif text-xl font-semibold text-stone-900"
+                placeholder="Click to edit card title"
+              />
+            )}
             {loading ? (
               <p className="text-stone-700">Loading...</p>
             ) : (
-              <p className="text-stone-700">
-                {getHistoryText()}
-              </p>
+              <InlineEditor
+                content={getHistoryText()}
+                onSave={(html) => handleSaveField('history_content', html)}
+                className="text-stone-700"
+                placeholder="Click to edit history"
+              />
             )}
           </div>
 
@@ -200,44 +285,86 @@ export function Bishopdale() {
             <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-sage-100">
               <Home className="w-6 h-6 text-sage-700" />
             </div>
-            <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              {loading ? 'Communities' : (content?.communities_title || 'Communities')}
-            </h2>
+            {!loading && (
+              <InlineEditor
+                content={`<h2>${content?.communities_title || 'Communities'}</h2>`}
+                onSave={(html) => handleSaveTextOnly('communities_title', html)}
+                className="mb-3 font-serif text-xl font-semibold text-stone-900"
+                placeholder="Click to edit card title"
+              />
+            )}
             {loading ? (
               <p className="text-stone-700">Loading...</p>
             ) : (
-              <p className="text-stone-700">
-                {getCommunitiesText()}
-              </p>
+              <InlineEditor
+                content={getCommunitiesText()}
+                onSave={(html) => handleSaveField('communities_content', html)}
+                className="text-stone-700"
+                placeholder="Click to edit communities"
+              />
             )}
           </div>
 
-          <Link to="/townships/bishopdale/industry" className="card group hover:shadow-lg transition-shadow">
-            <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-parchment-200 group-hover:bg-parchment-300 transition-colors">
-              <Factory className="w-6 h-6 text-parchment-700" />
+          {isEditMode ? (
+            <div className="card">
+              <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-parchment-200">
+                <Factory className="w-6 h-6 text-parchment-700" />
+              </div>
+              {!loading && (
+                <InlineEditor
+                  content={`<h2>${content?.industry_title || 'Industry'}</h2>`}
+                  onSave={(html) => handleSaveTextOnly('industry_title', html)}
+                  className="mb-3 font-serif text-xl font-semibold text-stone-900"
+                  placeholder="Click to edit card title"
+                />
+              )}
+              {loading ? (
+                <p className="text-stone-700">Loading...</p>
+              ) : (
+                <InlineEditor
+                  content={getIndustryText()}
+                  onSave={(html) => handleSaveField('industry_content', html)}
+                  className="text-stone-700"
+                  placeholder="Click to edit industry"
+                />
+              )}
             </div>
-            <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
-              {loading ? 'Industry' : (content?.industry_title || 'Industry')}
-            </h2>
-            {loading ? (
-              <p className="text-stone-700">Loading...</p>
-            ) : (
-              <p className="text-stone-700">
-                {getIndustryText()}
-              </p>
-            )}
-          </Link>
+          ) : (
+            <Link to="/townships/bishopdale/industry" className="card group hover:shadow-lg transition-shadow">
+              <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-parchment-200 group-hover:bg-parchment-300 transition-colors">
+                <Factory className="w-6 h-6 text-parchment-700" />
+              </div>
+              <h2 className="mb-3 font-serif text-xl font-semibold text-stone-900">
+                {loading ? 'Industry' : (content?.industry_title || 'Industry')}
+              </h2>
+              {loading ? (
+                <p className="text-stone-700">Loading...</p>
+              ) : (
+                <p className="text-stone-700" dangerouslySetInnerHTML={{ __html: getIndustryText() }} />
+              )}
+            </Link>
+          )}
         </div>
 
         <div className="prose prose-stone max-w-none">
           <div className="p-8 rounded-2xl bg-gradient-to-r from-sage-50 to-parchment-50">
-            <h2 className="mb-4 font-serif text-2xl font-semibold text-stone-900">
-              {loading ? 'Bishopdale Today' : (content?.today_title || 'Bishopdale Today')}
-            </h2>
+            {!loading && (
+              <InlineEditor
+                content={`<h2>${content?.today_title || 'Bishopdale Today'}</h2>`}
+                onSave={(html) => handleSaveTextOnly('today_title', html)}
+                className="mb-4 font-serif text-2xl font-semibold text-stone-900"
+                placeholder="Click to edit section title"
+              />
+            )}
             {loading ? (
               <p className="text-stone-700">Loading...</p>
             ) : (
-              getTodayContent()
+              <InlineEditor
+                content={getTodayContent()}
+                onSave={(html) => handleSaveField('today_content', html)}
+                className="text-stone-700"
+                placeholder="Click to edit today section"
+              />
             )}
           </div>
         </div>

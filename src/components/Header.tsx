@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, MapPin, ChevronDown } from 'lucide-react';
+import { Menu, X, MapPin, ChevronDown, Edit3 } from 'lucide-react';
+import { useEditMode } from '../contexts/EditModeContext';
 
 interface NavItem {
   name: string;
@@ -12,6 +13,7 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
   const location = useLocation();
+  const { isEditMode, toggleEditMode, isAuthenticated } = useEditMode();
 
   const navigation: NavItem[] = [
     { name: 'Home', path: '/' },
@@ -54,8 +56,9 @@ export function Header() {
             </div>
           </Link>
 
-          <nav className="items-center hidden space-x-1 md:flex">
-            {navigation.map((item) => {
+          <div className="flex items-center gap-2">
+            <nav className="items-center hidden space-x-1 md:flex">
+              {navigation.map((item) => {
               if (item.children) {
                 return (
                   <div
@@ -106,16 +109,31 @@ export function Header() {
                   {item.name}
                 </Link>
               );
-            })}
-          </nav>
+              })}
+            </nav>
 
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2 transition-colors rounded-lg md:hidden text-stone-700 hover:bg-parchment-100"
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            {isAuthenticated && (
+              <button
+                onClick={toggleEditMode}
+                className={`hidden md:flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  isEditMode
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white border border-stone-300 text-stone-700 hover:bg-stone-50'
+                }`}
+              >
+                <Edit3 className="w-4 h-4" />
+                {isEditMode ? 'Exit Edit Mode' : 'Edit Mode'}
+              </button>
+            )}
+
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 transition-colors rounded-lg md:hidden text-stone-700 hover:bg-parchment-100"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {isMenuOpen && (

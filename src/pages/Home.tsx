@@ -3,82 +3,76 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Building2, Clock, Image, Map, ArrowRight, BookOpen } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
+import { usePageContent } from '../hooks/usePageContent';
+import { InlineEditor } from '../components/InlineEditor';
+import { useEditMode } from '../contexts/EditModeContext';
 
-const heroImages: string[] = [
-  '/images/hero/home-page.webp',
-  '/images/hero/bishopdale-valley.webp',
-  '/images/hero/west-burton-village-green.webp',
-  '/images/hero/bishopdale-beck-1938.webp',
-];
-
-const stats = {
-  people: 150,
-  buildings: 75,
-  events: 200,
-  gallery: 500,
+const iconMap: Record<string, any> = {
+  Users,
+  Building2,
+  Clock,
+  Image,
+  Map,
+  BookOpen,
 };
 
 export function Home() {
+  const { page, loading, error, updateContent } = usePageContent('home');
+  const { isEditMode } = useEditMode();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  const heroImages = page?.content?.heroImages || [];
+  const stats = page?.content?.stats || { people: 0, buildings: 0, events: 0, gallery: 0 };
+
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 6500);
-    return () => clearInterval(timer);
-  }, []);
+    if (heroImages.length > 0) {
+      const timer = setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+      }, 6500);
+      return () => clearInterval(timer);
+    }
+  }, [heroImages.length]);
+
+  if (loading) {
+    return (
+      <PageWrapper>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-t-4 rounded-full border-stone-200 border-t-sage-600 animate-spin"></div>
+            <p className="mt-4 text-stone-600">Loading...</p>
+          </div>
+        </div>
+      </PageWrapper>
+    );
+  }
+
+  if (error || !page) {
+    return (
+      <PageWrapper>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <p className="text-red-600">Error loading page: {error || 'Page not found'}</p>
+          </div>
+        </div>
+      </PageWrapper>
+    );
+  }
 
   const aboutSection = {
     icon: BookOpen,
-    title: 'About This Project',
-    description: 'This website explores the history of Thoralby, the neighbouring villages of Newbiggin and West Burton, and the scattered hill farms in the rest of Bishopdale from prehistory to the late twentieth century.\n\nI was born at Holmeside Farm in Thoralby and raised in the village, where my family has lived for several generations. This website provides a wide range of primary evidence about Thoralby, Newbiggin, Bishopdale and West Burton. Many of the documents have been transcribed to avoid breaching copyright laws. Please notify me if you find any errors or if you have any relevant information or images for the site.\n\nThank you.\n\nPenny Ellis (née Snaith)',
-    path: '/about',
+    title: page.content.aboutSection?.title || 'About This Project',
+    description: page.content.aboutSection?.description || '',
+    // path: '/about',
     color: 'stone',
     stat: 0,
   };
 
-  const sections = [
-    {
-      icon: Users,
-      title: 'People & Families',
-      description: 'Discover the stories of families who shaped Thoralby through generations.',
-      path: '/archive/people-families',
-      color: 'sage',
-      stat: stats.people,
-    },
-    {
-      icon: Building2,
-      title: 'Buildings & Places',
-      description: 'Explore the historic architecture and landmarks of Bishopdale.',
-      path: '/archive/buildings-places',
-      color: 'parchment',
-      stat: stats.buildings,
-    },
-    {
-      icon: Clock,
-      title: 'Historical Timeline',
-      description: 'Journey through centuries of events that defined our community.',
-      path: '/timeline',
-      color: 'stone',
-      stat: stats.events,
-    },
-    {
-      icon: Image,
-      title: 'Photo Archive',
-      description: 'Browse my collection of historical photographs and images.',
-      path: '/archive/photographs',
-      color: 'sage',
-      stat: stats.gallery,
-    },
-    {
-      icon: Map,
-      title: 'Maps & Geography',
-      description: 'Compare historical and modern maps of Thoralby and surroundings.',
-      path: '/archive/maps',
-      color: 'parchment',
-      stat: 0,
-    },
-  ];
+  const sections = (page.content.sections || []).map((section: any) => ({
+    ...section,
+    icon: iconMap[section.icon] || Users,
+    stat: stats[section.title.toLowerCase().split(' ')[0]] || 0,
+    color: section.color || 'sage',
+  }));
 
   return (
     <PageWrapper>
@@ -109,13 +103,20 @@ export function Home() {
               transition={{ delay: 0.3, duration: 0.8 }}
               className="max-w-3xl"
             >
-              <h1 className="mb-6 font-serif text-5xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
-                Thoralby Through Time
-              </h1>
-              <p className="mb-8 text-xl leading-relaxed md:text-2xl text-parchment-100">
-                Discover the rich heritage of Thoralby and Bishopdale through stories,
-                photographs, and maps spanning centuries of Yorkshire Dales history.
-              </p>
+              <InlineEditor
+                content={page.content.heroTitle || 'Thoralby Through Time'}
+                onSave={async (value) => {
+                  await updateContent({ ...page.content, heroTitle: value });
+                }}
+                className="mb-6 font-serif text-5xl font-bold leading-tight text-white md:text-6xl lg:text-7xl"
+              />
+              <InlineEditor
+                content={page.content.heroSubtitle || 'Discover the rich heritage of Thoralby and Bishopdale through stories, photographs, and maps spanning centuries of Yorkshire Dales history.'}
+                onSave={async (value) => {
+                  await updateContent({ ...page.content, heroSubtitle: value });
+                }}
+                className="mb-8 text-xl leading-relaxed md:text-2xl text-parchment-100"
+              />
               <div className="flex flex-wrap gap-4">
                 <Link to="/gallery" className="bg-white btn-primary text-stone-900 hover:bg-parchment-100">
                   Explore the Archive
@@ -132,6 +133,7 @@ export function Home() {
           {heroImages.map((_, index) => (
             <button
               key={index}
+              type="button"
               onClick={() => setCurrentImageIndex(index)}
               className={`w-2 h-2 rounded-full transition-all ${
                 index === currentImageIndex
@@ -146,13 +148,20 @@ export function Home() {
       
       <div className="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
-          <h2 className="mb-4 font-serif text-4xl font-semibold text-stone-900">
-            Explore Our Collections
-          </h2>
-          <p className="max-w-2xl mx-auto text-lg text-stone-600">
-            Dive into different aspects of Thoralby's history through our curated
-            collections of people, places, events, and photographs.
-          </p>
+          <InlineEditor
+            content={page.content.collectionsTitle || 'Explore Our Collections'}
+            onSave={async (value) => {
+              await updateContent({ ...page.content, collectionsTitle: value });
+            }}
+            className="mb-4 font-serif text-4xl font-semibold text-stone-900"
+          />
+          <InlineEditor
+            content={page.content.collectionsDescription || 'Dive into different aspects of Thoralby\'s history through our curated collections of people, places, events, and photographs.'}
+            onSave={async (value) => {
+              await updateContent({ ...page.content, collectionsDescription: value });
+            }}
+            className="max-w-2xl mx-auto text-lg text-stone-600"
+          />
         </div>
 
         <motion.div
@@ -205,13 +214,26 @@ export function Home() {
 
 
         <div className="p-8 text-center text-white bg-gradient-to-r from-sage-600 to-sage-700 rounded-2xl md:p-12">
-          <h2 className="mb-4 font-serif text-3xl font-semibold md:text-4xl">
-            Help Us Preserve Our Heritage
-          </h2>
-          <p className="max-w-2xl mx-auto mb-6 text-lg text-sage-100">
-            Do you have photographs, documents, or stories about Thoralby and Bishopdale?
-            I'd love to hear from you and add your contributions to my archive.
-          </p>
+          <InlineEditor
+            content={page.content.ctaSection?.title || 'Help Us Preserve Our Heritage'}
+            onSave={async (value) => {
+              await updateContent({
+                ...page.content,
+                ctaSection: { ...page.content.ctaSection, title: value }
+              });
+            }}
+            className="mb-4 font-serif text-3xl font-semibold md:text-4xl"
+          />
+          <InlineEditor
+            content={page.content.ctaSection?.description || 'Do you have photographs, documents, or stories about Thoralby and Bishopdale? We\'d love to hear from you and add your contributions to our archive.'}
+            onSave={async (value) => {
+              await updateContent({
+                ...page.content,
+                ctaSection: { ...page.content.ctaSection, description: value }
+              });
+            }}
+            className="max-w-2xl mx-auto mb-6 text-lg text-sage-100"
+          />
           <Link
             to="/contribute"
             className="inline-flex items-center px-8 py-4 font-semibold transition-colors bg-white text-sage-700 rounded-xl hover:bg-parchment-50"
