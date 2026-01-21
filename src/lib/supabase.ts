@@ -33,6 +33,27 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = supabaseClient;
 
+// Helper function to check if we're using the mock client
+export const isUsingMockClient = !supabaseUrl || !supabaseAnonKey;
+
+// Helper function to validate authentication before operations
+export const validateAuth = async () => {
+  if (isUsingMockClient) {
+    throw new Error('Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY environment variables.');
+  }
+  
+  const { data: { user }, error } = await supabase.auth.getUser();
+  if (error) {
+    throw new Error(`Authentication error: ${error.message}`);
+  }
+  
+  if (!user) {
+    throw new Error('You must be logged in to save changes.');
+  }
+  
+  return user;
+};
+
 export type Database = {
   public: {
     Tables: {

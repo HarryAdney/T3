@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabase';
+import { supabase, validateAuth } from '../lib/supabase';
 
 interface PageContent {
   id: string;
@@ -58,9 +58,14 @@ export function usePageContent(slug: string): UsePageContentResult {
   }
 
   async function updateContent(content: Record<string, any>) {
-    if (!page) return;
+    if (!page) {
+      throw new Error('No page loaded to update');
+    }
 
     try {
+      // Validate authentication first
+      await validateAuth();
+      
       const { error: updateError } = await supabase
         .from('pages')
         .update({
@@ -70,13 +75,19 @@ export function usePageContent(slug: string): UsePageContentResult {
         .eq('id', page.id);
 
       if (updateError) {
-        throw updateError;
+        console.error('Supabase update error:', updateError);
+        throw new Error(`Database error: ${updateError.message}`);
       }
 
+      // Update local state only after successful database update
       setPage({ ...page, content, updated_at: new Date().toISOString() });
     } catch (err) {
       console.error('Error updating page:', err);
-      throw err;
+      // Re-throw with more specific error message
+      if (err instanceof Error) {
+        throw err;
+      }
+      throw new Error('Failed to update page content');
     }
   }
 
