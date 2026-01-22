@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { PageWrapper } from '../../components/PageWrapper';
-import { FileText, Edit, Eye, EyeOff, Plus, ChevronLeft } from 'lucide-react';
+import { FileText, Edit, Eye, EyeOff, ChevronLeft } from 'lucide-react';
 
 interface Page {
   id: string;
@@ -19,7 +19,6 @@ export function PagesManager() {
   const [pages, setPages] = useState<Page[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     loadPages();

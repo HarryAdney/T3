@@ -2,11 +2,9 @@ import { PageWrapper } from '../components/PageWrapper';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { usePageContent } from '../hooks/usePageContent';
 import { InlineEditor } from '../components/InlineEditor';
-import { useEditMode } from '../contexts/EditModeContext';
 
 export function FourTownships() {
   const { page, loading, error, updateContent } = usePageContent('four-townships');
-  const { isEditMode } = useEditMode();
 
   if (loading) {
     return (

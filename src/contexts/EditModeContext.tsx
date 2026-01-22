@@ -21,7 +21,7 @@ export function EditModeProvider({ children }: { children: ReactNode }) {
 
     checkAuth();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: string, session: any) => {
       setIsAuthenticated(!!session?.user);
       if (!session?.user) {
         setIsEditMode(false);

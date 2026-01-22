@@ -5,7 +5,6 @@ import { Users, Building2, Clock, Image, Map, ArrowRight, BookOpen } from 'lucid
 import { PageWrapper } from '../components/PageWrapper';
 import { usePageContent } from '../hooks/usePageContent';
 import { InlineEditor } from '../components/InlineEditor';
-import { useEditMode } from '../contexts/EditModeContext';
 
 const iconMap: Record<string, any> = {
   Users,
@@ -18,7 +17,6 @@ const iconMap: Record<string, any> = {
 
 export function Home() {
   const { page, loading, error, updateContent } = usePageContent('home');
-  const { isEditMode } = useEditMode();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const heroImages = page?.content?.heroImages || [];
@@ -62,7 +60,7 @@ export function Home() {
     icon: BookOpen,
     title: page.content.aboutSection?.title || 'About This Project',
     description: page.content.aboutSection?.description || '',
-    // path: '/about',
+    path: '/about',
     color: 'stone',
     stat: 0,
   };
@@ -130,7 +128,7 @@ export function Home() {
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 flex justify-center pb-6 space-x-2">
-          {heroImages.map((_, index) => (
+          {heroImages.map((_: string, index: number) => (
             <button
               key={index}
               type="button"
@@ -183,7 +181,7 @@ export function Home() {
         </motion.div>
 
         <div className="grid grid-cols-1 gap-6 mb-16 md:grid-cols-2 lg:grid-cols-3">
-          {sections.map((section, index) => (
+          {sections.map((section: any, index: number) => (
             <motion.div
               key={section.path}
               initial={{ opacity: 0, y: 20 }}

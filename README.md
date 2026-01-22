@@ -85,7 +85,7 @@ Simply upload the contents of the `dist/` folder after running `npm run build`.
 
 ## Project Structure
 
-```
+``` none
 src/
 ├── components/       # Reusable UI components
 │   ├── Header.tsx
@@ -105,6 +105,7 @@ src/
 public/
 └── images/          # Static images
     └── hero/        # Hero section images
+    
 ```
 
 ## Customization

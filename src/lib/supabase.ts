@@ -9,7 +9,7 @@ let supabaseClient: any;
 if (!supabaseUrl || !supabaseAnonKey) {
   console.warn('Supabase environment variables not found. Using mock client for development.');
   supabaseClient = {
-    from: (table: string) => ({
+    from: (_table: string) => ({
       select: () => Promise.resolve({ data: [], error: null }),
       eq: () => ({ select: () => Promise.resolve({ data: [], error: null }) }),
       insert: () => Promise.resolve({ data: [], error: null }),

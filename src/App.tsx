@@ -36,7 +36,6 @@ const ResetPassword = lazy(() => import('./pages/admin/ResetPassword').then(m =>
 const AdminDashboard = lazy(() => import('./pages/admin/Dashboard').then(m => ({ default: m.AdminDashboard })));
 const TownshipsList = lazy(() => import('./pages/admin/TownshipsList').then(m => ({ default: m.TownshipsList })));
 const TownshipEditor = lazy(() => import('./pages/admin/TownshipEditor').then(m => ({ default: m.TownshipEditor })));
-const PagesEditor = lazy(() => import('./pages/admin/PagesEditor').then(m => ({ default: m.PagesEditor })));
 const PagesManager = lazy(() => import('./pages/admin/PagesManager').then(m => ({ default: m.PagesManager })));
 const EventsEditor = lazy(() => import('./pages/admin/EventsEditor').then(m => ({ default: m.EventsEditor })));
 const PeopleEditor = lazy(() => import('./pages/admin/PeopleEditor').then(m => ({ default: m.PeopleEditor })));

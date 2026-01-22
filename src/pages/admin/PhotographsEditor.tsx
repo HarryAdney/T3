@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { PageWrapper } from '../../components/PageWrapper';
-import { ArrowLeft, Save, Plus, Trash2, Image } from 'lucide-react';
+import { ArrowLeft, Save, Plus, Trash2 } from 'lucide-react';
 
 interface Photograph {
   id: string;

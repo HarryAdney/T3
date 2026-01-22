@@ -5,16 +5,8 @@ import { PageWrapper } from '../../components/PageWrapper';
 import { useAuth, useSignOut } from '../../components/auth/ProtectedRoute';
 import { FileText, MapPin, Image, Calendar, LogOut, Users, HardDrive, Shield } from 'lucide-react';
 
-interface User {
-  id: string;
-  email: string;
-  user_metadata: {
-    role?: string;
-  };
-}
-
 export function AdminDashboard() {
-  const { user, loading: authLoading, isAdmin } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const { signOut, loading: signingOut } = useSignOut();
   const [profile, setProfile] = useState<{ role: string } | null>(null);
 

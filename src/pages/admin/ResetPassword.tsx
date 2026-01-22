@@ -12,7 +12,7 @@ export function ResetPassword() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange(async (event) => {
+    supabase.auth.onAuthStateChange(async (event: string) => {
       if (event === 'PASSWORD_RECOVERY') {
         setSuccess(false);
       }
