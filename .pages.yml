@@ -1,0 +1,16 @@
+site:
+  name: Thoralby Through Time
+  description: Local history website for Thoralby village
+
+content:
+  - label: Pages
+    type: collection
+    path: .
+    match: "**/*.md"
+    fields:
+      - name: title
+        label: Title
+        type: text
+      - name: body
+        label: Content
+        type: markdown
